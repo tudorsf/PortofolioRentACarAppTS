@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
     constructor(private registerService: RegisterService, private router: Router) {}
 user: UserAuth = {
+    id: 0,
     userName: '',
     password: '',
     roleRef: 0
@@ -22,11 +23,11 @@ user: UserAuth = {
   confirmPass = '';
 
   selectCompany(){
-    this.user.roleRef = 3
+    this.user.roleRef = 1
   }
 
   selectCustomer(){
-    this.user.roleRef = 4
+    this.user.roleRef = 2
   }
 
   
@@ -48,12 +49,14 @@ user: UserAuth = {
           console.error('Register failed', error);
         }
       );
-     } 
-     else {
-        this.user.password = '';
-        this.confirmPass = '';
-        console.log('passwords dont match, please select a role');
-     }
+     } else if(this.user.roleRef == 0){
+      console.log('please select a role')
+     } else {
+      this.user.password = '';
+      this.confirmPass = '';
+      console.log('passwords dont match, please select a role');
+   }
+     
     
   }
 }
