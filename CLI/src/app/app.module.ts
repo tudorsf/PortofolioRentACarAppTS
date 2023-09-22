@@ -1,15 +1,36 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HomeComponent } from './home.component/home.component';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login.component/login.component';
+import { RegisterComponent } from './register.component/register.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; 
+
+
+const routes: Routes = [
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  {path: 'home', component: HomeComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    
+    [RouterModule.forRoot(routes)]
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

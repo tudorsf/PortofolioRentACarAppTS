@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'CLI'`, () => {
+  it(`should have as title 'LoginCLI'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('CLI');
+    expect(app.title).toEqual('LoginCLI');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('CLI app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('LoginCLI app is running!');
   });
 });

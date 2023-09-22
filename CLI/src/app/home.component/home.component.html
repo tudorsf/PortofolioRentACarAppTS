@@ -1,0 +1,11 @@
+<div *ngIf="loggedIn">
+    <p>Welcome</p>
+    <button (click)="logOff()">Log Off</button>
+    <button (click)="getUser()">get user</button>
+</div>
+
+<div *ngIf="!loggedIn">
+    <p *ngIf="!loggedIn">please login</p>
+</div>
+
+
