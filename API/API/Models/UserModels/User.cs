@@ -9,7 +9,7 @@
 
        
 
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
         
 
         public bool IsDisabled { get; set; }

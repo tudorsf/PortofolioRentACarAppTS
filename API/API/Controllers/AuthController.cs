@@ -43,27 +43,9 @@ namespace LoginAPI3.Controllers
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
 
-                /*var role = new Role();
-                role.RoleId = request.roleRef;
-                role.RoleName = GetRoleName(role.RoleId);
+                user.Role.RoleId = request.roleRef; 
 
-                var role = new Role
-                {
-                    RoleId = request.roleRef,
-                    
-                };*/
-
-                if(request.roleRef != null)
-                {
-                    Role role = new Role
-                    {
-                        RoleId = request.roleRef
-                    };
-                    user.Role = role;
-
-                };
-            
-
+               
 
                 _context.Users.Add(user);
                 _context.SaveChanges();
