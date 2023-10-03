@@ -1,16 +1,14 @@
-﻿namespace LoginAPI3.Models.UserModels
+﻿namespace API.Models.UserModels
 {
     public class LoggedInUser
-    {
+    {   
         public int Id { get; set; }
-
-        public string userName { get; set; }
-        public string token { get; set; }
-
         public int UserRef { get; set; }
 
-        public int RoleRef { get; set; }
+        public string userName { get; set; }
 
+        public string Token { get; set; }
 
+        public int RoleREF { get; set; }
     }
 }

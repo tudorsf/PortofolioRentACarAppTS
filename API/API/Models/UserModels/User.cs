@@ -1,4 +1,5 @@
-﻿namespace LoginAPI3.Models.UserModels
+﻿
+namespace LoginAPI3.Models.UserModels
 {
     public class User
     {
@@ -9,7 +10,7 @@
 
        
 
-        public Role? Role { get; set; }
+        public Role Role { get; set; }
         
 
         public bool IsDisabled { get; set; }

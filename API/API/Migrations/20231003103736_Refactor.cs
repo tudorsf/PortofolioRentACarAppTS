@@ -5,7 +5,7 @@
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class Refactor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +16,10 @@ namespace API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    token = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserRef = table.Column<int>(type: "int", nullable: false),
-                    RoleRef = table.Column<int>(type: "int", nullable: false)
+                    userName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleREF = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

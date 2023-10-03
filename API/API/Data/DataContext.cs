@@ -1,4 +1,5 @@
-﻿using LoginAPI3.Models.UserModels;
+﻿using API.Models.UserModels;
+using LoginAPI3.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace LoginAPI3.Data

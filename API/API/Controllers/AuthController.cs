@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using LoginAPI3.Models.UserModels;
 using System;
+using API.Models.UserModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginAPI3.Controllers
 {
@@ -15,7 +17,7 @@ namespace LoginAPI3.Controllers
     [Route("api/[controller]")]
         public class AuthController : Controller
         {
-            public static User user = new User();
+            //public static User user = new User();
             private readonly IConfiguration _configuration;
             private readonly DataContext _context;
             public AuthController(IConfiguration configuration, DataContext context)
@@ -37,15 +39,18 @@ namespace LoginAPI3.Controllers
                     return BadRequest("Username already exists."); 
                 }
 
+
                 CreatePasswordHash(request.password, out byte[] passwordHash, out byte[] passwordSalt);
+
+                var user = new User();
 
                 user.userName = request.userName;
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
+                user.Role = GetRoleById(request.roleRef);
+                
 
-                user.Role.RoleId = request.roleRef; 
-
-               
+                
 
                 _context.Users.Add(user);
                 _context.SaveChanges();
@@ -55,7 +60,8 @@ namespace LoginAPI3.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<string>> Login([FromBody]UserDTO request)
         {
-            var user = _context.Users.FirstOrDefault(u => u.userName == request.userName);
+            var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.userName == request.userName);
+            
             if (user == null)
             {
                 return BadRequest("user not found");
@@ -72,12 +78,12 @@ namespace LoginAPI3.Controllers
 
             string token = CreateToken(user);
 
-            var loggedInUser = new Models.UserModels.LoggedInUser
+            var loggedInUser = new LoggedInUser
             {
                 UserRef = user.Id, 
                 userName = user.userName,
-                RoleRef = user.Role.RoleId,
-                token = token,
+                Token = token,
+                RoleREF = user.Role.RoleId
                 
             };
 
@@ -91,9 +97,9 @@ namespace LoginAPI3.Controllers
                          id = user.Id,
                          username = user.userName,
                          Token = token,
-                         //roleRef = user.RoleRef
                          roleRef = user.Role.RoleId,
                          roleName = user.Role.RoleName
+                        
                      }
                 ); ; 
                
@@ -102,7 +108,7 @@ namespace LoginAPI3.Controllers
         }
 
         [HttpDelete("LogOff/{id}")]
-        public async Task<ActionResult<Models.UserModels.LoggedInUser>> LogOff(int id)
+        public async Task<ActionResult<LoggedInUser>> LogOff(int id)
         {
             var loggedOfUser = _context.LoggedInUsers.FirstOrDefault(u => u.UserRef == id);
 
@@ -167,10 +173,14 @@ namespace LoginAPI3.Controllers
 
         }
 
-        private string GetRoleName(int id)
+        private Role GetRoleById(int roleId)
         {
-            var role = _context.Roles.FirstOrDefault(u => u.RoleId == id);
-            return role.RoleName;
+            
+            var role = _context.Roles.FirstOrDefault(r => r.RoleId == roleId);
+           
+              return role;
+
+            
         }
 
 
