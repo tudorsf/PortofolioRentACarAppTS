@@ -17,13 +17,15 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddCors(policyBuilder =>
     policyBuilder.AddDefaultPolicy(policy =>
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:62801")
         .AllowAnyHeader()
         .AllowCredentials()
         .AllowAnyMethod()
         )
 );
 var app = builder.Build();
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

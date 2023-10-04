@@ -6,14 +6,19 @@ import { LoginComponent } from './login.component/login.component';
 import { RegisterComponent } from './register.component/register.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { ClientComponent } from './client/client.component'; 
+import { CompanyComponent } from './company/company.component';
+import { RoleGuard } from './authGuard/auth.guard';
 
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  {path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  {path: 'home', component: HomeComponent, canActivate: [RoleGuard], data: { expectedRole: 'sysAdmin' }},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRole: 'client' }},
+  {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRole: 'company' }}
 ];
 
 @NgModule({
@@ -21,7 +26,11 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    CompanyComponent,
+    ClientComponent,
+    CompanyComponent
+    
   ],
   imports: [
     BrowserModule,

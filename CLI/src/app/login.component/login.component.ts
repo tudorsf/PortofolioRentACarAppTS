@@ -34,7 +34,7 @@ export class LoginComponent {
       id: 0,
       userName: '',
       token: '',
-      roleRef: 0 
+      role: '' 
     }
    
 
@@ -46,10 +46,17 @@ export class LoginComponent {
           this.loggedUser.id = response.id;
           this.loggedUser.userName = response.username;
           this.loggedUser.token = response.token; 
-          this.loggedUser.roleRef = response.roleRef
+          this.loggedUser.role = response.roleName;
           this.cookieService.set('user', JSON.stringify(this.loggedUser));
           this.authService.updateLoginStatus(true);
-          this.router.navigate(['/home']);
+          console.log(this.loggedUser.role)
+          if(this.loggedUser.role == 'client'){
+            this.router.navigate(['/client'])
+          } else if(this.loggedUser.role == 'company'){
+            this.router.navigate(['/company'])
+          } else if(this.loggedUser.role == 'sysAdmin') {
+            this.router.navigate(['/home']);
+          } 
        
           
        

@@ -97,7 +97,7 @@ namespace LoginAPI3.Controllers
                          id = user.Id,
                          username = user.userName,
                          Token = token,
-                         roleRef = user.Role.RoleId,
+                         
                          roleName = user.Role.RoleName
                         
                      }

@@ -18,7 +18,7 @@ export class RegisterService {
     };
 
     
-    return this.http.post('https://localhost:7030/api/Auth/register', registerData);
+    return this.http.post('https://localhost:7262/api/Auth/register', registerData);
   }
 
   login(username: string, password: string) {
@@ -29,7 +29,7 @@ export class RegisterService {
     };
 
     
-    return this.http.post('https://localhost:7030/api/Auth/login', loginData);
+    return this.http.post('https://localhost:7262/api/Auth/login', loginData);
 
   }
 

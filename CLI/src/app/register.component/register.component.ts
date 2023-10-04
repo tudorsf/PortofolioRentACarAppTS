@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
     constructor(private registerService: RegisterService, private router: Router) {}
 user: UserAuth = {
-    id: 0,
+    
     userName: '',
     password: '',
     roleRef: 0
@@ -23,11 +23,11 @@ user: UserAuth = {
   confirmPass = '';
 
   selectCompany(){
-    this.user.roleRef = 1
+    this.user.roleRef = 2
   }
 
   selectCustomer(){
-    this.user.roleRef = 2
+    this.user.roleRef = 3
   }
 
   

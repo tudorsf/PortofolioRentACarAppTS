@@ -43,7 +43,7 @@ export class AuthService {
 
     logOff(){
         const logOffData: LoggedUser = JSON.parse(this.cookieService.get('user'));
-        this.http.delete('https://localhost:7030/api/Auth/LogOff/'+logOffData.id).subscribe({
+        this.http.delete('https://localhost:7262/api/Auth/LogOff/'+logOffData.id).subscribe({
             next: () => {
                 this.cookieService.delete('user');
                 this.updateLoginStatus(false);

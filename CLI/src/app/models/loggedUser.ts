@@ -2,14 +2,15 @@ export class LoggedUser{
     id: number;
     userName: string;
     token: string;
-    roleRef: number;
+    role: string;
+    
     
 
-    constructor(id: number, userName: string, token: string, roleRef: number){
+    constructor(id: number, userName: string, token: string, role: string){
         this.id = id;
         this.userName = userName;
         this.token = token;
-        this.roleRef = roleRef;
+        this.role = role;
         
     }
 
