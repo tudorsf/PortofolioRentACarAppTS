@@ -8,8 +8,6 @@ namespace LoginAPI3.Models.UserModels
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
 
-       
-
         public Role Role { get; set; }
         
 

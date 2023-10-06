@@ -47,6 +47,7 @@ user: UserAuth = {
         (error) => {
           // Handle login error here
           console.error('Register failed', error);
+          
         }
       );
      } else if(this.user.roleRef == 0){
@@ -54,7 +55,7 @@ user: UserAuth = {
      } else {
       this.user.password = '';
       this.confirmPass = '';
-      console.log('passwords dont match, please select a role');
+      console.log('passwords dont match');
    }
      
     

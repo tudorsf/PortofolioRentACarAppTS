@@ -15,10 +15,10 @@ import { RoleGuard } from './authGuard/auth.guard';
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  {path: 'home', component: HomeComponent, canActivate: [RoleGuard], data: { expectedRole: 'sysAdmin' }},
+  {path: 'home', component: HomeComponent, canActivate: [RoleGuard], data: { expectedRoles: ['sysAdmin', 'client', 'company'] }},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRole: 'client' }},
-  {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRole: 'company' }}
+  {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
+  {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }}
 ];
 
 @NgModule({

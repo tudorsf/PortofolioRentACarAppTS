@@ -10,6 +10,7 @@ using LoginAPI3.Models.UserModels;
 using System;
 using API.Models.UserModels;
 using Microsoft.EntityFrameworkCore;
+using API.Models.DTO;
 
 namespace LoginAPI3.Controllers
 {
