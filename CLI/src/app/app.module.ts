@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientComponent } from './client/client.component'; 
 import { CompanyComponent } from './company/company.component';
 import { RoleGuard } from './authGuard/auth.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  {path: 'home', component: HomeComponent, canActivate: [RoleGuard], data: { expectedRoles: ['sysAdmin', 'client', 'company'] }},
+  {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
   {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }}
@@ -29,7 +30,8 @@ const routes: Routes = [
     HomeComponent,
     CompanyComponent,
     ClientComponent,
-    CompanyComponent
+    CompanyComponent,
+    DashboardComponent
     
   ],
   imports: [

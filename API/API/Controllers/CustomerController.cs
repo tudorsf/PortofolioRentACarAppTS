@@ -87,5 +87,14 @@ namespace API.Controllers
 
             return price;
         }
+
+
+        [HttpGet("GetCars")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
+        {
+            var cars = await _context.Cars.Include(u => u.Reservations).ToListAsync();
+
+            return cars;
+        }
     }
 }

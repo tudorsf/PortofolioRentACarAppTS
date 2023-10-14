@@ -40,10 +40,6 @@ namespace API.Controllers
             company.Rating = 5;
 
 
-
-
-
-
             _context.Companies.Add(company);
             _context.SaveChanges();
             return Ok();
@@ -53,9 +49,6 @@ namespace API.Controllers
         public async Task<ActionResult<User>> AddCar([FromBody] CarDTO request)
         {
             
-
-            
-
             var car = new Car();
 
             car.Name = request.name;
@@ -81,6 +74,9 @@ namespace API.Controllers
 
 
         }
+
+
+       
 
     }
 }

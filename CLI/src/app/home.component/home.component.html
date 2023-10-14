@@ -1,11 +1,25 @@
-<div *ngIf="loggedIn">
+<!--<div *ngIf="loggedIn">
     <p>Welcome</p>
+
     <button (click)="logOff()">Log Off</button>
     <button (click)="getUser()">get user</button>
 </div>
 
 <div *ngIf="!loggedIn">
     <p *ngIf="!loggedIn">please login</p>
-</div>
+</div>-->
 
+<table>
+    <thead>
+      <tr>
+        <th>Car Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ car.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
 
