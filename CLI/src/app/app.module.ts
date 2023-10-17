@@ -19,7 +19,9 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
-  {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }}
+  {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }},
+  {path:'dashboard', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }}
+
 ];
 
 @NgModule({

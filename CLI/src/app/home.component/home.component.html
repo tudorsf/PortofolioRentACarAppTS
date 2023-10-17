@@ -13,12 +13,16 @@
     <thead>
       <tr>
         <th>Car Name</th>
+        <th>Price</th>
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let car of cars">
         <td>{{ car.name }}</td>
+        <td>{{car.pricePerDay}}</td>
       </tr>
+      
     </tbody>
   </table>
   

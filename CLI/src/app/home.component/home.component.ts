@@ -4,6 +4,7 @@ import { LoggedUser } from '../models/loggedUser';
 import { CookieService } from 'ngx-cookie-service';
 import { CarsService } from '../services/cars.service';
 import { Car } from '../models/BL/car.model';
+import { Company } from '../models/BL/company.model';
 
 @Component({
   selector: 'home-component',
@@ -18,7 +19,7 @@ export class HomeComponent {
   loggedIn = false;
   
   cars: Car[] = [];
-
+  company: Company[] = [];
 
   constructor(private authService: AuthService, private cookieService: CookieService, private carsService: CarsService){
     this.authService.isLoggedIn().subscribe((isLoggedIn) => {
@@ -27,13 +28,11 @@ export class HomeComponent {
 
     this.carsService.getCars().subscribe((data: any) => {
       
-      //console.log(typeof(data));
-      console.log(data[0]);
-      console.log(data[1]);
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
           const car: Car = data[key];
           this.cars.push(car);
+          
         }
       }
       console.log(this.cars);
