@@ -1,4 +1,4 @@
-This app uses ASP .NET Core Web Api as back end and Angular as front end, is currently in the making and it wants to be a Rent A Car application. If you want to check my work you can clone it, add the database from API/DB in your MicrosoftSql Server, register with an account and login as company or as customer. 
+This application utilizes ASP .NET Core Web API as the backend and Angular as the frontend. It is currently under development and is intended to function as a Rent A Car application. To review my work, you can clone the repository, add the database from API/DB in your Microsoft SQL Server, register with an account, and login either as a company or as a customer.
 
 Introduction
 
