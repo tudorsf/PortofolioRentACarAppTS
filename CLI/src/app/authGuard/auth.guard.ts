@@ -12,7 +12,7 @@ export class RoleGuard implements CanActivate {
     const expectedRoles = route.data['expectedRoles'];
     
     const currentUser = this.authService.getCurrentUser();
-
+    console.log(currentUser);
     if (currentUser && expectedRoles.includes(currentUser.role)) {
       return true;
     }

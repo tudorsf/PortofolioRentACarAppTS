@@ -11,6 +11,7 @@ import { ClientComponent } from './client/client.component';
 import { CompanyComponent } from './company/company.component';
 import { RoleGuard } from './authGuard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,8 @@ const routes: Routes = [
     CompanyComponent,
     ClientComponent,
     CompanyComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidebarComponent
     
   ],
   imports: [

@@ -1,4 +1,6 @@
-﻿using API.Models.Company;
+﻿using System.Text.Json.Serialization;
+using System.Text.Json;
+using API.Models.Company;
 using API.Models.DTO;
 using API.Models.UserModels;
 using LoginAPI3.Data;
@@ -65,18 +67,28 @@ namespace API.Controllers
         }
 
         [HttpGet("GetComp/{id}")]
-        public async Task<ActionResult<Company>> GetCompanies(int id)
+        public ActionResult<Company> GetCompany(int id)
+
         {
-            var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.Id == id);
+            JsonSerializerOptions options = new()
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true
+            };
 
+            var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id);
 
-            return company;
+            var json = JsonSerializer.Serialize(company, options); // Serialize the object with the specified options
 
-
+            return Content(json, "application/json");
         }
 
 
-       
+
+
+
+
+
 
     }
 }

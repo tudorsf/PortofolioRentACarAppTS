@@ -1,1 +1,25 @@
-<p>company works!</p>
+
+ <div >
+            <p>{{profile.name}}</p>
+            <p>{{profile.city}}</p>
+            <p>{{profile.rating}}</p>
+          </div>
+          
+        
+        <table>
+            <thead>
+              <tr>
+                <th>Car Name</th>
+                <th>Price</th>
+        
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let car of profile.cars">
+                <td>{{ car.name }}</td>
+                <td>{{ car.pricePerDay }}</td>
+              </tr>
+              
+            </tbody>
+          </table>
+
