@@ -19,7 +19,7 @@ export class HomeComponent {
   loggedIn = false;
   
   cars: Car[] = [];
-  company: Company[] = [];
+  //company: Company[] = [];
 
   constructor(private authService: AuthService, private cookieService: CookieService, private carsService: CarsService){
     this.authService.isLoggedIn().subscribe((isLoggedIn) => {
