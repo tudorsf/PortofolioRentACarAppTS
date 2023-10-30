@@ -12,6 +12,7 @@ import { CompanyComponent } from './company/company.component';
 import { RoleGuard } from './authGuard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
 
 
 const routes: Routes = [
@@ -19,9 +20,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
+  {path:'clieht', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
   {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }},
-  {path:'dashboard', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }}
+  
 
 ];
 
@@ -35,14 +36,15 @@ const routes: Routes = [
     ClientComponent,
     CompanyComponent,
     DashboardComponent,
-    SidebarComponent
+    SidebarComponent,
+    ErrorModalComponent
+
     
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    
     [RouterModule.forRoot(routes)]
   ],
   exports: [RouterModule],
