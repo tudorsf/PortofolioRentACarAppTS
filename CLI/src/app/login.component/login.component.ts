@@ -5,6 +5,11 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoggedUser } from '../models/loggedUser';
 import { AuthService } from '../services/auth.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorService } from '../services/error.service';
+
+
+
 
 @Component({
   selector: 'login-component',
@@ -18,7 +23,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent {
 
   loggedIn = false;
-  constructor(private loginService: RegisterService, private router: Router, private cookieService: CookieService, private authService: AuthService) {
+  constructor(private loginService: RegisterService, private router: Router, private cookieService: CookieService, private authService: AuthService,private errorService: ErrorService, private modalService: NgbModal) {
     this.authService.isLoggedIn().subscribe((isLoggedIn) => {
       this.loggedIn = isLoggedIn;
     });
@@ -38,6 +43,7 @@ export class LoginComponent {
       role: '' 
     }
    
+    errorMessage: string = '';
 
    login(){
 
@@ -63,7 +69,21 @@ export class LoginComponent {
        
       },
       error: (error) => {
-        console.log(error);
+       
+        if (error.error instanceof ErrorEvent) {
+          
+          this.errorMessage = error.error.message;
+          console.log(this.errorMessage);
+          this.errorService.changeErrorMessage(this.errorMessage);
+          this.modalService.open(this.errorMessage);
+        } else if (error.error && error.error.message) {
+          // Server-side error with a specific error message
+          this.errorMessage = error.error.message;
+          console.log(this.errorMessage);
+          this.errorService.changeErrorMessage(this.errorMessage);
+          this.modalService.open(this.errorMessage);
+
+          }
       }
     })
 
