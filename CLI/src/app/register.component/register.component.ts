@@ -3,7 +3,7 @@ import { UserAuth } from '../models/user.model';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { ErrorService } from '../services/error.service';
-//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'register-component',
@@ -15,7 +15,7 @@ import { ErrorService } from '../services/error.service';
 
 
 export class RegisterComponent {
-    constructor(private registerService: RegisterService, private router: Router, private errorService:  ErrorService/*, private modalService: NgbModal*/ ) {}
+    constructor(private registerService: RegisterService, private router: Router, private errorService:  ErrorService, private modalService: NgbModal ) {}
 user: UserAuth = {
     
     userName: '',
@@ -72,7 +72,7 @@ user: UserAuth = {
 
       // Save the error message for the error modal
         this.errorService.changeErrorMessage(errorMessage);
-        //this.modalService.open(errorMessage);
+        this.modalService.open(errorMessage);
           
         }
       );
