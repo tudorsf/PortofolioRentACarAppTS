@@ -13,7 +13,7 @@ builder.Services.AddControllers()
         {
             options.JsonSerializerOptions.ReferenceHandler = null;
         });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -25,7 +25,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddCors(policyBuilder =>
     policyBuilder.AddDefaultPolicy(policy =>
-        policy.WithOrigins("http://localhost:54726")
+        policy.WithOrigins("http://localhost:54503")
         .AllowAnyHeader()
         .AllowCredentials()
         .AllowAnyMethod()
