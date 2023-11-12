@@ -74,14 +74,12 @@ export class LoginComponent {
           
           this.errorMessage = error.error.message;
           console.log(this.errorMessage);
-          this.errorService.changeErrorMessage(this.errorMessage);
-          this.modalService.open(this.errorMessage);
+          this.errorService.openErrorModal(this.errorMessage);
         } else if (error.error && error.error.message) {
           // Server-side error with a specific error message
           this.errorMessage = error.error.message;
           console.log(this.errorMessage);
-          this.errorService.changeErrorMessage(this.errorMessage);
-          this.modalService.open(this.errorMessage);
+          this.errorService.openErrorModal(this.errorMessage);
 
           }
       }

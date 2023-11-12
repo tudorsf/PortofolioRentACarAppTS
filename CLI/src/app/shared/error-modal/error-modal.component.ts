@@ -1,24 +1,14 @@
-import { Component } from "@angular/core";
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ErrorService } from "src/app/services/error.service";
-
-@Injectable({
-  providedIn: 'root'
-})
+// error-modal.component.ts
+import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'error-modal',
-    templateUrl: './error-modal.component.html',
-    
-  })
+  selector: 'app-error-modal',
+  templateUrl: './error-modal.component.html',
+  styleUrls: ['./error-modal.component.css']
+})
+export class ErrorModalComponent {
+  @Input() errorMessage: string = '';
 
-  export class ErrorModalComponent {
-    errorMessage = '';
-
-  constructor(private errorService: ErrorService) { }
-
-  ngOnInit(): void {
-    this.errorService.currentErrorMessage.subscribe(message => this.errorMessage = message);
-  }
-  }
+  constructor(public activeModal: NgbActiveModal) {}
+}

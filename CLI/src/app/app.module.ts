@@ -7,21 +7,22 @@ import { RegisterComponent } from './register.component/register.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ClientComponent } from './client/client.component'; 
 import { CompanyComponent } from './company/company.component';
 import { RoleGuard } from './authGuard/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
+import { ClientComponent } from './client/client.component';
 
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  {path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {path:'clieht', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
+  {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
   {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }},
+  
+  {path: 'home', component: HomeComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
   
 
 ];
@@ -49,6 +50,6 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -13,11 +13,24 @@ import { ErrorService } from './services/error.service';
 export class AppComponent {
   title = 'LoginCLI';
   
-  /*constructor(private modalService: NgbModal, private errorService: ErrorService){
+  userRole:string;
 
-    let errorSub$ = this.errorService.currentErrorMessage.subscribe((errorMessage: string) => { this.modalService.open(errorMessage) })
-
-  }*/
+  constructor(private authService: AuthService){
+    this.userRole = this.authService.getCurrentUserRole();
+   }
+ 
+    get dashboardLink(): string {
+    
+      if (this.userRole == 'client') {
+        return 'client';
+      } else if (this.userRole == 'company') {
+        return 'company';
+      } else  {
+        return '/login';
+      }
+    }
+  
+  
 
   
 

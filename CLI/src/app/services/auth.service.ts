@@ -41,6 +41,24 @@ export class AuthService {
         return user;
     }
 
+    getCurrentUserRole(){
+     const userData = this.cookieService.get('user');
+        try {
+          if (userData) {
+                const user: LoggedUser = JSON.parse(userData);
+                if (user) {
+                  return user.role;
+                }
+              }
+            } catch{
+                return "";
+
+            }
+         return "";
+    }
+        
+    
+
     logOff(){
         const logOffData: LoggedUser = JSON.parse(this.cookieService.get('user'));
         this.http.delete('https://localhost:7262/api/Auth/LogOff/'+logOffData.id).subscribe({

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService {
-  errorMessageSource = new BehaviorSubject<string>('');
-  currentErrorMessage = this.errorMessageSource.asObservable();
+  constructor(private modalService: NgbModal) {}
 
-  constructor() { }
-
-  changeErrorMessage(message: string) {
-    this.errorMessageSource.next(message);
+  openErrorModal(errorMessage: string): void {
+    const modalRef = this.modalService.open(ErrorModalComponent);
+    console.log(modalRef);
+    modalRef.componentInstance.errorMessage = errorMessage;
   }
 }
