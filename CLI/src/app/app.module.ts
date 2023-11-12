@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
   {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }},
-  
+  {path:'modal', component:ErrorModalComponent },
+
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
   

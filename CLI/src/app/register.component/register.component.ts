@@ -31,6 +31,7 @@ user: UserAuth = {
 
   confirmPass = '';
 
+errorMessage = '';
   selectCompany(){
     this.user.roleRef = 2
   }

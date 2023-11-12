@@ -3,7 +3,7 @@
     <form #userForm="ngForm">
       <div class="mb-3">
         <label for="email" class="form-label">Username</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="user.userName" name="email">
+        <input type="email" class="form-control" id="email" placeholder="username" [(ngModel)]="user.userName" name="email">
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
@@ -29,7 +29,10 @@
       </div>
       <button type="submit" class="btn rentGreen custom-btn" (click)="register()">Register</button>
     </form>
+
+    
   </div>
+
 
   
 
