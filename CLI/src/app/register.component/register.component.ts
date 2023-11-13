@@ -4,6 +4,9 @@ import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { ErrorService } from '../services/error.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
+
 
 @Component({
   selector: 'register-component',
@@ -42,7 +45,7 @@ errorMessage = '';
 
   
   register(){
-     if(this.confirmPass == this.user.password && this.user.roleRef != 0){
+     if(this.user.userName != "" && this.user.password != "" && this.confirmPass == this.user.password && this.user.roleRef != 0){
         
        
         this.registerService.register(this.user.userName, this.user.password, this.user.roleRef)
@@ -54,33 +57,24 @@ errorMessage = '';
         (error) => {
           
           let errorMessage:string;
-
-            if (error.error instanceof ErrorEvent) {
+          if (error.error instanceof ErrorEvent) {
               errorMessage = error.error.message;
               this.errorService.openErrorModal(errorMessage);
-            } else {
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        this.errorService.openErrorModal(errorMessage);
-
-      }
-
-        this.errorService.openErrorModal(errorMessage);          
+          } else {
+              errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+              this.errorService.openErrorModal(errorMessage);
+           }
         }
       );
      } else if(this.user.roleRef == 0){
-      let errorMessage = 'plese select a role'
-      //this.errorService.changeErrorMessage(errorMessage);
-      this.errorService.openErrorModal(errorMessage);      
+        let errorMessage = 'please select a role'
+        this.errorService.openErrorModal(errorMessage);      
      } else if(this.confirmPass != this.user.password) {
-      this.user.password = '';
-      this.confirmPass = '';
-      let errorMessage = 'passwords dont match'
-      //this.errorService.changeErrorMessage(errorMessage);
-      console.log(errorMessage);
-      this.errorService.openErrorModal(errorMessage);   }
-     
-    
-  }
+        this.user.password = '';
+        this.confirmPass = '';
+        let errorMessage = 'passwords dont match'
+        this.errorService.openErrorModal(errorMessage);   }
+   }
 
   
 }

@@ -69,19 +69,9 @@ export class LoginComponent {
        
       },
       error: (error) => {
-       
-        if (error.error instanceof ErrorEvent) {
-          
-          this.errorMessage = error.error.message;
-          console.log(this.errorMessage);
-          this.errorService.openErrorModal(this.errorMessage);
-        } else if (error.error && error.error.message) {
-          // Server-side error with a specific error message
-          this.errorMessage = error.error.message;
-          console.log(this.errorMessage);
-          this.errorService.openErrorModal(this.errorMessage);
-
-          }
+        let errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        this.errorService.openErrorModal(errorMessage);
+        
       }
     })
 
