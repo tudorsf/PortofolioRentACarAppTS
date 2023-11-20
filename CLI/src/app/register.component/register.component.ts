@@ -20,7 +20,7 @@ import { ErrorModalComponent } from '../shared/error-modal/error-modal.component
 export class RegisterComponent {
     constructor(private registerService: RegisterService, private router: Router, private errorService:  ErrorService, private modalService: NgbModal ) {}
 
-    checkForm = true;
+    //checkForm = true;
     
 
 user: UserAuth = {
