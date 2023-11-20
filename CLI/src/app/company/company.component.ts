@@ -2,7 +2,6 @@ import { Component, OnInit  } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Company } from '../models/BL/company.model';
 import { CompanyService } from '../services/company.service';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-company',

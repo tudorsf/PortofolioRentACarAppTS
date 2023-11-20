@@ -9,10 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CompanyComponent } from './company/company.component';
 import { RoleGuard } from './authGuard/auth.guard';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
 import { ClientComponent } from './client/client.component';
+import { AccesDeniedComponent } from './acces.denied/access-denied.component';
 
 
 const routes: Routes = [
@@ -21,10 +20,10 @@ const routes: Routes = [
   {path:'client', component:ClientComponent, canActivate: [RoleGuard], data: { expectedRoles: ['client', 'sysAdmin'] }},
   {path:'company', component:CompanyComponent, canActivate: [RoleGuard], data: { expectedRoles: ['company', 'sysAdmin'] }},
   {path:'modal', component:ErrorModalComponent },
-
+  {path: 'access-denied', component:AccesDeniedComponent},
   {path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
-  
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+ 
 
 ];
 
@@ -37,9 +36,8 @@ const routes: Routes = [
     CompanyComponent,
     ClientComponent,
     CompanyComponent,
-    DashboardComponent,
-    SidebarComponent,
-    ErrorModalComponent
+    ErrorModalComponent,
+    AccesDeniedComponent
 
     
   ],

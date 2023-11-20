@@ -3,7 +3,6 @@ import { AuthService } from './services/auth.service';
 import { LoggedUser } from './models/loggedUser';
 import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
 import { ErrorService } from './services/error.service';
-//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',

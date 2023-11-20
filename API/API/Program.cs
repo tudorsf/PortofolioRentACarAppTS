@@ -25,7 +25,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddCors(policyBuilder =>
     policyBuilder.AddDefaultPolicy(policy =>
-        policy.WithOrigins("http://localhost:53589")
+        policy.WithOrigins("http://localhost:63323")
         .AllowAnyHeader()
         .AllowCredentials()
         .AllowAnyMethod()

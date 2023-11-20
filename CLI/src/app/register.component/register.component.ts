@@ -20,6 +20,7 @@ import { ErrorModalComponent } from '../shared/error-modal/error-modal.component
 export class RegisterComponent {
     constructor(private registerService: RegisterService, private router: Router, private errorService:  ErrorService, private modalService: NgbModal ) {}
 
+    checkForm = true;
     
 
 user: UserAuth = {
@@ -51,28 +52,27 @@ errorMessage = '';
         this.registerService.register(this.user.userName, this.user.password, this.user.roleRef)
       .subscribe(
         (response) => {
-         
           this.router.navigate(['/login']);
         },
         (error) => {
-          
+            
           let errorMessage:string;
-          if (error.error instanceof ErrorEvent) {
-              errorMessage = error.error.message;
-              this.errorService.openErrorModal(errorMessage);
-          } else {
-              errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-              this.errorService.openErrorModal(errorMessage);
-           }
+           if(error.status == 400){
+            this.errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
+  
+            } else {
+            this.errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            }
+            this.errorService.openErrorModal(this.errorMessage);
         }
       );
      } else if(this.user.roleRef == 0){
-        let errorMessage = 'please select a role'
+        let errorMessage = 'Please select a role'
         this.errorService.openErrorModal(errorMessage);      
      } else if(this.confirmPass != this.user.password) {
         this.user.password = '';
         this.confirmPass = '';
-        let errorMessage = 'passwords dont match'
+        let errorMessage = 'Passwords dont match'
         this.errorService.openErrorModal(errorMessage);   }
    }
 

@@ -27,7 +27,7 @@
           I want to register as customer
       </label>
       </div>
-      <button type="submit" class="btn rentGreen custom-btn" (click)="register()">Register</button>
+      <button type="submit" class="btn rentGreen custom-btn" (click)="register()" [disabled]="checkForm">Register</button>
     </form>
 
     

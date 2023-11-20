@@ -69,8 +69,15 @@ export class LoginComponent {
        
       },
       error: (error) => {
-        let errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        this.errorService.openErrorModal(errorMessage);
+        //console.log(error);
+        errorMessage: String;
+        if(error.status == 400){
+          this.errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
+
+        } else {
+          this.errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        this.errorService.openErrorModal(this.errorMessage);
         
       }
     })

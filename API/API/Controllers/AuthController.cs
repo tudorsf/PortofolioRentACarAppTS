@@ -65,7 +65,7 @@ namespace LoginAPI3.Controllers
             
             if (user == null)
             {
-                return BadRequest("user not found");
+                return BadRequest("User not found");
             }
                
             

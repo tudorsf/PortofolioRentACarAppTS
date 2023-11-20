@@ -2807,11 +2807,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Tudor\\Desktop\\RentACar\\RentACarApp\\API\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj",
+      "projectPath": "C:\\Users\\Tudor\\Desktop\\RentACar\\RentACarApp\\API\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Tudor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\obj\\",
+      "outputPath": "C:\\Users\\Tudor\\Desktop\\RentACar\\RentACarApp\\API\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tudor\\AppData\\Roaming\\NuGet\\NuGet.Config",
