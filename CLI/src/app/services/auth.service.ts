@@ -41,6 +41,11 @@ export class AuthService {
         return user;
     }
 
+    getUserREF(){
+      const user: LoggedUser = JSON.parse(this.cookieService.get('user'));
+      return user.id;
+    }
+
     getCurrentUserRole(){
      const userData = this.cookieService.get('user');
         try {

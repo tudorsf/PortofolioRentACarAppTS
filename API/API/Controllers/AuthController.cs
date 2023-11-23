@@ -33,7 +33,7 @@ namespace LoginAPI3.Controllers
 
 
             [HttpPost("register")]
-            public async Task<ActionResult<User>> Register([FromBody] UserDTO request)
+            public ActionResult<User> Register([FromBody] UserDTO request)
             {
                 if (_context.Users.Any(u => u.userName == request.userName))
                 {
@@ -59,7 +59,7 @@ namespace LoginAPI3.Controllers
             }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<string>> Login([FromBody]UserDTO request)
+        public ActionResult<string> Login([FromBody]UserDTO request)
         {
             var user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.userName == request.userName);
             
@@ -89,8 +89,7 @@ namespace LoginAPI3.Controllers
             };
 
             _context.LoggedInUsers.Add(loggedInUser);
-            await _context.SaveChangesAsync();
-
+            _context.SaveChanges();
 
             return Ok(
                      new
@@ -109,7 +108,7 @@ namespace LoginAPI3.Controllers
         }
 
         [HttpDelete("LogOff/{id}")]
-        public async Task<ActionResult<LoggedInUser>> LogOff(int id)
+        public ActionResult<LoggedInUser> LogOff(int id)
         {
             var loggedOfUser = _context.LoggedInUsers.FirstOrDefault(u => u.UserRef == id);
 
@@ -118,7 +117,7 @@ namespace LoginAPI3.Controllers
                
                 _context.LoggedInUsers.Remove(loggedOfUser);
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 return Ok();
             }

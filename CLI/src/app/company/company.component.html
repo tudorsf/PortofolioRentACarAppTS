@@ -1,25 +1,30 @@
 
- <div >
-            <p>{{profile.name}}</p>
-            <p>{{profile.city}}</p>
-            <p>{{profile.rating}}</p>
-          </div>
+ <div *ngIf="!company" class="profile-not-created">
+    <p>You have not created a profile, please submit this form</p>
+    <button (click)="openModal()">create profile</button>
+ </div>
+ 
+ <div *ngIf="company">
+            <p>{{company.name}}</p>
+            <p>{{company.city}}</p>
+            <p>{{company.rating}}</p>
+            <p>your cars</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Car Name</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let car of company.cars">
+                  <td>{{ car.name }}</td>
+                  <td>{{ car.pricePerDay }}</td>
+                </tr>
+              </tbody>
+            </table>
+</div>
           
         
-        <table>
-            <thead>
-              <tr>
-                <th>Car Name</th>
-                <th>Price</th>
-        
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let car of profile.cars">
-                <td>{{ car.name }}</td>
-                <td>{{ car.pricePerDay }}</td>
-              </tr>
-              
-            </tbody>
-          </table>
+       
 

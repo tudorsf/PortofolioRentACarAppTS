@@ -27,7 +27,7 @@ namespace API.Controllers
 
 
         [HttpPost("addProfile")]
-        public async Task<ActionResult<User>> AddProfile([FromBody] CompanyDTO request)
+        public async Task<ActionResult<Company>> AddProfile([FromBody]CompanyDTO request)
         {
             if (_context.Companies.Any(u => u.UserREF == request.userREF))
             {
@@ -48,7 +48,7 @@ namespace API.Controllers
         }
 
         [HttpPost("addCar")]
-        public async Task<ActionResult<User>> AddCar([FromBody] CarDTO request)
+        public async Task<ActionResult<Car>> AddCar([FromBody] CarDTO request)
         {
             
             var car = new Car();

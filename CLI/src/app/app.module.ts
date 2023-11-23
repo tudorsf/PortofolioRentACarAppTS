@@ -12,6 +12,7 @@ import { RoleGuard } from './authGuard/auth.guard';
 import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
 import { ClientComponent } from './client/client.component';
 import { AccesDeniedComponent } from './acces.denied/access-denied.component';
+import { ProfileModalComponent } from './company/profile-modal/profile-modal.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
     ClientComponent,
     CompanyComponent,
     ErrorModalComponent,
-    AccesDeniedComponent
+    AccesDeniedComponent,
+    ProfileModalComponent
 
     
   ],

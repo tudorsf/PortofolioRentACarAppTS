@@ -1,0 +1,21 @@
+<div class="modal-header rentGreen">
+    <h4 class="modal-title">Error</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body bg-light text-dark">
+    <div class="row">
+        <div class="col-md-8">
+          <label class="for-label">Company Name</label>
+          <input type="text" name="name" class="form-control" [(ngModel)]="company.name" >
+         
+          <label class="for-label">Company Location</label>
+          <input type="text" name="client" class="form-control" [(ngModel)]="company.city">
+          
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer bg-light">
+    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="createProfile()" data-bs-dismiss="modal">Create</button>
+
+  </div>

@@ -2,6 +2,10 @@ import { Component, OnInit  } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Company } from '../models/BL/company.model';
 import { CompanyService } from '../services/company.service';
+import { ProfileModalComponent } from './profile-modal/profile-modal.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileService } from '../services/profile.service';
+
 
 @Component({
   selector: 'app-company',
@@ -10,7 +14,10 @@ import { CompanyService } from '../services/company.service';
 })
 export class CompanyComponent implements OnInit {
 
-  profile: Company = {
+  private modalRef: NgbModalRef | null = null;
+
+ 
+  company: Company = {
     id: 0,
     userREF: 0,
     name: '',
@@ -19,23 +26,50 @@ export class CompanyComponent implements OnInit {
     cars: []
   }
 
+  receivedData: any;
 
-  constructor(private authService: AuthService, private companyService: CompanyService) {
-    this.companyService.getProfile().subscribe((data: any) => {
-        
-      this.profile = data;        
-      console.log(this.profile);
-      
-
-    });
-    
+ constructor(private authService: AuthService, private companyService: CompanyService, private modalService: NgbModal, private profileService: ProfileService) {
+    this.companyService.getProfile().subscribe(
+      (data: any) => {
+        this.company = data;
+      },
+      (error: any) => {
+        console.error('Error creating profile:', error);
+      }
+    );
+  
 
     
    }
 
   ngOnInit(): void {
-    
+    this.profileService.data$.subscribe((data) => {
+     
+      this.company = data;
+
+     
+    });
   }
+
+
+  
+  openModal(){
+    this.modalRef = this.modalService.open(ProfileModalComponent, { centered: true });
+  }
+
+  closeModal(){
+    if (this.modalRef) {
+      this.modalRef.close();
+      this.modalRef = null;
+    }
+  }
+
+  
+  
+
+  
+ 
+    
 
   
 
