@@ -18,15 +18,18 @@ export class CompanyService {
 
    
     
-    getProfile(){
+    getProfile(): Observable<any>{
         const currentUser = this.authService.getCurrentUser();
         return this.http.get('https://localhost:7262/api/Company/GetComp/'+ currentUser.id);
+          
     }
 
    
 
-    createProfile(company: Company){
-        return this.http.post('https://localhost:7262/api/Company/addProfile', company);
+    createProfile(company: Company): Observable<any>{
+        
+            return this.http.post('https://localhost:7262/api/Company/addProfile', company);
+       
        
     }
 

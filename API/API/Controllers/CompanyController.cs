@@ -44,7 +44,7 @@ namespace API.Controllers
 
             _context.Companies.Add(company);
             _context.SaveChanges();
-            return Ok();
+            return company;
         }
 
         [HttpPost("addCar")]
@@ -78,7 +78,7 @@ namespace API.Controllers
 
             var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id);
 
-            var json = JsonSerializer.Serialize(company, options); // Serialize the object with the specified options
+            var json = JsonSerializer.Serialize(company, options); 
 
             return Content(json, "application/json");
         }
