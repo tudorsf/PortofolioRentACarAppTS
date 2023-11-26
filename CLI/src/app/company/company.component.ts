@@ -21,48 +21,45 @@ export class CompanyComponent implements OnInit {
  
   company: Company | null = null;
 
-  isCompanyPopulated = false;
-
- constructor(private authService: AuthService, private companyService: CompanyService, private modalService: NgbModal, private profileService: ProfileService) {
-  this.companyService.getProfile().subscribe(
-    (data: any) => {
-      console.log(data + "data from backend")
-      if(data != null){
-        try{
-          this.company = data;
-          this.isCompanyPopulated = this.checkCompanyPopulated();
-
-        }
-        catch (error) {
-          console.error('Error creating profile:', error);
-        }
-        console.log(this.company + " company from backend");
-      }
-     
-    },
-    (error: any) => {
-      console.error('Error creating profile:', error);
-    }
-  );
-
-  this.profileService.data$.subscribe((data) => {
-    if(data != null){
-      try{
-        this.company = data;
-      console.log(this.company);
-      this.isCompanyPopulated = this.checkCompanyPopulated();
-      console.log(this.isCompanyPopulated);
-      } catch(error){
-        console.log(error)
-      }
-      
-     }
-    console.log(this.company + ' from profile service');
-  });
- }
+ constructor(private companyService: CompanyService, 
+             private modalService: NgbModal, 
+             private profileService: ProfileService) 
+          {}
 
   ngOnInit(): void {
+
+    this.companyService.getProfile().subscribe(
+      (data: any) => {
+        console.log(data + "data from backend")
+        if(data != null){
+          try{
+            this.company = data;
+          }
+          catch (error) {
+            console.error('Error creating profile:', error);
+          }
+          console.log(this.company + " company from backend");
+        }
+       
+      },
+      (error: any) => {
+        console.error('Error creating profile:', error);
+      }
+    );
     
+    if(!this.company){
+      this.profileService.data$.subscribe((data) => {
+        if(data != null){
+          this.company = data;
+          this.closeModal();
+         }
+      });
+    }
+    
+
+    
+
+
 
     
    
@@ -82,9 +79,13 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  checkCompanyPopulated(): boolean {
-    return !!this.company && !!this.company.Name && !!this.company.City && !!this.company.Rating && !!this.company.Cars;
-  }
+  /*checkCompanyPopulated(): boolean {
+    console.log(JSON.stringify(this.company) + "from check company");
+    console.log(this.company?.name);
+    console.log(this.company?.city);
+    console.log(this.company?.rating);
+    return !!this.company && !!this.company.name && !!this.company.city && !!this.company.rating;
+  }*/
 
   
   

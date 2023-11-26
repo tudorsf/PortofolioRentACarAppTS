@@ -20,19 +20,19 @@ import { ProfileService } from 'src/app/services/profile.service';
    
     
     company: Company = {
-        Id: 0,
-        UserREF: 0,
-        Name: '',
-        City: '',
-        Rating: 0,
-        Cars: []
+        id: 0,
+        userREF: 0,
+        name: '',
+        city: '',
+        rating: 0,
+        cars: []
     }
 
 
     constructor(private authService: AuthService, private companyService: CompanyService, private profileService: ProfileService){}
 
     createProfile(){
-        this.company.UserREF = this.authService.getUserREF();
+        this.company.userREF = this.authService.getUserREF();
         if(this.company){
           this.companyService.createProfile(this.company).subscribe(
             (response: any) => {
@@ -40,6 +40,8 @@ import { ProfileService } from 'src/app/services/profile.service';
                 this.company = response;
                 if(this.company){
                   this.profileService.setData(this.company);
+                  this.modalRef?.close();
+
                  }
               }
              
@@ -54,8 +56,15 @@ import { ProfileService } from 'src/app/services/profile.service';
           
         
       
-       //console.log(this.company);
 
+    }
+
+    closeModal(){
+      console.log(this.modalRef);
+      if (this.modalRef) {
+        this.modalRef.close();
+        this.modalRef = null;
+      }
     }
 
    

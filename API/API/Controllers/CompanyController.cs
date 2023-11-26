@@ -70,17 +70,17 @@ namespace API.Controllers
         public ActionResult<Company> GetCompany(int id)
 
         {
-            JsonSerializerOptions options = new()
+            /*JsonSerializerOptions options = new()
             {
                 ReferenceHandler = ReferenceHandler.IgnoreCycles,
                 WriteIndented = true
-            };
+            };*/
 
             var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id);
 
-            var json = JsonSerializer.Serialize(company, options); 
+            //var json = JsonSerializer.Serialize(company, options); 
 
-            return Content(json, "application/json");
+            return company;
         }
 
 
