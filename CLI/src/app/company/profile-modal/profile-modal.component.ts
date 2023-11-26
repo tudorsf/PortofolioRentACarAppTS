@@ -5,6 +5,7 @@ import { CompanyService } from 'src/app/services/company.service';
 import { ErrorModalComponent } from 'src/app/shared/error-modal/error-modal.component';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from 'src/app/services/profile.service';
+import { ErrorService } from 'src/app/services/error.service';
 
 
 @Component({
@@ -29,7 +30,10 @@ import { ProfileService } from 'src/app/services/profile.service';
     }
 
 
-    constructor(private authService: AuthService, private companyService: CompanyService, private profileService: ProfileService){}
+    constructor(private authService: AuthService,
+                private companyService: CompanyService,
+                private profileService: ProfileService,
+                private errorService: ErrorService){}
 
     createProfile(){
         this.company.userREF = this.authService.getUserREF();
@@ -60,11 +64,7 @@ import { ProfileService } from 'src/app/services/profile.service';
     }
 
     closeModal(){
-      console.log(this.modalRef);
-      if (this.modalRef) {
-        this.modalRef.close();
-        this.modalRef = null;
-      }
+      console.log("this is not working yet");
     }
 
    

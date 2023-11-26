@@ -55,15 +55,6 @@ export class CompanyComponent implements OnInit {
          }
       });
     }
-    
-
-    
-
-
-
-    
-   
-  
   }
 
   
