@@ -6,7 +6,8 @@ import { ProfileModalComponent } from './profile-modal/profile-modal.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from '../services/profile.service';
 import { Observable } from 'rxjs';
-import { ChangeDetectorRef } from '@angular/core';
+import { StreetMapService } from '../services/streetMap.service';
+
 
 
 @Component({
@@ -18,12 +19,16 @@ export class CompanyComponent implements OnInit {
 
   private modalRef: NgbModalRef | null = null;
 
+
  
   company: Company | null = null;
 
+  address: string = '';
+
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
-             private profileService: ProfileService) 
+             private profileService: ProfileService,
+             private streetService: StreetMapService) 
           {}
 
   ngOnInit(): void {
@@ -57,6 +62,7 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+
   
   
   openModal(){
@@ -70,21 +76,15 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  /*checkCompanyPopulated(): boolean {
-    console.log(JSON.stringify(this.company) + "from check company");
-    console.log(this.company?.name);
-    console.log(this.company?.city);
-    console.log(this.company?.rating);
-    return !!this.company && !!this.company.name && !!this.company.city && !!this.company.rating;
+  openCarModal(){
+    console.log("");
+  }
+
+  /*createMap(){
+    console.log(this.streetService.createMap())
   }*/
 
   
-  
-
-  
- 
-    
-
   
 
 }
