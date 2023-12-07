@@ -33,7 +33,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         cars: []
     }
 
-      //myForm: FormGroup;
+    companyForm: FormGroup;
 
     constructor(private authService: AuthService,
                 private companyService: CompanyService,
@@ -41,14 +41,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
                 private errorService: ErrorService,
                 private fb: FormBuilder)
                 {
-                  /*this.myForm = this.fb.group({
-                    phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-                    email: ['', [Validators.required, Validators.email]],
-                  });*/
+                  
+                    this.companyForm = this.fb.group({
+                      name: ['', Validators.required],
+                      city: ['', Validators.required],
+                      address: ['', Validators.required],
+                      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+                      eMail: ['', [Validators.required, Validators.email]],
+                    });
                 }
 
     createProfile(){
+        this.company =  this.companyForm.value;
+        console.log(this.company);
         this.company.userREF = this.authService.getUserREF();
+        
         if(this.company){
           this.companyService.createProfile(this.company).subscribe(
             (response: any) => {

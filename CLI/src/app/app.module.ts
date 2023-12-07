@@ -14,7 +14,7 @@ import { ClientComponent } from './client/client.component';
 import { AccesDeniedComponent } from './acces.denied/access-denied.component';
 import { ProfileModalComponent } from './company/profile-modal/profile-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -49,6 +49,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatTooltipModule,
     [RouterModule.forRoot(routes)]
   ],
   exports: [RouterModule],

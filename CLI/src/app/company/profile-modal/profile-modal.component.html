@@ -5,28 +5,30 @@
   <div class="modal-body bg-light text-dark">
     <div class="row">
         <div class="col-md-8">
-          <form >
-          
-          <label class="for-label">Company Name</label>
-          <input type="text" name="name" class="form-control" [(ngModel)]="company.name" >
-         
-          <label class="for-label">Company Location</label>
-          <input type="text" name="client" class="form-control" [(ngModel)]="company.city">
-
-          <label class="for-label">Company Address</label>
-          <input type="text" name="client" class="form-control" [(ngModel)]="company.address">
-
-          <label class="for-label">Phone Number</label>
-          <input type="string" name="client" class="form-control" [(ngModel)]="company.phoneNumber">
-
-          <label class="for-label">E-Mail</label>
-          <input type="email" name="client" class="form-control" [(ngModel)]="company.eMail">
-        </form>
+          <div class="container">
+            <form [formGroup]="companyForm">
+              <label class="for-label">Company Name <span><i class="fas fa-info-circle info-icon" matTooltip="Please enter a valid name" matTooltipPosition="above"></i> </span></label> 
+              <input type="text" name="name" class="form-control" formControlName="name">
+             
+              <label class="for-label">Company Location <span><i class="fas fa-info-circle info-icon" matTooltip="Please enter a valid city" matTooltipPosition="right"></i> </span> </label>
+              <input type="text" name="city" class="form-control" formControlName="city">
+    
+              <label class="for-label">Company Address <span><i class="fas fa-info-circle info-icon" matTooltip="Please enter a valid address" matTooltipPosition="right"></i> </span> </label>
+              <input type="text" name="address" class="form-control" formControlName="address">
+    
+              <label class="for-label">Phone Number <span><i class="fas fa-info-circle info-icon" matTooltip="Please enter a valid phone number" matTooltipPosition="right"></i> </span></label>
+              <input type="text" name="phoneNumber" class="form-control" formControlName="phoneNumber">
+    
+              <label class="for-label">E-Mail <span><i class="fas fa-info-circle info-icon" matTooltip="Please enter a valid e-mail" matTooltipPosition="right"></i> </span> </label>
+              <input type="email" name="eMail" class="form-control" formControlName="eMail">
+            </form>
+          </div>
+        
+        
         </div>
       </div>
   </div>
   <div class="modal-footer bg-light">
     <button type="button" class="btn btn-outline-dark" (click)="closeModal()" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-outline-dark"  (click)="createProfile()" data-bs-dismiss="modal">Create</button>
-    <!-- [disabled]="myForm.invalid" -->
+    <button type="button" class="btn btn-outline-dark" [disabled]="companyForm.invalid" (click)="createProfile()" data-bs-dismiss="modal">Create</button>
   </div>

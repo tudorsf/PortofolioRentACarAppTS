@@ -10,3 +10,9 @@
     border-top: 1px solid #ddd;
     padding: 10px 20px;
   }
+
+  ::ng-deep .mat-tooltip.matTooltipTallHeaderCell {
+    position: relative;
+    left: -0.75rem;
+    top: -3rem;
+  }
