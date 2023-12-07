@@ -39,6 +39,9 @@ namespace API.Controllers
             company.Name = request.name;
             company.City = request.city;
             company.UserREF = request.userREF;
+            company.Address = request.address;
+            company.PhoneNumber = request.phoneNumber;
+            company.eMail = request.email;
             company.Rating = 5;
 
 

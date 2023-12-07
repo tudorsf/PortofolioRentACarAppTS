@@ -7,6 +7,9 @@
  <div *ngIf="company">
             <label>Name:</label><p>{{company!.name}}</p>
             <label>Location:</label><p>{{company!.city}}</p>
+            <label>Address:</label><p>{{company!.address}}</p>
+            <label>Email:</label><p>{{company!.eMail}}</p>
+            <label>Phone Number:</label><p>{{company!.phoneNumber}}</p>
             <label>Rating:</label><p>{{company!.rating}}</p>
             <label>Cars:</label>
             <table>
@@ -31,8 +34,8 @@
   <input type="string" [(ngModel)]="address">
   <button (click)="createMap()">create map</button>
   
-</div>-->
-          
+</div>
+-->      
         
        
 

@@ -6,6 +6,7 @@ import { ErrorModalComponent } from 'src/app/shared/error-modal/error-modal.comp
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ErrorService } from 'src/app/services/error.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -25,15 +26,26 @@ import { ErrorService } from 'src/app/services/error.service';
         userREF: 0,
         name: '',
         city: '',
+        address: '',
+        phoneNumber: '',
+        eMail: '',
         rating: 0,
         cars: []
     }
 
+      //myForm: FormGroup;
 
     constructor(private authService: AuthService,
                 private companyService: CompanyService,
                 private profileService: ProfileService,
-                private errorService: ErrorService){}
+                private errorService: ErrorService,
+                private fb: FormBuilder)
+                {
+                  /*this.myForm = this.fb.group({
+                    phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+                    email: ['', [Validators.required, Validators.email]],
+                  });*/
+                }
 
     createProfile(){
         this.company.userREF = this.authService.getUserREF();

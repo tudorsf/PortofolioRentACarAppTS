@@ -13,6 +13,7 @@ import { ErrorModalComponent } from './shared/error-modal/error-modal.component'
 import { ClientComponent } from './client/client.component';
 import { AccesDeniedComponent } from './acces.denied/access-denied.component';
 import { ProfileModalComponent } from './company/profile-modal/profile-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     [RouterModule.forRoot(routes)]
   ],
   exports: [RouterModule],

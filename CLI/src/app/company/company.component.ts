@@ -80,9 +80,9 @@ export class CompanyComponent implements OnInit {
     console.log("");
   }
 
-  /*createMap(){
+  createMap(){
     console.log(this.streetService.createMap())
-  }*/
+  }
 
   
   
