@@ -9,6 +9,7 @@ import { Company } from '../models/BL/company.model';
 @Component({
   selector: 'home-component',
   templateUrl: './home.component.html',
+ 
   
 })
 

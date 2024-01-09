@@ -41,6 +41,7 @@ const routes: Routes = [
     ErrorModalComponent,
     AccesDeniedComponent,
     ProfileModalComponent
+    
 
     
   ],

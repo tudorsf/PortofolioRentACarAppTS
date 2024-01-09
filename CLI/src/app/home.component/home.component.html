@@ -9,7 +9,12 @@
     <p *ngIf="!loggedIn">please login</p>
 </div>-->
 
-<table>
+<div *ngIf="cars.length == 0">
+  <p>no cars available, please try again later</p>
+</div>
+
+<div *ngIf="cars.length > 0">
+  <table>
     <thead>
       <tr>
         <th>Car Name</th>
@@ -26,4 +31,6 @@
     </tbody>
   </table>
   
+</div>
+
 

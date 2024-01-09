@@ -11,8 +11,6 @@
     padding: 10px 20px;
   }
 
-  ::ng-deep .mat-tooltip.matTooltipTallHeaderCell {
-    position: relative;
-    left: -0.75rem;
-    top: -3rem;
-  }
+  /*.mat-tooltip {
+    z-index: 1000; 
+  }*/

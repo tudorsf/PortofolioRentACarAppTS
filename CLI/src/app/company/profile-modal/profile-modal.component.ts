@@ -35,6 +35,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
     companyForm: FormGroup;
 
+    info = false;
+
     constructor(private authService: AuthService,
                 private companyService: CompanyService,
                 private profileService: ProfileService,
@@ -86,6 +88,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       console.log("this is not working yet");
     }
 
+    askInfo(){
+      this.info = !this.info;
+    }
+
+  
+
+    showMessage(form:any, formInput:any): boolean {
+      const control = form.get(formInput);
+    
+      return control?.invalid && control?.dirty && control?.touched && control?.value;
+    }
    
 
     
