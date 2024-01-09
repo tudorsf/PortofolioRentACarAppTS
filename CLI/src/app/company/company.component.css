@@ -14,7 +14,7 @@
   }
   
   .profile-not-created button {
-    background-color:rgb(38, 213, 134);
+    background-color: rgb(38, 213, 134);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -29,4 +29,94 @@
   .profile-not-created button:hover {
     background-color: #2aae6e;
   }
+
+  /*.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .profile-info {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  
+  
+ 
+  .add-cars-button {
+    background-color:rgb(38, 213, 134);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;*/
+    /*cursor: pointer;*/
+  /*}
+  
+  .add-cars-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cars-section {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  
+
+  .profile-info{
+    width: 70%;
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .company-table {
+    width: 80%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .company-table td, .company-table th {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .company-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .add-cars-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .add-cars-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cars-section {
+    width: 80%;
+  }*/
+  
+  
+  
   

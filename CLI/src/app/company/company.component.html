@@ -4,40 +4,61 @@
     <button (click)="openModal()">create profile</button>
  </div>
  
- <div *ngIf="company">
-            <label>Name:</label><p>{{company!.name}}</p>
-            <label>Location:</label><p>{{company!.city}}</p>
-            <label>Address:</label><p>{{company!.address}}</p>
-            <label>Email:</label><p>{{company!.eMail}}</p>
-            <label>Phone Number:</label><p>{{company!.phoneNumber}}</p>
-            <label>Rating:</label><p>{{company!.rating}}</p>
-            <button>Add Cars</button>
+ 
+<div *ngIf="company" class="profile-container">
+  <div class="profile-info">
+    <table class="company-table">
+      <tr>
+        <td><label>Name:</label></td>
+        <td>{{ company!.name }}</td>
+      </tr>
+      <tr>
+        <td><label>Location:</label></td>
+        <td>{{ company!.city }}</td>
+      </tr>
+      <tr>
+        <td><label>Address:</label></td>
+        <td>{{ company!.address }}</td>
+      </tr>
+      <tr>
+        <td><label>Email:</label></td>
+        <td>{{ company!.eMail }}</td>
+      </tr>
+      <tr>
+        <td><label>Phone Number:</label></td>
+        <td>{{ company!.phoneNumber }}</td>
+      </tr>
+      <tr>
+        <td><label>Rating:</label></td>
+        <td>{{ company!.rating }}</td>
+      </tr>
+    </table>
 
-            <label>Cars:</label>
-            <table>
-              <thead>
-                <tr>
-                  <th>Car Name</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let car of company!.cars">
-                  <td>{{ car.name }}</td>
-                  <td>{{ car.pricePerDay }}</td>
-                </tr>
-              </tbody>
-            </table>
-            <!--<button (click)="openCarModal()">Add Cars</button>-->
-</div>
+    
+  </div>
 
-<!--<div>
-  <label>add adress</label>
-  <input type="string" [(ngModel)]="address">
-  <button (click)="createMap()">create map</button>
+  <button class="add-cars-button">Add Cars</button>
   
+  <div class="cars-section">
+    <label>Cars:</label>
+    <table>
+      <thead>
+        <tr>
+          <th>Car Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of company!.cars">
+          <td>{{ car.name }}</td>
+          <td>{{ car.pricePerDay }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
--->      
-        
+
+ 
+
        
 
