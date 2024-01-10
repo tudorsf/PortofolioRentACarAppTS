@@ -15,6 +15,8 @@ import { AccesDeniedComponent } from './acces.denied/access-denied.component';
 import { ProfileModalComponent } from './company/profile-modal/profile-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarModalComponent } from './company/car-modal/car-modal.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -40,7 +42,8 @@ const routes: Routes = [
     CompanyComponent,
     ErrorModalComponent,
     AccesDeniedComponent,
-    ProfileModalComponent
+    ProfileModalComponent,
+    CarModalComponent
     
 
     
@@ -51,7 +54,8 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    [RouterModule.forRoot(routes)]
+    [RouterModule.forRoot(routes)],
+    NgbModule
   ],
   exports: [RouterModule],
   providers: [],

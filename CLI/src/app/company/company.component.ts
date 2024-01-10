@@ -3,17 +3,19 @@ import { AuthService } from '../services/auth.service';
 import { Company } from '../models/BL/company.model';
 import { CompanyService } from '../services/company.service';
 import { ProfileModalComponent } from './profile-modal/profile-modal.component';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from '../services/profile.service';
 import { Observable } from 'rxjs';
 import { StreetMapService } from '../services/streetMap.service';
 
 
 
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  styleUrls: ['./company.component.css',
+'../app.component.css']
 })
 export class CompanyComponent implements OnInit {
 
@@ -24,6 +26,7 @@ export class CompanyComponent implements OnInit {
   company: Company | null = null;
 
   address: string = '';
+
 
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
