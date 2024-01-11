@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/BL/company.model';
 import { CarsService } from 'src/app/services/cars.service';
+import { Router } from '@angular/router';
+import { ErrorService } from 'src/app/services/error.service';
+
 
 
 @Component({
@@ -30,7 +33,9 @@ import { CarsService } from 'src/app/services/cars.service';
 
     constructor(private fb: FormBuilder,
                 private companyService: CompanyService,
-                private carsService: CarsService
+                private carsService: CarsService,
+                private router: Router,
+                private errorService:  ErrorService
             ){
         this.carForm = this.fb.group({
             name: ['', Validators.required],
@@ -65,13 +70,12 @@ import { CarsService } from 'src/app/services/cars.service';
             this.car.companyREF = this.company?.id;
             console.log(this.car);
             this.carsService.addCar(this.car).subscribe(
-                response => {
-                    console.log('Car added successfully:', response);
-                    // Handle success if needed
+                success => {
+                   this.router.navigate(["/company"]);
                 },
+
                 error => {
-                    console.error('Error adding car:', error);
-                    // Handle error if needed
+                    this.errorService.openErrorModal(error.message);
                 }
             );
            
