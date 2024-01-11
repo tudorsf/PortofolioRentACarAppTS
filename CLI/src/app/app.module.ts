@@ -16,7 +16,7 @@ import { ProfileModalComponent } from './company/profile-modal/profile-modal.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarModalComponent } from './company/car-modal/car-modal.component';
+import { AddCarComponent } from './company/add-car/add-car.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -27,6 +27,7 @@ const routes: Routes = [
   {path: 'access-denied', component:AccesDeniedComponent},
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {path:'add-car', component:AddCarComponent, data: { expectedRoles: ['company', 'sysAdmin']} }
  
 
 ];
@@ -43,7 +44,8 @@ const routes: Routes = [
     ErrorModalComponent,
     AccesDeniedComponent,
     ProfileModalComponent,
-    CarModalComponent
+    AddCarComponent
+    
     
 
     

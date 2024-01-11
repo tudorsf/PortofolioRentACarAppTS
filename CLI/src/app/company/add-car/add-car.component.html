@@ -1,0 +1,5 @@
+<form [formGroup]="carForm">
+   <label>name</label> <input type="text" name="name" class="form-control" formControlName="name">
+   <label>price </label> <input type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
+    <button (click)="addCar()">add car</button>
+</form>

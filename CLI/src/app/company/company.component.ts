@@ -7,6 +7,7 @@ import { NgbModal, NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from '../services/profile.service';
 import { Observable } from 'rxjs';
 import { StreetMapService } from '../services/streetMap.service';
+import { Router } from '@angular/router';
 
 
 
@@ -31,7 +32,8 @@ export class CompanyComponent implements OnInit {
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
              private profileService: ProfileService,
-             private streetService: StreetMapService) 
+             private streetService: StreetMapService,
+             private router: Router) 
           {}
 
   ngOnInit(): void {
@@ -85,6 +87,10 @@ export class CompanyComponent implements OnInit {
 
   createMap(){
     console.log(this.streetService.createMap())
+  }
+
+  navigate(){
+    this.router.navigate(['/add-car']);
   }
 
   

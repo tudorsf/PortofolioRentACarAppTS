@@ -6,7 +6,6 @@ export interface Car {
     id: number;
     name: string;
     pricePerDay: number;
-    company: Company;
     companyREF: number;
     photos: Photo[];
     reservations: Reservation[];

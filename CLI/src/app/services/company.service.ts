@@ -27,11 +27,12 @@ export class CompanyService {
    
 
     createProfile(company: Company): Observable<any>{
-        
-            return this.http.post('https://localhost:7262/api/Company/addProfile', company);
-       
-       
+        return this.http.post('https://localhost:7262/api/Company/addProfile', company);
     }
+
+    
+
+    
 
     
 

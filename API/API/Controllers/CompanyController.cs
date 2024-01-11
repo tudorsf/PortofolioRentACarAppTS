@@ -79,7 +79,7 @@ namespace API.Controllers
                 WriteIndented = true
             };*/
 
-            var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id);
+            var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id); //get company details based on UserREF
 
             //var json = JsonSerializer.Serialize(company, options); 
 
