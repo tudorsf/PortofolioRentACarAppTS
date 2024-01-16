@@ -1,6 +1,6 @@
 <div class="modal-header rentGreen">
     <h4 class="modal-title">Create Profile <i class="fas fa-info-circle info-icon" (click)="askInfo()"></i></h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="this.activeModal.dismiss()"></button>
   </div>
   <div class="modal-body bg-light text-dark">
     <div class="row">
@@ -36,6 +36,6 @@
       </div>
   </div>
   <div class="modal-footer bg-light">
-    <button type="button" class="btn btn-outline-dark" (click)="closeModal()" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="this.activeModal.dismiss()" data-bs-dismiss="modal">Close</button>
     <button type="button" class="btn btn-outline-dark" [disabled]="companyForm.invalid" (click)="createProfile()" data-bs-dismiss="modal">Create</button>
   </div>

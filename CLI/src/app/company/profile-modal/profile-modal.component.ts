@@ -85,9 +85,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
     }
 
-    closeModal(){
-      console.log("this is not working yet");
-    }
+    
 
     askInfo(){
       this.info = !this.info;
