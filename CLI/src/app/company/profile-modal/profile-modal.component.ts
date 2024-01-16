@@ -3,7 +3,7 @@ import { Company } from 'src/app/models/BL/company.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { ErrorModalComponent } from 'src/app/shared/error-modal/error-modal.component';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -40,6 +40,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     constructor(private authService: AuthService,
                 private companyService: CompanyService,
                 private profileService: ProfileService,
+                public activeModal: NgbActiveModal,
                 private errorService: ErrorService,
                 private fb: FormBuilder)
                 {

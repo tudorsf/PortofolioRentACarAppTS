@@ -14,8 +14,6 @@ export class ReservationsModalComponent {
 
     private modalRef: NgbModalRef | null = null;
 
-   
-    //reservations: Reservation[] = []
 
     constructor(public activeModal: NgbActiveModal){}
 }
