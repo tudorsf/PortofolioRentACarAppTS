@@ -50,7 +50,7 @@ namespace API.Controllers
 
 
         [HttpPost("addReservation")]
-        public async Task<ActionResult<User>> AddReservation([FromBody] ReservationDTO request)
+        public async Task<ActionResult<Reservation>> AddReservation([FromBody] ReservationDTO request)
         {
             var reservation = new Reservation();
 
@@ -58,7 +58,11 @@ namespace API.Controllers
                     .Include(c => c.Reservations)
                     .FirstOrDefault(r => r.Id == request.carREF);
 
+            if (car == null)
 
+                return BadRequest("not available");
+
+            else
 
             reservation.CarId = request.carREF;
             reservation.CompanyId = request.companyREF;
@@ -78,7 +82,8 @@ namespace API.Controllers
 
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
-            return Ok();
+            //return Ok();
+            return reservation;
         }
 
         private int GetPrice(int id, int days)

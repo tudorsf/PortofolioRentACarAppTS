@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCarComponent } from './company/add-car/add-car.component';
+import { ReservationsModalComponent } from './company/reservations-modal/reservations-modal.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -44,8 +45,8 @@ const routes: Routes = [
     ErrorModalComponent,
     AccesDeniedComponent,
     ProfileModalComponent,
-    AddCarComponent
-    
+    AddCarComponent,
+    ReservationsModalComponent
     
 
     

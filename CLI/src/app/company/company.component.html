@@ -4,59 +4,7 @@
     <button (click)="openModal()">create profile</button>
  </div>
  
- 
-<!--<div *ngIf="company" >
-  <div class="profile-container">
-    <div class="profile-info d-flex justify-content-center align-items-center">
-      <table class="company-table">
-        <tr>
-          <td><label>Name:</label></td>
-          <td>{{ company!.name }}</td>
-        </tr>
-        <tr>
-          <td><label>Location:</label></td>
-          <td>{{ company!.city }}</td>
-        </tr>
-        <tr>
-          <td><label>Address:</label></td>
-          <td>{{ company!.address }}</td>
-        </tr>
-        <tr>
-          <td><label>Email:</label></td>
-          <td>{{ company!.eMail }}</td>
-        </tr>
-        <tr>
-          <td><label>Phone Number:</label></td>
-          <td>{{ company!.phoneNumber }}</td>
-        </tr>
-        <tr>
-          <td><label>Rating:</label></td>
-          <td>{{ company!.rating }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <button class="add-cars-button">Add Cars</button>
 
-<div class="cars-section">
-  <label>Cars:</label>
-  <table>
-    <thead>
-      <tr>
-        <th>Car Name</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of company!.cars">
-        <td>{{ car.name }}</td>
-        <td>{{ car.pricePerDay }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-</div>-->
 
 <div *ngIf="company" class="content">
   <div class="row">
@@ -120,6 +68,14 @@
               <tr *ngFor="let car of company!.cars">
                 <td>{{ car.name }}</td>
                 <td>{{ car.pricePerDay }}</td>
+                <td>
+                  <div *ngIf="car.reservations.length > 0">
+                    <input type="text" (click)="openReservationModal(this.car.reservations)" placeholder="Click to view reservations">
+                  </div>
+                  <div *ngIf="car.reservations.length === 0">
+                    No reservations
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -128,9 +84,8 @@
       
     </div>
   </div>
-  
-</div>
 
+  
 
  
 

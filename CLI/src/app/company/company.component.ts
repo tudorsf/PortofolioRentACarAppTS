@@ -8,6 +8,9 @@ import { ProfileService } from '../services/profile.service';
 import { Observable } from 'rxjs';
 import { StreetMapService } from '../services/streetMap.service';
 import { Router } from '@angular/router';
+import { Reservation } from '../models/BL/reservation.model';
+import { Car } from '../models/BL/car.model';
+import { ReservationsModalComponent } from './reservations-modal/reservations-modal.component';
 
 
 
@@ -28,6 +31,11 @@ export class CompanyComponent implements OnInit {
 
   address: string = '';
 
+  reservations: Reservation[] = [];
+  
+  cars: Car[] = [];
+
+  showDropdown = false;
 
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
@@ -44,6 +52,13 @@ export class CompanyComponent implements OnInit {
         if(data != null){
           try{
             this.company = data;
+            this.company!.cars.forEach((car) => {
+               this.reservations = [ ...car.reservations];
+               console.log(this.reservations);
+            });
+            //console.log(this.company!.cars);
+            //this.check();
+
           }
           catch (error) {
             console.error('Error creating profile:', error);
@@ -56,7 +71,7 @@ export class CompanyComponent implements OnInit {
         console.error('Error creating profile:', error);
       }
     );
-    
+
     if(!this.company){
       this.profileService.data$.subscribe((data) => {
         if(data != null){
@@ -64,7 +79,12 @@ export class CompanyComponent implements OnInit {
           this.closeModal();
          }
       });
+
+
     }
+
+    
+    
   }
 
 
@@ -93,6 +113,18 @@ export class CompanyComponent implements OnInit {
     this.router.navigate(['/add-car']);
   }
 
+  
+
+  toggleDropdown(car: any): void {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  openReservationModal(carReservations: Reservation[]): void {
+    const modalRef = this.modalService.open(ReservationsModalComponent, { size: 'lg' });
+    modalRef.componentInstance.reservations = carReservations;
+  }
+
+  
   
   
 
