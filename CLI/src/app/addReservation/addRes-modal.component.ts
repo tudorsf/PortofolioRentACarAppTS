@@ -66,14 +66,21 @@ export class AddReservationsModalComponent {
         console.log(reservation);
         console.log(this.car);
 
-        /*this.carsService.addReservation(reservation).subscribe(
+        this.carsService.addReservation(reservation).subscribe(
           success => this.activeModal.dismiss()
-        )*/
+        )
       } else {
         
         console.log('Please select both start and end dates.');
       }
     }
+
+    /*public formatToDate(date: any, format: string = DATE_FORMAT) {
+      if(date === null || date === "" || date === undefined)
+        return null;
+      
+      return (moment(date)).format(format);
+    }*/
 }
 
 

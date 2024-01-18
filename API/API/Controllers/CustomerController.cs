@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Threading;
 using API.Models.Company;
 using API.Models.Customer;
 using API.Models.DTO;
@@ -67,9 +68,14 @@ namespace API.Controllers
             reservation.CarId = request.carId;
             reservation.CompanyId = request.companyId;
             reservation.CustomerId = request.customerId;
-            reservation.StartDate = request.startDate;
-            reservation.EndDate = request.endDate;
-            
+            //reservation.StartDate = request.startDate;
+
+
+            reservation.StartDate = request.startDate.AddHours(2);
+
+           
+            reservation.EndDate = request.endDate.AddHours(2);
+
             TimeSpan timeDifference = request.endDate - request.startDate;
 
             
