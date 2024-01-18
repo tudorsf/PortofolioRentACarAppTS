@@ -8,7 +8,6 @@ import { Company } from '../models/BL/company.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddReservationsModalComponent } from '../addReservation/addRes-modal.component';
 
-
 @Component({
   selector: 'home-component',
   templateUrl: './home.component.html',
@@ -58,10 +57,10 @@ export class HomeComponent {
         console.log(user);
     }
 
-    openResModal(){
+    openResModal(car: Car){
       
         const modalRef = this.modalService.open(AddReservationsModalComponent, { size: 'lg' });
-        //modalRef.componentInstance.reservations = carReservations;
+        modalRef.componentInstance.car = car;
       
     }
 

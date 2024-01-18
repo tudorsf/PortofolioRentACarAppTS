@@ -6,6 +6,8 @@ import {JsonPipe} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
+import { Car } from "../models/BL/car.model";
+import { CarsService } from "../services/cars.service";
 
 @Component({
     selector: 'app-addRes-modal',
@@ -25,13 +27,11 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 
 export class AddReservationsModalComponent {
-    //@Input() reservations!: Reservation[];
+    @Input() car!: Car;
 
     private modalRef: NgbModalRef | null = null;
 
-    reservation: Reservation | null = null;
-
-    constructor(public activeModal: NgbActiveModal){}
+    constructor(public activeModal: NgbActiveModal, private carsService: CarsService){}
 
     range = new FormGroup({
         start: new FormControl<Date | null>(null),
@@ -39,22 +39,40 @@ export class AddReservationsModalComponent {
       });
     
     save(){
-        /*console.log(this.range.value.start);
-        this.reservation?.startDate = new Date(this.range.value.start);*/
-        if (this.reservation) {
-            const selectedStartDate: Date | null | undefined = this.range.value.start;
+
+      const startDate: Date | null | undefined = this.range.get('start')?.value;
+      const endDate: Date | null | undefined = this.range.get('end')?.value;
+      console.log('startDate', startDate);
+
+      const utcStartDate = new Date(startDate!.toISOString());
+      const utcEndDate = new Date(endDate!.toISOString());
+
+      console.log('utcdate:', utcStartDate);
+
+      if (startDate && endDate) {
+      
+        const reservation: Reservation = {
+          id: 0, 
+          carId: this.car.id, 
+          companyId: this.car.companyREF,
+          customerId: 1, 
+          startDate: utcStartDate,
+          endDate: utcEndDate,
+          
+          totalPrice: 0 
+        };
+  
+       
+        console.log(reservation);
+        console.log(this.car);
+
+        /*this.carsService.addReservation(reservation).subscribe(
+          success => this.activeModal.dismiss()
+        )*/
+      } else {
         
-            // Check if a start date is selected
-            if (selectedStartDate) {
-              // Assign the selected start date to the reservation's startDate property
-              this.reservation.startDate = new Date(selectedStartDate);
-        
-              // Log the updated reservation object
-              console.log('Updated Reservation:', this.reservation);
-            } else {
-              console.error('No start date selected.');
-            }
-          }
+        console.log('Please select both start and end dates.');
+      }
     }
 }
 

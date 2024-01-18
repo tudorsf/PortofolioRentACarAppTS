@@ -4,11 +4,11 @@
     {   
         public int Id { get; set; }
 
-        public int customerREF { get; set; }
+        public int customerId { get; set; }
 
-        public int companyREF { get; set; }
+        public int companyId { get; set; }
 
-        public int carREF { get; set; }
+        public int carId { get; set; }
 
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }

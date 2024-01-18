@@ -56,7 +56,7 @@ namespace API.Controllers
 
             var car = _context.Cars
                     .Include(c => c.Reservations)
-                    .FirstOrDefault(r => r.Id == request.carREF);
+                    .FirstOrDefault(r => r.Id == request.carId);
 
             if (car == null)
 
@@ -64,9 +64,9 @@ namespace API.Controllers
 
             else
 
-            reservation.CarId = request.carREF;
-            reservation.CompanyId = request.companyREF;
-            reservation.CustomerId = request.customerREF;
+            reservation.CarId = request.carId;
+            reservation.CompanyId = request.companyId;
+            reservation.CustomerId = request.customerId;
             reservation.StartDate = request.startDate;
             reservation.EndDate = request.endDate;
             
@@ -74,7 +74,7 @@ namespace API.Controllers
 
             
             int differenceInDays = (int)timeDifference.TotalDays;
-            reservation.TotalPrice = GetPrice(request.carREF, differenceInDays);
+            reservation.TotalPrice = GetPrice(request.carId, differenceInDays);
 
 
             car.Reservations.Add(reservation);
