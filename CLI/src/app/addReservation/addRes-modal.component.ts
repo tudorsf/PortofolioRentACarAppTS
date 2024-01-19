@@ -32,7 +32,9 @@ import { ProfileService } from "../services/profile.service";
 export class AddReservationsModalComponent {
     @Input() car!: Car;
 
-    customer: Customer | null = null;
+    @Input() customer! : Customer;
+
+   
 
     private modalRef: NgbModalRef | null = null;
 
@@ -62,7 +64,7 @@ export class AddReservationsModalComponent {
           id: 0, 
           carId: this.car.id, 
           companyId: this.car.companyREF,
-          customerId: 0,
+          customerId: this.customer.id,
           startDate: utcStartDate,
           endDate: utcEndDate,
           

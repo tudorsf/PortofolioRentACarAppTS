@@ -27,6 +27,7 @@ export class ClientComponent implements OnInit {
         if(data != null){
           try{
             this.customer = data;
+            this.customerService.setCustomer(this.customer);
             console.log(this.customer)
           }
           catch (error) {

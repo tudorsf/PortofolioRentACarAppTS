@@ -39,10 +39,6 @@ export class HomeComponent implements OnInit{
 
     ngOnInit(): void {
 
-      
-        
-    
-
       this.authService.isLoggedIn().subscribe((isLoggedIn) => {
         this.loggedIn = isLoggedIn;
       });
@@ -62,9 +58,10 @@ export class HomeComponent implements OnInit{
   
       
       });
-  
       
-  
+      this.customer = this.customerService.getCustomer();
+      
+      console.log(this.customer);
   
     }
 
