@@ -23,7 +23,7 @@ namespace API.Controllers
         }
 
         [HttpPost("addProfile")]
-        public async Task<ActionResult<User>> AddProfile([FromBody] Customer request)
+        public async Task<ActionResult<Customer>> AddProfile([FromBody] Customer request)
         {
             if (_context.Customers.Any(u => u.UserREF == request.UserREF))
             {
@@ -45,7 +45,7 @@ namespace API.Controllers
 
             _context.Customers.Add(customer);
             _context.SaveChanges();
-            return Ok();
+            return customer;
         }
 
 
@@ -112,6 +112,21 @@ namespace API.Controllers
             return cars;
         }
 
-        
+
+        [HttpGet("GetCust/{id}")]
+        public ActionResult<Customer> GetCustomer(int id)
+
+        {
+            var customer = _context.Customers.FirstOrDefault(u => u.UserREF == id); //get customer details based on UserREF
+
+            if(customer == null)
+                return NotFound();
+
+            else
+                return customer;
+        }
+
+
+
     }
 }

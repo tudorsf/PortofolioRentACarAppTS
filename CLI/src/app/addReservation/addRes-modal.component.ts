@@ -8,6 +8,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { Car } from "../models/BL/car.model";
 import { CarsService } from "../services/cars.service";
+import { Customer } from "../models/BL/customer.model";
+import { CustomerService } from "../services/customer.service";
+import { ProfileService } from "../services/profile.service";
 
 @Component({
     selector: 'app-addRes-modal',
@@ -21,7 +24,7 @@ import { CarsService } from "../services/cars.service";
         JsonPipe,
         MatNativeDateModule,
       ],
-      encapsulation: ViewEncapsulation.None, // Add this line
+      encapsulation: ViewEncapsulation.None, 
       styleUrls: ['./addRes-modal.component.css']
   })
 
@@ -29,9 +32,12 @@ import { CarsService } from "../services/cars.service";
 export class AddReservationsModalComponent {
     @Input() car!: Car;
 
+    customer: Customer | null = null;
+
     private modalRef: NgbModalRef | null = null;
 
-    constructor(public activeModal: NgbActiveModal, private carsService: CarsService){}
+    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService){
+    }
 
     range = new FormGroup({
         start: new FormControl<Date | null>(null),
@@ -49,13 +55,14 @@ export class AddReservationsModalComponent {
 
       console.log('utcdate:', utcStartDate);
 
+
       if (startDate && endDate) {
       
         const reservation: Reservation = {
           id: 0, 
           carId: this.car.id, 
           companyId: this.car.companyREF,
-          customerId: 1, 
+          customerId: 0,
           startDate: utcStartDate,
           endDate: utcEndDate,
           
@@ -66,14 +73,22 @@ export class AddReservationsModalComponent {
         console.log(reservation);
         console.log(this.car);
 
-        this.carsService.addReservation(reservation).subscribe(
+        /*this.carsService.addReservation(reservation).subscribe(
           success => this.activeModal.dismiss()
-        )
+        )*/
       } else {
         
         console.log('Please select both start and end dates.');
       }
     }
+
+    getCustomerId(){
+      let customer: any = this.customerService.getProfile();
+      if(customer)
+        return customer.id;
+    }
+
+    
 
     /*public formatToDate(date: any, format: string = DATE_FORMAT) {
       if(date === null || date === "" || date === undefined)
@@ -81,6 +96,8 @@ export class AddReservationsModalComponent {
       
       return (moment(date)).format(format);
     }*/
+
+    
 }
 
 

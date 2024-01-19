@@ -13,5 +13,8 @@ namespace API.Models.Customer
         public string phoneNumber { get; set; }
         public int Rating { get; set; }
 
+        public List<Reservation> Reservations { get; set; }
+
+
     }
 }
