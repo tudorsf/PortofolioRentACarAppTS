@@ -21,7 +21,13 @@ export class ClientComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.customerService.getProfile().subscribe(
+
+    this.customerService.customer$.subscribe((value) => {
+      this.customer = value;
+      console.log(this.customer, 'home component');
+    });
+
+    /*this.customerService.getProfile().subscribe(
       (data: any) => {
         console.log(data + "data from backend")
         if(data != null){
@@ -40,8 +46,11 @@ export class ClientComponent implements OnInit {
       (error: any) => {
         console.error('Error creating profile:', error);
       }
-    );
+    );*/
 
+
+
+    
     if(!this.customer){
       this.profileService.data$.subscribe((data) => {
         if(data != null){

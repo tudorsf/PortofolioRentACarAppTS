@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggedUser } from '../models/loggedUser';
 import { AuthService } from './auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Customer } from '../models/BL/customer.model';
 
 @Injectable({
@@ -22,7 +22,9 @@ import { Customer } from '../models/BL/customer.model';
     
     getProfile(): Observable<any>{
         const currentUser = this.authService.getCurrentUser();
-        return this.http.get('https://localhost:7262/api/Customer/GetCust/'+ currentUser.id);
+        return this.http.get('https://localhost:7262/api/Customer/GetCust/'+ currentUser.id).pipe(
+            tap((customer) => this.setCustomer(customer))
+        );
           
     }
     
@@ -35,8 +37,10 @@ import { Customer } from '../models/BL/customer.model';
     }
 
     getCustomer(): any {
+        console.log(this.customerSubject.value);
         return this.customerSubject.value;
-      }
+        
+    }
 
     
 }

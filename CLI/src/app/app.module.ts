@@ -22,6 +22,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CustomerService } from './services/customer.service';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -69,7 +70,7 @@ const routes: Routes = [
     BrowserAnimationsModule
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

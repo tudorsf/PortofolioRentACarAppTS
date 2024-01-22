@@ -6,11 +6,13 @@ import {JsonPipe} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
-import { Car } from "../models/BL/car.model";
-import { CarsService } from "../services/cars.service";
-import { Customer } from "../models/BL/customer.model";
-import { CustomerService } from "../services/customer.service";
-import { ProfileService } from "../services/profile.service";
+import { Car } from "../../models/BL/car.model";
+import { CarsService } from "../../services/cars.service";
+import { Customer } from "../../models/BL/customer.model";
+import { CustomerService } from "../../services/customer.service";
+import { ProfileService } from "../../services/profile.service";
+import { ErrorModalComponent } from "src/app/shared/error-modal/error-modal.component";
+import { ErrorService } from "src/app/services/error.service";
 
 @Component({
     selector: 'app-addRes-modal',
@@ -32,13 +34,14 @@ import { ProfileService } from "../services/profile.service";
 export class AddReservationsModalComponent {
     @Input() car!: Car;
 
-    @Input() customer! : Customer;
+    @Input() clientId!: number;
 
    
 
     private modalRef: NgbModalRef | null = null;
 
-    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService){
+    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService, private carsService: CarsService,private  errorService: ErrorService){
+      //console.log(this.customer)
     }
 
     range = new FormGroup({
@@ -64,7 +67,7 @@ export class AddReservationsModalComponent {
           id: 0, 
           carId: this.car.id, 
           companyId: this.car.companyREF,
-          customerId: this.customer.id,
+          customerId: this.clientId,
           startDate: utcStartDate,
           endDate: utcEndDate,
           
@@ -74,10 +77,13 @@ export class AddReservationsModalComponent {
        
         console.log(reservation);
         console.log(this.car);
-
-        /*this.carsService.addReservation(reservation).subscribe(
-          success => this.activeModal.dismiss()
-        )*/
+        if(this.clientId != undefined || this.clientId != 0 || this.clientId != null){
+          this.carsService.addReservation(reservation).subscribe(
+            success => this.activeModal.dismiss()
+          )
+        } else {        this.errorService.openErrorModal('please create client prof');
+        }
+        
       } else {
         
         console.log('Please select both start and end dates.');

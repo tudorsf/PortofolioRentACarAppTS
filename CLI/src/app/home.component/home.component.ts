@@ -6,10 +6,11 @@ import { CarsService } from '../services/cars.service';
 import { Car } from '../models/BL/car.model';
 import { Company } from '../models/BL/company.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddReservationsModalComponent } from '../addReservation/addRes-modal.component';
+import { AddReservationsModalComponent } from './addReservation/addRes-modal.component';
 import { Customer } from '../models/BL/customer.model';
 import { CustomerService } from '../services/customer.service';
 import { ProfileService } from '../services/profile.service';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @Component({
   selector: 'home-component',
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit{
   
   cars: Car[] = [];
 
-  customer: Customer | null = null;
+  customer!: Customer;
 
 
   constructor(private authService: AuthService,
@@ -35,13 +36,24 @@ export class HomeComponent implements OnInit{
                private carsService: CarsService,
                private modalService: NgbModal,
                private customerService: CustomerService,
-               private profileService: ProfileService){}
+               private profileService: ProfileService){
 
-    ngOnInit(): void {
+                /*this.customer = this.customerService.getCustomer();
+                console.log(this.customer);*/
+               }
+
+    ngOnInit() {
+
+      this.customerService.customer$.subscribe((value) => {
+        this.customer = value;
+        console.log(this.customer, 'home component');
+      });
 
       this.authService.isLoggedIn().subscribe((isLoggedIn) => {
         this.loggedIn = isLoggedIn;
       });
+
+      
 
       
   
@@ -59,9 +71,9 @@ export class HomeComponent implements OnInit{
       
       });
       
-      this.customer = this.customerService.getCustomer();
+      //this.customer = await firstValueFrom(this.customerService.getProfile());
       
-      console.log(this.customer);
+      //console.log(this.customer);
   
     }
 
@@ -80,6 +92,7 @@ export class HomeComponent implements OnInit{
     openResModal(car: Car){
         const modalRef = this.modalService.open(AddReservationsModalComponent, { size: 'lg' });
         modalRef.componentInstance.car = car;
+        modalRef.componentInstance.clientId = this.customer.id;
     }
 
     getCustomer(): void{
