@@ -29,7 +29,9 @@ import { Customer } from '../models/BL/customer.model';
     }
     
     createProfile(customer: Customer): Observable<any>{
-        return this.http.post('https://localhost:7262/api/Customer/addProfile', customer);
+        return this.http.post('https://localhost:7262/api/Customer/addProfile', customer).pipe(
+            tap((customer) => this.setCustomer(customer))
+        );
     }
 
     setCustomer(customer: any): void {

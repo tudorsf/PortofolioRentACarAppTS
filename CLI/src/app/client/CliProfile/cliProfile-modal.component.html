@@ -1,0 +1,31 @@
+<div class="modal-header rentGreen">
+    <h4 class="modal-title">Create Profile <i class="fas fa-info-circle info-icon" ></i></h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="this.activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body bg-light text-dark">
+    <div class="row">
+        <div class="col-md-8">
+          <div class="container">
+            <form [formGroup]="customerForm">
+              
+              <label class="for-label">Customer Name</label> 
+              <input type="text" name="name" class="form-control" formControlName="name">
+             
+
+             <label class="for-label">Phone Number</label>
+              <input type="text" name="phoneNumber" class="form-control" formControlName="phoneNumber">
+
+              <label class="for-label">E-Mail</label>
+              <input type="email" name="eMail" class="form-control" formControlName="eMail">
+
+            </form>
+          </div>
+        
+        
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer bg-light">
+    <button type="button" class="btn btn-outline-dark" (click)="this.activeModal.dismiss()" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-outline-dark" [disabled]="customerForm.invalid" (click)="createProfile()" data-bs-dismiss="modal">Create</button>
+  </div>

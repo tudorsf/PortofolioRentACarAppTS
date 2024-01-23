@@ -119,10 +119,10 @@ namespace API.Controllers
         {
             var customer = _context.Customers.FirstOrDefault(u => u.UserREF == id); //get customer details based on UserREF
 
-            if(customer == null)
+            /*if(customer == null)
                 return NotFound();
 
-            else
+            else*/
                 return customer;
         }
 

@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CustomerService } from './services/customer.service';
+import { NoProfileComponent } from './noProfile.component/noProfile.component';
+import { CliProfileModalComponent } from './client/CliProfile/cliProfile-modal.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -51,7 +53,8 @@ const routes: Routes = [
     AccesDeniedComponent,
     ProfileModalComponent,
     AddCarComponent,
-    ReservationsModalComponent
+    ReservationsModalComponent,
+    NoProfileComponent
     
 
     

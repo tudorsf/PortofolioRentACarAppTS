@@ -11,6 +11,8 @@ import { Customer } from '../models/BL/customer.model';
 import { CustomerService } from '../services/customer.service';
 import { ProfileService } from '../services/profile.service';
 import { firstValueFrom, Observable } from 'rxjs';
+import { ErrorService } from '../services/error.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-component',
@@ -36,17 +38,19 @@ export class HomeComponent implements OnInit{
                private carsService: CarsService,
                private modalService: NgbModal,
                private customerService: CustomerService,
-               private profileService: ProfileService){
-
-                /*this.customer = this.customerService.getCustomer();
-                console.log(this.customer);*/
-               }
+               private profileService: ProfileService,
+               private errorService: ErrorService,
+               private router: Router){}
 
     ngOnInit() {
 
       this.customerService.customer$.subscribe((value) => {
-        this.customer = value;
-        console.log(this.customer, 'home component');
+        console.log(value);
+        if(value != null){
+          this.customer = value;
+          console.log(this.customer, 'home component');
+        }
+       
       });
 
       this.authService.isLoggedIn().subscribe((isLoggedIn) => {
@@ -71,15 +75,10 @@ export class HomeComponent implements OnInit{
       
       });
       
-      //this.customer = await firstValueFrom(this.customerService.getProfile());
-      
-      //console.log(this.customer);
+    
   
     }
-
- 
-
-
+    
     logOff(){
       this.authService.logOff()
     }
@@ -90,18 +89,16 @@ export class HomeComponent implements OnInit{
     }
 
     openResModal(car: Car){
+      if(this.customer != null){
         const modalRef = this.modalService.open(AddReservationsModalComponent, { size: 'lg' });
         modalRef.componentInstance.car = car;
         modalRef.componentInstance.clientId = this.customer.id;
+      } else {
+        this.errorService.openErrorModal("you neeed a customer account to make reservations");
+      }
+        
     }
-
-    getCustomer(): void{
-      this.customerService.getProfile();
-       
-    }
-
-
-  }
+ }
 
   
 

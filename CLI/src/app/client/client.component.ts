@@ -4,6 +4,7 @@ import { CustomerService } from '../services/customer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from '../services/profile.service';
 import { Router } from '@angular/router';
+import { NoProfileComponent } from '../noProfile.component/noProfile.component';
 
 @Component({
   selector: 'app-client',

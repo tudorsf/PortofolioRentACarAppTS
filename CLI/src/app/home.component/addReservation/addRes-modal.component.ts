@@ -77,12 +77,10 @@ export class AddReservationsModalComponent {
        
         console.log(reservation);
         console.log(this.car);
-        if(this.clientId != undefined || this.clientId != 0 || this.clientId != null){
-          this.carsService.addReservation(reservation).subscribe(
+        this.carsService.addReservation(reservation).subscribe(
             success => this.activeModal.dismiss()
           )
-        } else {        this.errorService.openErrorModal('please create client prof');
-        }
+        
         
       } else {
         

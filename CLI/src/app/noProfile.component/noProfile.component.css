@@ -1,0 +1,31 @@
+.profile-not-created {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    margin: 20px auto;
+    text-align: center;
+    width: 50%;
+  }
+  
+  .profile-not-created p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .profile-not-created button {
+    background-color: rgb(38, 213, 134);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .profile-not-created button:hover {
+    background-color: #2aae6e;
+  }
