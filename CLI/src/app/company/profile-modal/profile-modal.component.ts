@@ -66,7 +66,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
                 this.company = response;
                 if(this.company){
                   this.profileService.setData(this.company);
-                  this.modalRef?.close();
+                  this.activeModal.dismiss()
 
                  }
               }

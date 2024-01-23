@@ -56,9 +56,7 @@ export class CompanyComponent implements OnInit {
                this.reservations = [ ...car.reservations];
                console.log(this.reservations);
             });
-            //console.log(this.company!.cars);
-            //this.check();
-
+           
           }
           catch (error) {
             console.error('Error creating profile:', error);
@@ -72,16 +70,12 @@ export class CompanyComponent implements OnInit {
       }
     );
 
-    if(!this.company){
-      this.profileService.data$.subscribe((data) => {
-        if(data != null){
-          this.company = data;
-          this.closeModal();
-         }
-      });
+    this.companyService.company$.subscribe((value) => {
+      this.company = value;
+      console.log(this.company, 'home component');
+    });
 
 
-    }
 
     
     
@@ -90,7 +84,7 @@ export class CompanyComponent implements OnInit {
 
   
   
-  openModal(){
+  /*openModal(){
     this.modalRef = this.modalService.open(ProfileModalComponent, { centered: true });
   }
 
@@ -99,16 +93,13 @@ export class CompanyComponent implements OnInit {
       this.modalRef.close();
       this.modalRef = null;
     }
-  }
+  }*/
 
   openCarModal(){
     console.log("");
   }
 
-  createMap(){
-    console.log(this.streetService.createMap())
-  }
-
+  
   navigate(){
     this.router.navigate(['/add-car']);
   }

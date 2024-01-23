@@ -3,6 +3,7 @@ import { AuthService } from "../services/auth.service";
 import { NgbModalRef } from "@ng-bootstrap/ng-bootstrap/modal/modal-ref";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CliProfileModalComponent } from "../client/CliProfile/cliProfile-modal.component";
+import { ProfileModalComponent } from "../company/profile-modal/profile-modal.component";
 
 @Component({
     selector: 'noProfile-component',
@@ -25,6 +26,8 @@ import { CliProfileModalComponent } from "../client/CliProfile/cliProfile-modal.
         const userRole = this.authService.getCurrentUserRole();
         if (userRole == 'client'){
             this.modalRef = this.modalService.open(CliProfileModalComponent, { centered: true });
-        }
-    }
+        } else if(userRole == 'company'){
+          this.modalService.open(ProfileModalComponent)
+        }    
+      }
   }

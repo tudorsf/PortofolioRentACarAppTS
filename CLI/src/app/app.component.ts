@@ -44,7 +44,9 @@ export class AppComponent implements OnInit{
           console.error('Error creating profile:', error);
         }
       );
-     }
+     } /*else if(this.userRole == 'company'){
+      
+     }*/
    }
 
  

@@ -44,7 +44,7 @@ import { ErrorService } from 'src/app/services/error.service';
     }
 
     ngOnInit(): void {
-        this.companyService.getProfile().subscribe(
+        /*this.companyService.getProfile().subscribe(
             (data: any) => {
               console.log(data + "data from backend")
               if(data != null){
@@ -61,7 +61,11 @@ import { ErrorService } from 'src/app/services/error.service';
             (error: any) => {
               console.error('Error creating profile:', error);
             }
-          );
+          );*/
+          this.companyService.company$.subscribe((value) => {
+            this.company = value;
+            console.log(this.company, 'home component');
+          });
     }
 
     addCar(){
