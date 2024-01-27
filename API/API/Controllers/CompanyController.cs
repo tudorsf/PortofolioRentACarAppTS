@@ -7,6 +7,7 @@ using LoginAPI3.Data;
 using LoginAPI3.Models.UserModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Models.Customer;
 
 namespace API.Controllers
 {
@@ -43,6 +44,7 @@ namespace API.Controllers
             company.PhoneNumber = request.phoneNumber;
             company.eMail = request.email;
             company.Rating = 5;
+            company.NumberOfRatings = 0;
 
 
             _context.Companies.Add(company);
@@ -85,6 +87,53 @@ namespace API.Controllers
 
             return company;
         }
+
+        [HttpPost("RateCustomer")]
+
+        public async Task<ActionResult<Customer>> RateCustomerByCompany(int id, decimal rating)
+        {
+           
+            var reservation = _context.Reservations.FirstOrDefault(r => r.Id == id);
+
+
+            if (reservation == null)
+            {
+                return BadRequest("Reservation not found");
+            }
+
+            if (reservation.EndDate > DateTime.UtcNow)
+            {
+                return BadRequest("Cannot rate a reservation that has not ended yet");
+            }
+
+            if (reservation.CompRating != null)
+            {
+                return BadRequest("Already rated");
+            }
+
+            reservation.CompRating = rating;
+
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == reservation.CustomerId);
+
+            if (customer == null)
+            {
+                return BadRequest("Customer not found");
+            }
+
+            customer.Rating = (customer.Rating * customer.NumberOfRatings + rating) / (customer.NumberOfRatings + 1);
+            customer.NumberOfRatings++;
+
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+
+            return customer;
+
+
+        }
+
+       
+
+
 
 
 

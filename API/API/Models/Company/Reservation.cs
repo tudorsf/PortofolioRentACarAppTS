@@ -14,6 +14,10 @@
 
         public int TotalPrice { get; set; }
 
+        public decimal? CustRating { get; set; } //rating given by customer
+
+        public decimal? CompRating { get; set; } //rating given by customer
+
 
     }
 

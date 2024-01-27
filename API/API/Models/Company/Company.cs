@@ -14,7 +14,9 @@
         public string eMail { get; set; }
 
 
-        public int Rating { get; set; }
+        public decimal Rating { get; set; }
+
+        public int NumberOfRatings { get; set; }
 
         public List<Car> Cars { get; set; }
     }

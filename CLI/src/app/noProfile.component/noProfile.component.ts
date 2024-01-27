@@ -27,7 +27,7 @@ import { ProfileModalComponent } from "../company/profile-modal/profile-modal.co
         if (userRole == 'client'){
             this.modalRef = this.modalService.open(CliProfileModalComponent, { centered: true });
         } else if(userRole == 'company'){
-          this.modalService.open(ProfileModalComponent)
+          this.modalService.open(ProfileModalComponent,  { centered: true })
         }    
       }
   }

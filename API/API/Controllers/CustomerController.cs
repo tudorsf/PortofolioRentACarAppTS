@@ -37,6 +37,7 @@ namespace API.Controllers
             customer.eMail = request.eMail;
             
             customer.Rating = 5;
+            customer.NumberOfRatings = 0;
 
 
 
@@ -117,7 +118,9 @@ namespace API.Controllers
         public ActionResult<Customer> GetCustomer(int id)
 
         {
-            var customer = _context.Customers.FirstOrDefault(u => u.UserREF == id); //get customer details based on UserREF
+            var customer = _context.Customers
+                 .Include(c => c.Reservations)
+                .FirstOrDefault(u => u.UserREF == id);//get customer details based on UserREF
 
             /*if(customer == null)
                 return NotFound();
@@ -126,7 +129,53 @@ namespace API.Controllers
                 return customer;
         }
 
+        [HttpPost("RateCompany")]
 
+        public async Task<ActionResult<Company>> RateCompanyByCustomer (int id, decimal rating)
+        {
+                var reservation = _context.Reservations.FirstOrDefault(r => r.Id == id);
+
+
+
+                if (reservation == null)
+                {
+                    return BadRequest("Reservation not found");
+                }
+
+                if (reservation.EndDate > DateTime.UtcNow)
+                {
+                    return BadRequest("Cannot rate a reservation that has not ended yet");
+                }
+
+                if (reservation.CustRating != null)
+                {
+                    return BadRequest("already rated");
+
+                }
+
+                reservation.CustRating = rating;
+                
+                var company = _context.Companies.FirstOrDefault(c => c.Id == reservation.CompanyId);
+                
+                if(company == null)
+                {
+                    
+                    return BadRequest("company not found");
+
+                }
+                
+                company.Rating = (company.Rating * company.NumberOfRatings + rating) / (company.NumberOfRatings + 1);
+            
+                company.NumberOfRatings++;
+
+                 _context.Companies.Update(company);
+                await _context.SaveChangesAsync();
+
+                return company;
+
+         }
+
+       
 
     }
 }
