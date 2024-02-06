@@ -52,26 +52,7 @@ namespace API.Controllers
             return company;
         }
 
-        /*[HttpPost("addCar")]
-        public async Task<ActionResult<Car>> AddCar([FromBody] CarDTO request)
-        {
-            
-            var car = new Car();
-
-            car.Name = request.name;
-            car.PricePerDay = request.pricePerDay;
-            //car.Photos = request.Photos;
-            car.CompanyREF = request.companyREF;
-
-            _context.Cars.Add(car);
-
-
-            
-            _context.SaveChanges();
-            return car;
-        }
-        */
-
+      
 
         [HttpPost("addCar")]
         public async Task<ActionResult<Car>> AddCar([FromBody] CarDTO request)
