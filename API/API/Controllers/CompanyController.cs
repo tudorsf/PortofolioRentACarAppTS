@@ -52,7 +52,7 @@ namespace API.Controllers
             return company;
         }
 
-        [HttpPost("addCar")]
+        /*[HttpPost("addCar")]
         public async Task<ActionResult<Car>> AddCar([FromBody] CarDTO request)
         {
             
@@ -67,6 +67,33 @@ namespace API.Controllers
 
 
             
+            _context.SaveChanges();
+            return car;
+        }
+        */
+
+
+        [HttpPost("addCar")]
+        public async Task<ActionResult<Car>> AddCar([FromBody] CarDTO request)
+        {
+
+            var car = new Car();
+
+            car.Name = request.name;
+            car.PricePerDay = request.pricePerDay;
+            //car.Photos = request.Photos;
+            car.CompanyREF = request.companyREF;
+            car.doorsNr = request.doorsNr;
+            car.Horsepower = request.Horsepower;
+            car.engine = request.engine;
+            car.geaboxType = request.geaboxType;
+            car.Model = request.brand;
+            car.Year = request._year;
+            car.type = request.type;
+            _context.Cars.Add(car);
+
+
+
             _context.SaveChanges();
             return car;
         }
