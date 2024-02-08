@@ -40,7 +40,7 @@ namespace API.Models.Company
                 }
                 else
                 {
-                    throw new ArgumentException("Year cannot be more than 15 years in the past.");
+                    throw new ArgumentException("Sorry, you cannot rent a car older than 15 years");
                 }
             } 
         }

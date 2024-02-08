@@ -6,6 +6,7 @@ import { Company } from 'src/app/models/BL/company.model';
 import { CarsService } from 'src/app/services/cars.service';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/services/error.service';
+import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carEnums';
 
 
 
@@ -20,15 +21,23 @@ import { ErrorService } from 'src/app/services/error.service';
 
     carForm: FormGroup;
 
-    car: Car = {
+    car!: Car /*= {
         id: 0,
         name: '',
+        brand: '',
         pricePerDay: 0,
         companyREF: 0,
         photos: [],
-        reservations: []
-    }
+        reservations: [],
+        doorsNr: 3,
+        engine: 1,
+        gearboxType: 1,
+        carType: 1,
+        year: 0,
+        horsepower: 0
+    }*/
 
+   
     company: Company | null = null;
 
     constructor(private fb: FormBuilder,
@@ -39,37 +48,73 @@ import { ErrorService } from 'src/app/services/error.service';
             ){
         this.carForm = this.fb.group({
             name: ['', Validators.required],
-            pricePerDay: ['', Validators.required]
+            pricePerDay: ['', Validators.required],
+            doorsNr: [''],
+            brand: ['', Validators.required],
+            engine: [''],
+            gearboxType: [''],
+           type: [''],
+            year: [''],
+            horsepower: ['']
+
         })
     }
 
     ngOnInit(): void {
-        /*this.companyService.getProfile().subscribe(
-            (data: any) => {
-              console.log(data + "data from backend")
-              if(data != null){
-                try{
-                  this.company = data;
-                }
-                catch (error) {
-                  console.error('Error creating profile:', error);
-                }
-                console.log(this.company + " company from backend");
-              }
-             
-            },
-            (error: any) => {
-              console.error('Error creating profile:', error);
-            }
-          );*/
-          this.companyService.company$.subscribe((value) => {
+
+        this.companyService.company$.subscribe((value) => {
             this.company = value;
             console.log(this.company, 'home component');
           });
     }
 
+    engineEnum = Engine;
+    gearboxEnum = GearboxType;
+    doorsNrEnum = DoorsNr;
+    carTypeEnum = CarType;
+
+    getEngineOptions(): { label: string, value: any }[] {
+      return this.getEnumOptions(this.engineEnum);
+    }
+  
+    getGearboxTypeOptions(): { label: string, value: any }[] {
+      return this.getEnumOptions(this.gearboxEnum);
+    }
+
+    getDoorsOptions(): { label: string, value: any }[] {
+      return this.getEnumOptions(this.doorsNrEnum);
+    }
+
+    getCarTypeOptions(): { label: string, value: any }[] {
+      return this.getEnumOptions(this.carTypeEnum);
+    }
+    
+
+
+    private getEnumOptions(enumObj: any): { label: string, value: Number }[] {
+      const options = [];
+      for (const key in enumObj) {
+        if (isNaN(Number(key))) {
+          options.push({ label: key, value: enumObj[key] });
+        }
+      }
+      return options;
+    }
+  
+
     addCar(){
+      //console.log()
+      console.log(this.carForm.value , 'car form value');
+
         this.car =  this.carForm.value;
+        console.log(this.car);
+
+        this.car.type = +this.car.type;
+        this.car.doorsNr = +this.car.doorsNr;
+        this.car.engine = +this.car.engine;
+        this.car.gearboxType = +this.car.gearboxType;
+        this.car.year = +this.car.year;
+
         if(this.company != null){
             this.car.companyREF = this.company?.id;
             console.log(this.car);
@@ -83,6 +128,8 @@ import { ErrorService } from 'src/app/services/error.service';
                 }
             );
            
+        } else {
+          console.log("company null")
         }
     }
   }

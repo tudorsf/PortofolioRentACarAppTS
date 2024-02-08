@@ -1,29 +1,29 @@
 export enum CarType
 {   
-    HatchBack,
-    Sedan,
-    Wagon,
-    Van
+    HatchBack = 1,
+    Sedan = 2,
+    Wagon = 3,
+    Van = 4
 }
 
 export enum  DoorsNr
 {   
-   Three,
-   Five
+   Three = 3,
+   Five = 5
 }
 
 export enum Engine
 {   
-    Diesel,
-    Benzin, 
-    Electric,
-    GPL,
-    Hybrid
+    Diesel = 1,
+    Benzin = 2, 
+    Electric = 3,
+    GPL = 4,
+    Hybrid = 5
     
 }
 
 export enum GearboxType
 {
-    Manual,
-    Automatic
+    Manual = 1,
+    Automatic =2
 }

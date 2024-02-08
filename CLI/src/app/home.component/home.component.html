@@ -25,7 +25,15 @@
     <tbody>
       <tr *ngFor="let car of cars">
         <td>{{ car.name }}</td>
+        <td>{{ car.brand }}</td>
+
         <td>{{car.pricePerDay}}</td>
+        <!--
+        <td>{{car.doorsNr}}</td>
+        <td>{{car.engine}}</td>
+        <td>{{car.type}}</td>
+        <td>{{car.gearboxType}}</td>-->
+
         <td><button (click)="openResModal(this.car)">add reservation</button></td>
       </tr>
       

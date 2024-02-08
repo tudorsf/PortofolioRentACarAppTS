@@ -67,9 +67,9 @@ namespace API.Controllers
             car.doorsNr = request.doorsNr;
             car.Horsepower = request.Horsepower;
             car.engine = request.engine;
-            car.geaboxType = request.geaboxType;
+            car.geaboxType = request.gearboxType;
             car.Model = request.brand;
-            car.Year = request._year;
+            car.Year = request.year;
             car.type = request.type;
             _context.Cars.Add(car);
 

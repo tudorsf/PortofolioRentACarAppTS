@@ -1,5 +1,25 @@
 <form [formGroup]="carForm">
    <label>name</label> <input type="text" name="name" class="form-control" formControlName="name">
+   <label>brand </label> <input type="text" name="brand" class="form-control" formControlName="brand">
+   <label>year </label> <input type="text" name="year" class="form-control" formControlName="year">
+   <label>horsepower </label> <input type="text" name="horsepower" class="form-control" formControlName="horsepower">
+
    <label>price </label> <input type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
+   <label>Engine</label> 
+   <select formControlName="engine" name="engine" id="engine"  class="form-control">
+      <option *ngFor="let options of getEngineOptions()" [value]="options.value">{{ options.label}}</option>
+   </select>
+   <label>Type</label> 
+   <select formControlName="type" id="type" class="form-control">
+      <option *ngFor="let options of getCarTypeOptions()" [value]="options.value">{{ options.label}}</option>
+   </select>
+   <label>Doors Number</label> 
+   <select formControlName="doorsNr" id="doorsNr" class="form-control">
+      <option *ngFor="let options of getDoorsOptions()" [value]="options.value">{{ options.label}}</option>
+   </select>
+   <label>Gearbox</label> 
+   <select formControlName="gearboxType" id="gearboxType" class="form-control">
+      <option *ngFor="let options of getGearboxTypeOptions()" [value]="options.value">{{ options.label}}</option>
+   </select>
     <button (click)="addCar()">add car</button>
 </form>
