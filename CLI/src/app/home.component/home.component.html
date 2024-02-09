@@ -28,11 +28,10 @@
         <td>{{ car.brand }}</td>
 
         <td>{{car.pricePerDay}}</td>
-        <!--
-        <td>{{car.doorsNr}}</td>
-        <td>{{car.engine}}</td>
-        <td>{{car.type}}</td>
-        <td>{{car.gearboxType}}</td>-->
+        <td >{{Engine[car.engine]}}</td>                
+        <td>{{DorsNr[car.doorsNr]}}</td>
+        <td>{{CarType[car.type]}}</td>
+        <td>{{ GearboxType[car.gearboxType] }}</td>
 
         <td><button (click)="openResModal(this.car)">add reservation</button></td>
       </tr>

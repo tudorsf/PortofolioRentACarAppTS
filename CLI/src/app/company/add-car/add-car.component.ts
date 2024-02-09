@@ -7,6 +7,7 @@ import { CarsService } from 'src/app/services/cars.service';
 import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/services/error.service';
 import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carEnums';
+import { UtilityService } from 'src/app/services/utility.service';
 
 
 
@@ -44,7 +45,8 @@ import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carE
                 private companyService: CompanyService,
                 private carsService: CarsService,
                 private router: Router,
-                private errorService:  ErrorService
+                private errorService:  ErrorService,
+                private utilityService: UtilityService
             ){
         this.carForm = this.fb.group({
             name: ['', Validators.required],
@@ -74,24 +76,24 @@ import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carE
     carTypeEnum = CarType;
 
     getEngineOptions(): { label: string, value: any }[] {
-      return this.getEnumOptions(this.engineEnum);
+      return this.utilityService.getEnumOptions(this.engineEnum);
     }
   
     getGearboxTypeOptions(): { label: string, value: any }[] {
-      return this.getEnumOptions(this.gearboxEnum);
+      return this.utilityService.getEnumOptions(this.gearboxEnum);
     }
 
     getDoorsOptions(): { label: string, value: any }[] {
-      return this.getEnumOptions(this.doorsNrEnum);
+      return this.utilityService.getEnumOptions(this.doorsNrEnum);
     }
 
     getCarTypeOptions(): { label: string, value: any }[] {
-      return this.getEnumOptions(this.carTypeEnum);
+      return this.utilityService.getEnumOptions(this.carTypeEnum);
     }
     
 
 
-    private getEnumOptions(enumObj: any): { label: string, value: Number }[] {
+    /*private getEnumOptions(enumObj: any): { label: string, value: Number }[] {
       const options = [];
       for (const key in enumObj) {
         if (isNaN(Number(key))) {
@@ -99,7 +101,7 @@ import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carE
         }
       }
       return options;
-    }
+    }*/
 
     identify(index: number, item: any) {
       return item.label;

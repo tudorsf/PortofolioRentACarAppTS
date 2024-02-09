@@ -64,12 +64,23 @@
               <tr>
                 <th>Car Name</th>
                 <th>Price</th>
+                <th>Engine</th>
+                <th>Doors</th>
+                <th>Type</th>
+                <th>Gearbox</th>
+
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let car of company!.cars">
                 <td>{{ car.name }}</td>
                 <td>{{ car.pricePerDay }}</td>
+                <td >{{Engine[car.engine]}}</td>                
+                <td>{{DorsNr[car.doorsNr]}}</td>
+                <td>{{CarType[car.type]}}</td>
+                <td>{{GearboxType[car.gearboxType]}}</td>
+
+
                 <td>
                   <div *ngIf="car.reservations.length > 0">
                     <input type="text" (click)="openReservationModal(this.car.reservations)" placeholder="Click to view reservations">

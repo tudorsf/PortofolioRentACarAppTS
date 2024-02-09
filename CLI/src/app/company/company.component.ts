@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { Reservation } from '../models/BL/reservation.model';
 import { Car } from '../models/BL/car.model';
 import { ReservationsModalComponent } from './reservations-modal/reservations-modal.component';
+import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
+import { UtilityService } from '../services/utility.service';
 
 
 
@@ -35,16 +37,26 @@ export class CompanyComponent implements OnInit {
   
   cars: Car[] = [];
 
+  Engine = Engine;
+  DorsNr = DoorsNr;
+  CarType = CarType;
+  GearboxType = GearboxType;
+
+    
+
   showDropdown = false;
 
+ 
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
              private profileService: ProfileService,
              private streetService: StreetMapService,
-             private router: Router) 
+             private router: Router,
+             private utilityService: UtilityService) 
           {}
 
   ngOnInit(): void {
+
 
     this.companyService.getProfile().subscribe(
       (data: any) => {
@@ -53,7 +65,9 @@ export class CompanyComponent implements OnInit {
           try{
             this.company = data;
             this.company!.cars.forEach((car) => {
+
                this.reservations = [ ...car.reservations];
+              console.log(this.company?.cars);
                console.log(this.reservations);
             });
            
@@ -75,25 +89,16 @@ export class CompanyComponent implements OnInit {
       console.log(this.company, 'home component');
     });
 
+   
+    
 
 
     
     
   }
 
-
   
-  
-  /*openModal(){
-    this.modalRef = this.modalService.open(ProfileModalComponent, { centered: true });
-  }
 
-  closeModal(){
-    if (this.modalRef) {
-      this.modalRef.close();
-      this.modalRef = null;
-    }
-  }*/
 
   openCarModal(){
     console.log("");

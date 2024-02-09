@@ -13,6 +13,9 @@ import { ProfileService } from '../services/profile.service';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
+import { UtilityService } from '../services/utility.service';
+import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
+
 
 @Component({
   selector: 'home-component',
@@ -32,6 +35,11 @@ export class HomeComponent implements OnInit{
 
   customer!: Customer;
 
+  Engine = Engine;
+  DorsNr = DoorsNr;
+  CarType = CarType;
+  GearboxType = GearboxType;
+
 
   constructor(private authService: AuthService,
                private cookieService: CookieService, 
@@ -40,7 +48,8 @@ export class HomeComponent implements OnInit{
                private customerService: CustomerService,
                private profileService: ProfileService,
                private errorService: ErrorService,
-               private router: Router){}
+               private router: Router,
+               private utilityService: UtilityService){}
 
     ngOnInit() {
 
@@ -67,17 +76,22 @@ export class HomeComponent implements OnInit{
           if (data.hasOwnProperty(key)) {
             const car: Car = data[key];
             this.cars.push(car);
-            
+            this.cars.forEach(car => {
+              console.log(car.gearboxType);
+              console.log(car.engine);
+            });
           }
         }
         console.log(this.cars);
   
       
       });
+
       
-    
   
     }
+
+   
     
     logOff(){
       this.authService.logOff()

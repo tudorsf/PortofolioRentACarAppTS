@@ -22,7 +22,7 @@ namespace API.Models.Company
 
         public Engine engine { get; set; }
 
-        public GearboxType geaboxType { get; set; }
+        public GearboxType gearboxType { get; set; }
 
         public DoorsNr doorsNr { get; set; }
 
