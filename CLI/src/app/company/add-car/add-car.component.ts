@@ -100,6 +100,10 @@ import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carE
       }
       return options;
     }
+
+    identify(index: number, item: any) {
+      return item.label;
+   }
   
 
     addCar(){
@@ -108,8 +112,9 @@ import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carE
 
         this.car =  this.carForm.value;
         console.log(this.car);
-
+        
         this.car.type = +this.car.type;
+        console.log(this.car.type)
         this.car.doorsNr = +this.car.doorsNr;
         this.car.engine = +this.car.engine;
         this.car.gearboxType = +this.car.gearboxType;

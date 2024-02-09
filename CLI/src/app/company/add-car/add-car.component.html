@@ -7,19 +7,23 @@
    <label>price </label> <input type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
    <label>Engine</label> 
    <select formControlName="engine" name="engine" id="engine"  class="form-control">
-      <option *ngFor="let options of getEngineOptions()" [value]="options.value">{{ options.label}}</option>
+      <option value="" disabled selected>Select engine type</option>
+      <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
    </select>
    <label>Type</label> 
    <select formControlName="type" id="type" class="form-control">
-      <option *ngFor="let options of getCarTypeOptions()" [value]="options.value">{{ options.label}}</option>
+      <option value="" disabled selected>Select a car type</option>
+      <option *ngFor="let options of getCarTypeOptions(); trackBy:identify" [value]="options.value"  >{{ options.label}}</option>
    </select>
    <label>Doors Number</label> 
    <select formControlName="doorsNr" id="doorsNr" class="form-control">
-      <option *ngFor="let options of getDoorsOptions()" [value]="options.value">{{ options.label}}</option>
+      <option value="" disabled selected>Select doors number</option>
+      <option *ngFor="let options of getDoorsOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
    </select>
    <label>Gearbox</label> 
    <select formControlName="gearboxType" id="gearboxType" class="form-control">
-      <option *ngFor="let options of getGearboxTypeOptions()" [value]="options.value">{{ options.label}}</option>
+      <option value="" disabled selected>Select gerbox type</option>
+      <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
    </select>
     <button (click)="addCar()">add car</button>
 </form>
