@@ -29,7 +29,8 @@ namespace LoginAPI3.Data
 
         public DbSet<Reservation> Reservations { get; set; }
 
-        public DbSet<Photo> Photos { get; set; }
+
+        public DbSet<CarPhotos> CPhotos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

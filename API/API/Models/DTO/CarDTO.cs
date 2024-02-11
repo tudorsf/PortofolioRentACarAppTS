@@ -22,5 +22,7 @@ namespace API.Models.DTO
         public CarType type { get; set; }
 
         public int year { get; set; }
+
+        public string[] photos { get; set; }
     }
 }

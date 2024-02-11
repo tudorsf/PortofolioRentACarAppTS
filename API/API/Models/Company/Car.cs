@@ -14,7 +14,9 @@ namespace API.Models.Company
 
         public int CompanyREF { get; set; }
         
-        public List<Photo> Photos { get; set; }
+        //public List<Photo> Photos { get; set; }
+
+        public List<CarPhotos> Photos { get; set; } = new List<CarPhotos>();
 
         public List<Reservation> Reservations { get; set; }
 

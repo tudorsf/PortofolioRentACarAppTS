@@ -62,7 +62,6 @@ namespace API.Controllers
 
             car.Name = request.name;
             car.PricePerDay = request.pricePerDay;
-            //car.Photos = request.Photos;
             car.CompanyREF = request.companyREF;
             car.doorsNr = request.doorsNr;
             car.Horsepower = request.Horsepower;
@@ -71,6 +70,36 @@ namespace API.Controllers
             car.Model = request.brand;
             car.Year = request.year;
             car.type = request.type;
+
+            /*byte[] photoBytes = Convert.FromBase64String(request.photos);
+
+            var photo = new Photo
+            {
+                CarREF = car.Id,
+                photo = photoBytes
+            };
+
+            car.Photos.Add(photo);
+            */
+
+
+            foreach (var elements in request.photos)
+            {
+                
+
+                byte[] photoBytes = Convert.FromBase64String(elements);
+
+                var photo = new CarPhotos
+                {
+                    CarREF = car.Id,
+                    Photo = photoBytes
+                };
+
+                car.Photos.Add(photo);
+
+                _context.CPhotos.Add(photo);
+            }
+
             _context.Cars.Add(car);
 
 
@@ -89,7 +118,12 @@ namespace API.Controllers
                 WriteIndented = true
             };*/
 
-            var company = _context.Companies.Include(u => u.Cars).ThenInclude(car => car.Reservations).FirstOrDefault(u => u.UserREF == id); //get company details based on UserREF
+            var company = _context.Companies.
+                Include(u => u.Cars).
+                    ThenInclude(car => car.Reservations).
+                    Include(u => u.Cars).
+                    ThenInclude(car => car.Photos).
+                   FirstOrDefault(u => u.UserREF == id); //get company details based on UserREF
 
             //var json = JsonSerializer.Serialize(company, options); 
 

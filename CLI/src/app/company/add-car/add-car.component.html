@@ -25,5 +25,6 @@
       <option value="" disabled selected>Select gerbox type</option>
       <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
    </select>
-    <button (click)="addCar()">add car</button>
+   <input type="file" class="file-upload" (change)="uploadPicture($event)" multiple>
+   <button (click)="addCar()">add car</button>
 </form>

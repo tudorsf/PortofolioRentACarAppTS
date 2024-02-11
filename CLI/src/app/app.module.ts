@@ -34,7 +34,7 @@ const routes: Routes = [
   {path:'modal', component:ErrorModalComponent },
   {path: 'access-denied', component:AccesDeniedComponent},
   {path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'add-car', component:AddCarComponent, data: { expectedRoles: ['company', 'sysAdmin']} }
  
 

@@ -108,7 +108,9 @@ namespace API.Controllers
         [HttpGet("GetCars")]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
-            var cars = await _context.Cars.Include(u => u.Reservations).ToListAsync();
+            var cars = await _context.Cars.
+                                    Include(car => car.Photos)
+                .Include(u => u.Reservations).ToListAsync();
 
             return cars;
         }

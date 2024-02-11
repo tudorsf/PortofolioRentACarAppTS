@@ -1,10 +1,10 @@
 ﻿namespace API.Models.Company
 {
-    public class Photo
-    {   
+    public class CarPhotos
+    {
         public int Id { get; set; }
         public int CarREF { get; set; }
 
-        public string photo { get; set; }
+        public byte[] Photo { get; set; }
     }
 }
