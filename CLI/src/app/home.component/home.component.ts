@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit{
   GearboxType = GearboxType;
 
 
+
   constructor(private authService: AuthService,
                private cookieService: CookieService, 
                private carsService: CarsService,
@@ -76,10 +77,8 @@ export class HomeComponent implements OnInit{
           if (data.hasOwnProperty(key)) {
             const car: Car = data[key];
             this.cars.push(car);
-            this.cars.forEach(car => {
-              console.log(car.gearboxType);
-              console.log(car.engine);
-            });
+           
+            
           }
         }
         console.log(this.cars);

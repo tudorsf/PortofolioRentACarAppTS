@@ -1,14 +1,16 @@
 
- <div *ngIf="!company" class="profile-not-created">
-   <!-- <p>You have not created a profile, please submit this form</p>
-    <button (click)="openModal()">create profile</button>-->
-    <noProfile-component></noProfile-component>
+  <div *ngIf="isLoading">
+   <app-loader-component></app-loader-component>
+  </div>
 
- </div>
+<div *ngIf="!isLoading">
+    <div *ngIf="!company" class="profile-not-created">
+      <noProfile-component></noProfile-component>
+    </div>
  
 
 
-<div *ngIf="company" class="content">
+    <div *ngIf="company" class="content">
   <div class="row">
     <div class="col col-md-4">
       <div class="profile-container">
@@ -100,7 +102,16 @@
 
   
 
- 
 
-       
 
+
+
+
+    
+
+
+    </div>
+</div>
+    
+
+   

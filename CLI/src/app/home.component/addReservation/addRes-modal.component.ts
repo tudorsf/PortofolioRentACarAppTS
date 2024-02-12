@@ -96,14 +96,7 @@ export class AddReservationsModalComponent {
 
     
 
-    /*public formatToDate(date: any, format: string = DATE_FORMAT) {
-      if(date === null || date === "" || date === undefined)
-        return null;
-      
-      return (moment(date)).format(format);
-    }*/
-
-    
+   
 }
 
 

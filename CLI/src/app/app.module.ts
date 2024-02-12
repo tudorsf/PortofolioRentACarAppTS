@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CustomerService } from './services/customer.service';
 import { NoProfileComponent } from './noProfile.component/noProfile.component';
 import { CliProfileModalComponent } from './client/CliProfile/cliProfile-modal.component';
+import { LoaderComponent } from './loader.component/loader.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path:'add-car', component:AddCarComponent, data: { expectedRoles: ['company', 'sysAdmin']} }
- 
+ /*{path:'load', component: LoaderComponent}*/
 
 ];
 
@@ -54,8 +55,8 @@ const routes: Routes = [
     ProfileModalComponent,
     AddCarComponent,
     ReservationsModalComponent,
-    NoProfileComponent
-    
+    NoProfileComponent,
+    LoaderComponent
 
     
   ],

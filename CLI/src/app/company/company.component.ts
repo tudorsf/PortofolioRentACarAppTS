@@ -17,6 +17,7 @@ import { UtilityService } from '../services/utility.service';
 
 
 
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
@@ -42,7 +43,7 @@ export class CompanyComponent implements OnInit {
   CarType = CarType;
   GearboxType = GearboxType;
 
-    
+  isLoading: boolean = true;
 
   showDropdown = false;
 
@@ -60,7 +61,6 @@ export class CompanyComponent implements OnInit {
 
     this.companyService.getProfile().subscribe(
       (data: any) => {
-        console.log(data + "data from backend")
         if(data != null){
           try{
             this.company = data;
@@ -70,19 +70,23 @@ export class CompanyComponent implements OnInit {
               console.log(this.company?.cars);
                console.log(this.reservations);
             });
+            this.isLoading = false;
            
           }
           catch (error) {
             console.error('Error creating profile:', error);
+            //this.isLoading = false;
           }
-          console.log(this.company + " company from backend");
+        } else if(data == null){
+          this.isLoading = false;
         }
        
       },
       (error: any) => {
         console.error('Error creating profile:', error);
+        this.isLoading = false;
       }
-    );
+    ) 
 
     this.companyService.company$.subscribe((value) => {
       this.company = value;
@@ -90,7 +94,7 @@ export class CompanyComponent implements OnInit {
     });
 
    
-    
+    console.log(this.isLoading);
 
 
     

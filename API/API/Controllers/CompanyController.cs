@@ -109,7 +109,7 @@ namespace API.Controllers
         }
 
         [HttpGet("GetComp/{id}")]
-        public ActionResult<Company> GetCompany(int id)
+        public async Task<ActionResult<Company>> GetCompany(int id)
 
         {
             /*JsonSerializerOptions options = new()
