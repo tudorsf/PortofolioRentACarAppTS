@@ -1,44 +1,41 @@
-<!--<div *ngIf="loggedIn">
-    <p>Welcome</p>
+<div *ngIf="isLoading">
+  <app-loader-component></app-loader-component>
+ </div>
 
-    <button (click)="logOff()">Log Off</button>
-    <button (click)="getUser()">get user</button>
-</div>
-
-<div *ngIf="!loggedIn">
-    <p *ngIf="!loggedIn">please login</p>
-</div>-->
-
-<div *ngIf="cars.length == 0">
-  <p>no cars available, please try again later</p>
-</div>
-
-<div *ngIf="cars.length > 0">
-  <table>
-    <thead>
-      <tr>
-        <th>Car Name</th>
-        <th>Price</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of cars">
-        <td>{{ car.name }}</td>
-        <td>{{ car.brand }}</td>
-
-        <td>{{car.pricePerDay}}</td>
-        <td >{{Engine[car.engine]}}</td>                
-        <td>{{DorsNr[car.doorsNr]}}</td>
-        <td>{{CarType[car.type]}}</td>
-        <td>{{ GearboxType[car.gearboxType] }}</td>
-
-        <td><button (click)="openResModal(this.car)">add reservation</button></td>
-      </tr>
-      
-    </tbody>
-  </table>
+ <div *ngIf="!isLoading">
+  <div *ngIf="cars.length == 0">
+    <p>no cars available, please try again later</p>
+  </div>
   
-</div>
+  <div *ngIf="cars.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Car Name</th>
+          <th>Price</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.name }}</td>
+          <td>{{ car.brand }}</td>
+  
+          <td>{{car.pricePerDay}}</td>
+          <td >{{Engine[car.engine]}}</td>                
+          <td>{{DorsNr[car.doorsNr]}}</td>
+          <td>{{CarType[car.type]}}</td>
+          <td>{{ GearboxType[car.gearboxType] }}</td>
+  
+          <td><button (click)="openResModal(this.car)">add reservation</button></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </div>
+ </div>
+
+
 
 

@@ -36,21 +36,24 @@ export class AddReservationsModalComponent {
 
     @Input() clientId!: number;
 
+    
+
    
 
     private modalRef: NgbModalRef | null = null;
 
-    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService, private carsService: CarsService,private  errorService: ErrorService){
-      //console.log(this.customer)
-    }
-
     range = new FormGroup({
-        start: new FormControl<Date | null>(null),
-        end: new FormControl<Date | null>(null),
-      });
+      start: new FormControl<Date | null>(null),
+      end: new FormControl<Date | null>(null),
+    });
+
+    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService, private carsService: CarsService,private  errorService: ErrorService){
+      
+      }
+    
     
     save(){
-
+      
       const startDate: Date | null | undefined = this.range.get('start')?.value;
       const endDate: Date | null | undefined = this.range.get('end')?.value;
       console.log('startDate', startDate);
@@ -61,7 +64,7 @@ export class AddReservationsModalComponent {
       console.log('utcdate:', utcStartDate);
 
 
-      if (startDate && endDate) {
+      /*if (startDate && endDate) {
       
         const reservation: Reservation = {
           id: 0, 
@@ -85,7 +88,7 @@ export class AddReservationsModalComponent {
       } else {
         
         console.log('Please select both start and end dates.');
-      }
+      }*/
     }
 
     getCustomerId(){
@@ -93,6 +96,9 @@ export class AddReservationsModalComponent {
       if(customer)
         return customer.id;
     }
+
+   
+    
 
     
 

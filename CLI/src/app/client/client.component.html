@@ -1,5 +1,9 @@
+<div *ngIf="isLoading">
+  <app-loader-component></app-loader-component>
+ </div>
 
-<div *ngIf="customer">
+ <div *ngIf="!isLoading">
+  <div *ngIf="customer">
     <tr>
         <td><label>Name:</label></td>
         <td>{{ customer!.name }}</td>
@@ -21,3 +25,6 @@
 <div *ngIf="!customer">prifile not created
     <noProfile-component></noProfile-component>
 </div>
+</div>
+
+

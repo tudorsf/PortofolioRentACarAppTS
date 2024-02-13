@@ -13,6 +13,7 @@ import { NoProfileComponent } from '../noProfile.component/noProfile.component';
 })
 export class ClientComponent implements OnInit {
 
+  isLoading = true;
   customer: Customer | null = null;
 
 
@@ -23,31 +24,36 @@ export class ClientComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.customerService.customer$.subscribe((value) => {
+    /*this.customerService.customer$.subscribe((value) => {
       this.customer = value;
+      this.isLoading = false;
       console.log(this.customer, 'home component');
-    });
+    });*/
 
-    /*this.customerService.getProfile().subscribe(
+    this.customerService.getProfile().subscribe(
       (data: any) => {
         console.log(data + "data from backend")
         if(data != null){
           try{
             this.customer = data;
             this.customerService.setCustomer(this.customer);
+            this.isLoading = false;
+
             console.log(this.customer)
           }
           catch (error) {
             console.error('Error creating profile:', error);
           }
           console.log(this.customer + " company from backend");
+        } else if(data == null){
+          this.isLoading = false;
         }
        
       },
       (error: any) => {
         console.error('Error creating profile:', error);
       }
-    );*/
+    );
 
 
 

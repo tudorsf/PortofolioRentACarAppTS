@@ -15,6 +15,7 @@ import { ErrorService } from '../services/error.service';
 import { Router } from '@angular/router';
 import { UtilityService } from '../services/utility.service';
 import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
+import { CompanyService } from '../services/company.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
 
 export class HomeComponent implements OnInit{
     
-  
+  isLoading = true;
+
   loggedIn = false;
   
   cars: Car[] = [];
@@ -40,6 +42,8 @@ export class HomeComponent implements OnInit{
   CarType = CarType;
   GearboxType = GearboxType;
 
+  company!: Company;
+
 
 
   constructor(private authService: AuthService,
@@ -50,18 +54,12 @@ export class HomeComponent implements OnInit{
                private profileService: ProfileService,
                private errorService: ErrorService,
                private router: Router,
-               private utilityService: UtilityService){}
+               private utilityService: UtilityService
+              ){}
 
     ngOnInit() {
 
-      this.customerService.customer$.subscribe((value) => {
-        console.log(value);
-        if(value != null){
-          this.customer = value;
-          console.log(this.customer, 'home component');
-        }
-       
-      });
+      
 
       this.authService.isLoggedIn().subscribe((isLoggedIn) => {
         this.loggedIn = isLoggedIn;
@@ -77,6 +75,7 @@ export class HomeComponent implements OnInit{
           if (data.hasOwnProperty(key)) {
             const car: Car = data[key];
             this.cars.push(car);
+            this.isLoading = false;
            
             
           }
@@ -86,6 +85,17 @@ export class HomeComponent implements OnInit{
       
       });
 
+
+      this.customerService.customer$.subscribe((value) => {
+        console.log(value);
+        if(value != null){
+          this.customer = value;
+          console.log(this.customer, 'home component');
+        }
+       
+      });
+
+      
       
   
     }
@@ -107,7 +117,7 @@ export class HomeComponent implements OnInit{
         modalRef.componentInstance.car = car;
         modalRef.componentInstance.clientId = this.customer.id;
       } else {
-        this.errorService.openErrorModal("you neeed a customer account to make reservations");
+        this.errorService.openErrorModal("you neeed a customer account with a complete profile to make reservations");
       }
         
     }

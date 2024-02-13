@@ -17,13 +17,13 @@ export class ErrorService {
   }
 
   closeErrorModal(): void {
-     if(this.modalRef!.componentInstance.errorMessage == "you neeed a customer account to make reservations"){
+     /*if(this.modalRef!.componentInstance.errorMessage == "you neeed a customer account to make reservations"){
       
       this.modalRef!.close('Manually closed');
       this.modalRef = null; 
       this.router.navigate(['/register']);
       
-    } else if (this.modalRef) {
+    } else */if (this.modalRef) {
       console.log(this.modalRef!.componentInstance.errorMessage);
       this.modalRef.close('Manually closed');
       this.modalRef = null; 
