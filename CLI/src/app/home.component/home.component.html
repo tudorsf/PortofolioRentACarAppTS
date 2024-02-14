@@ -13,7 +13,11 @@
         <tr>
           <th>Car Name</th>
           <th>Price</th>
-  
+          <th>Price</th>
+          <th>Price</th>
+          <th>Price</th>
+          <th>Price</th>
+
         </tr>
       </thead>
       <tbody>
@@ -27,7 +31,10 @@
           <td>{{CarType[car.type]}}</td>
           <td>{{ GearboxType[car.gearboxType] }}</td>
   
-          <td><button (click)="openResModal(this.car)">add reservation</button></td>
+          <td>
+            <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+
+          </td>
         </tr>
         
       </tbody>

@@ -26,6 +26,8 @@ import { CustomerService } from './services/customer.service';
 import { NoProfileComponent } from './noProfile.component/noProfile.component';
 import { CliProfileModalComponent } from './client/CliProfile/cliProfile-modal.component';
 import { LoaderComponent } from './loader.component/loader.component';
+import { MatButtonModule } from '@angular/material/button';
+import { AddReservationsModalComponent } from './home.component/addReservation/addRes-modal.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -57,6 +59,7 @@ const routes: Routes = [
     ReservationsModalComponent,
     NoProfileComponent,
     LoaderComponent
+    
 
     
   ],
@@ -71,7 +74,9 @@ const routes: Routes = [
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
+    
   ],
   exports: [RouterModule],
   providers: [CustomerService],

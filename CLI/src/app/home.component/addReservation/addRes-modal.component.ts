@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from "@angular/core";
+import { Component, Input, ViewEncapsulation,OnInit } from "@angular/core";
 import { NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Reservation } from "src/app/models/BL/reservation.model";
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,6 +13,9 @@ import { CustomerService } from "../../services/customer.service";
 import { ProfileService } from "../../services/profile.service";
 import { ErrorModalComponent } from "src/app/shared/error-modal/error-modal.component";
 import { ErrorService } from "src/app/services/error.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import {NativeDateAdapter} from '@angular/material/core';
 
 @Component({
     selector: 'app-addRes-modal',
@@ -25,19 +28,23 @@ import { ErrorService } from "src/app/services/error.service";
         ReactiveFormsModule,
         JsonPipe,
         MatNativeDateModule,
+        MatButtonModule,
+        MatInputModule
+        
       ],
       encapsulation: ViewEncapsulation.None, 
-      styleUrls: ['./addRes-modal.component.css']
+      styleUrls: ['./addRes-modal.component.css'],
+      providers: [NativeDateAdapter],
   })
 
 
-export class AddReservationsModalComponent {
+export class AddReservationsModalComponent implements OnInit{
     @Input() car!: Car;
 
     @Input() clientId!: number;
 
     
-
+    todayDate = new Date();
    
 
     private modalRef: NgbModalRef | null = null;
@@ -47,8 +54,15 @@ export class AddReservationsModalComponent {
       end: new FormControl<Date | null>(null),
     });
 
-    constructor(public activeModal: NgbActiveModal, private customerService: CustomerService, private carsService: CarsService,private  errorService: ErrorService){
+    constructor(public activeModal: NgbActiveModal,
+                 private customerService: CustomerService, 
+                 private carsService: CarsService,
+                 private  errorService: ErrorService){
       
+      }
+
+      ngOnInit(){
+
       }
     
     
@@ -64,7 +78,7 @@ export class AddReservationsModalComponent {
       console.log('utcdate:', utcStartDate);
 
 
-      /*if (startDate && endDate) {
+      if (startDate && endDate) {
       
         const reservation: Reservation = {
           id: 0, 
@@ -88,7 +102,7 @@ export class AddReservationsModalComponent {
       } else {
         
         console.log('Please select both start and end dates.');
-      }*/
+      }
     }
 
     getCustomerId(){
@@ -96,6 +110,8 @@ export class AddReservationsModalComponent {
       if(customer)
         return customer.id;
     }
+
+   
 
    
     
