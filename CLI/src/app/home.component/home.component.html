@@ -2,46 +2,94 @@
   <app-loader-component></app-loader-component>
  </div>
 
- <div *ngIf="!isLoading">
+ <div *ngIf="!isLoading" style="width: 100%;">
   <div *ngIf="cars.length == 0">
     <p>no cars available, please try again later</p>
   </div>
-  
   <div *ngIf="cars.length > 0">
-    <table>
-      <thead>
-        <tr>
-          <th>Car Name</th>
-          <th>Price</th>
-          <th>Price</th>
-          <th>Price</th>
-          <th>Price</th>
-          <th>Price</th>
+    <div class="container mt-1">
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let car of cars">
-          <td>{{ car.name }}</td>
-          <td>{{ car.brand }}</td>
-  
-          <td>{{car.pricePerDay}}</td>
-          <td >{{Engine[car.engine]}}</td>                
-          <td>{{DorsNr[car.doorsNr]}}</td>
-          <td>{{CarType[car.type]}}</td>
-          <td>{{ GearboxType[car.gearboxType] }}</td>
-  
-          <td>
-            <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+        <div class="left">
+          <div class="title mt-1">
+            <h5>Filter by:</h5>
+            <h5><span>Reset all <i class="material-icons">clear</i></span></h5>
+          </div>
+          <div class="content">
+            <input type="text" placeholder="Search">
+          </div>
+        </div>
 
-          </td>
-        </tr>
+        <div class="middle">
+          
+
+          <mat-card *ngFor="let car of cars" class="example-card mt-1 mb-1">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{car.name}}</mat-card-title>
+              <mat-card-subtitle>{{car.model}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="">
+            <mat-card-content>
+              <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </mat-card-content>
+            <mat-card-footer>
+              <span> {{CarType[car.type]}}</span>
+              <span> {{Engine[car.engine]}}</span>
+              <span> {{GearboxType[car.gearboxType]}}</span>
+              <span> {{DorsNr[car.doorsNr]}}</span>
+              <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+            </mat-card-footer>
+          </mat-card>
+          
+     <!-- <table>
+        <thead>
+          <tr>
+            <th>Car Name</th>
+            <th>Price</th>
+            <th>Price</th>
+            <th>Price</th>
+            <th>Price</th>
+            <th>Price</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{ car.name }}</td>
+            <td>{{ car.brand }}</td>
+    
+            <td>{{car.pricePerDay}}</td>
+            <td >{{Engine[car.engine]}}</td>                
+            <td>{{DorsNr[car.doorsNr]}}</td>
+            <td>{{CarType[car.type]}}</td>
+            <td>{{ GearboxType[car.gearboxType] }}</td>
+    
+            <td>
+              <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+  
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>-->
+        </div>
+        <div class="right">
+        <!-- Content for the last 50% section -->
+        </div>
+      </div>
+
         
-      </tbody>
-    </table>
+  </div>
+
+
+  
+   
     
   </div>
- </div>
 
 
 

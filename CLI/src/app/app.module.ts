@@ -28,6 +28,8 @@ import { CliProfileModalComponent } from './client/CliProfile/cliProfile-modal.c
 import { LoaderComponent } from './loader.component/loader.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AddReservationsModalComponent } from './home.component/addReservation/addRes-modal.component';
+import {MatCardModule} from '@angular/material/card';
+
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -75,7 +77,9 @@ const routes: Routes = [
     MatInputModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
+    
     
   ],
   exports: [RouterModule],

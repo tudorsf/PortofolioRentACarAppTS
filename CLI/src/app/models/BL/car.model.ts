@@ -14,7 +14,7 @@ export interface Car {
     engine: Engine;
     type: CarType;
     gearboxType: GearboxType;
-    brand: string;
+    model: string;
     year: number;
     horsepower: number;
     
