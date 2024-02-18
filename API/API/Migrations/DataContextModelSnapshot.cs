@@ -56,6 +56,9 @@ namespace API.Migrations
                     b.Property<int>("engine")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("engineCapacity")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("gearboxType")
                         .HasColumnType("int");
 

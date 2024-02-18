@@ -52,6 +52,7 @@ import { UtilityService } from 'src/app/services/utility.service';
             name: ['', Validators.required],
             pricePerDay: ['', Validators.required],
             doorsNr: [''],
+            engineCapacity: ['', Validators.required],
             brand: ['', Validators.required],
             engine: [''],
             gearboxType: [''],
@@ -143,10 +144,10 @@ import { UtilityService } from 'src/app/services/utility.service';
 
               const base64String = base64Image.split(',')[1];
 
-              photosArray.push(this.fb.control(base64String)); // Append Base64 image to photos array
+              photosArray.push(this.fb.control(base64String)); 
           };
 
-          reader.readAsDataURL(file); // Convert selected file to Base64
+          reader.readAsDataURL(file); 
       }
     }
   }

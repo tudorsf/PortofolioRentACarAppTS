@@ -8,13 +8,14 @@ namespace API.Models.Company
         public string Name { get; set; }
 
         public string Model { get; set; }
+
+        public decimal engineCapacity { get; set; }
         public int PricePerDay { get; set; }
 
         public Company Company { get; set; }
 
         public int CompanyREF { get; set; }
         
-        //public List<Photo> Photos { get; set; }
 
         public List<CarPhotos> Photos { get; set; } = new List<CarPhotos>();
 

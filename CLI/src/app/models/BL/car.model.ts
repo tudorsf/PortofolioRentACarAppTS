@@ -17,6 +17,7 @@ export interface Car {
     model: string;
     year: number;
     horsepower: number;
+    engineCapacity: number;
     
 
 }

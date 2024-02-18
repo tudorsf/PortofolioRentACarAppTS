@@ -25,7 +25,15 @@ import { Injectable } from '@angular/core';
           reader.onload = () => resolve(reader.result as string);
           reader.onerror = error => reject(error);
       });
+
   }
 
+  byteArrayToBase64(byteArray: Uint8Array): string {
+    let binaryString = '';
+    byteArray.forEach(byte => {
+      binaryString += String.fromCharCode(byte);
+    });
+    return btoa(binaryString);
+  }
     
   }

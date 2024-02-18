@@ -24,5 +24,7 @@ namespace API.Models.DTO
         public int year { get; set; }
 
         public string[] photos { get; set; }
+
+        public decimal engineCapacity { get; set; }
     }
 }

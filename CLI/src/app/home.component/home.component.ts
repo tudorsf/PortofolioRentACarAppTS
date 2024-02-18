@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { UtilityService } from '../services/utility.service';
 import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
 import { CompanyService } from '../services/company.service';
+import { Photo } from '../models/BL/photo.model';
 
 
 @Component({
@@ -32,9 +33,13 @@ export class HomeComponent implements OnInit{
     
   isLoading = true;
 
+
   loggedIn = false;
   
   cars: Car[] = [];
+  filteredCars: Car[] = [];
+
+  displayedCars : Car[] = [];
 
   customer!: Customer;
 
@@ -44,6 +49,17 @@ export class HomeComponent implements OnInit{
   GearboxType = GearboxType;
 
   company!: Company;
+
+  years: number[] = [];
+
+  searchQuery:string = '';
+
+  yearFilter: string = '';
+  doorsFilter: number = 0;
+  engineFilter: number = 0;
+  gearFilter: number = 0;
+  typeFilter: number = 0;
+
 
 
 
@@ -60,7 +76,7 @@ export class HomeComponent implements OnInit{
 
     ngOnInit() {
 
-      
+      this.years = this.generateYears();
 
       this.authService.isLoggedIn().subscribe((isLoggedIn) => {
         this.loggedIn = isLoggedIn;
@@ -75,7 +91,13 @@ export class HomeComponent implements OnInit{
         for (const key in data) {
           if (data.hasOwnProperty(key)) {
             const car: Car = data[key];
+
+            car.photos.forEach((photo: Photo) => {
+              photo.photo = 'data:image/png;base64,'+photo.photo;
+            });
+
             this.cars.push(car);
+            this.filteredCars.push(car);
             this.isLoading = false;
            
             
@@ -122,6 +144,94 @@ export class HomeComponent implements OnInit{
       }
         
     }
+
+    private generateYears(): number[] {
+      const currentYear = new Date().getFullYear();
+      const pastYears = 15;
+      const years = [];
+      for (let i = 0; i <= pastYears; i++) {
+        years.push(currentYear - i);
+      }
+      return years;
+    }
+
+    engineEnum = Engine;
+    gearboxEnum = GearboxType;
+    doorsNrEnum = DoorsNr;
+    carTypeEnum = CarType;
+
+    getEngineOptions(): { label: string, value: any }[] {
+      return this.utilityService.getEnumOptions(this.engineEnum);
+    }
+  
+    getGearboxTypeOptions(): { label: string, value: any }[] {
+      return this.utilityService.getEnumOptions(this.gearboxEnum);
+    }
+
+    getDoorsOptions(): { label: string, value: any }[] {
+      return this.utilityService.getEnumOptions(this.doorsNrEnum);
+    }
+
+    getCarTypeOptions(): { label: string, value: any }[] {
+      return this.utilityService.getEnumOptions(this.carTypeEnum);
+    }
+
+    identify(index: number, item: any) {
+      return item.label;
+    }
+
+    filter(){
+      //let filteredCars = this.cars;
+
+        if (this.searchQuery !== '') {
+            this.filteredCars = this.filteredCars.filter(car =>
+                car.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                car.model.toLowerCase().includes(this.searchQuery.toLowerCase()) || (car.name + car.model).toLowerCase().includes(this.searchQuery.toLowerCase())
+            );
+            }
+
+  
+    if (this.yearFilter !== '') {
+        this.filteredCars = this.filteredCars.filter(car => car.year == parseFloat(this.yearFilter));
+      }
+
+    if (this.doorsFilter > 0) {
+      console.log("dor filter", this.doorsFilter)
+        this.filteredCars = this.filteredCars.filter(car => car.doorsNr == this.doorsFilter);
+      }
+
+      if (this.engineFilter > 0) {
+        console.log('engin filter', this.engineFilter)
+                 this.filteredCars = this.filteredCars.filter(car => car.engine == this.engineFilter);
+      }
+
+      if (this.gearFilter > 0) {
+        console.log('gear filter', this.gearFilter)
+            this.filteredCars = this.filteredCars.filter(car => car.gearboxType == this.gearFilter);
+      }
+
+      if (this.typeFilter > 0) {
+            this.filteredCars = this.filteredCars.filter(car => car.type === this.typeFilter);
+      }
+
+      //console.log(filteredCars);
+      return this.filteredCars;
+    }
+
+    resetFilters(){
+      this.searchQuery = '';
+
+      this.yearFilter = '';
+      this.doorsFilter = 0;
+      this.engineFilter = 0;
+      this.gearFilter = 0;
+      this.typeFilter = 0;
+    
+      this.filteredCars = this.cars;
+    }
+    
+
+  
  }
 
   

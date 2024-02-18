@@ -12,29 +12,68 @@
         <div class="left">
           <div class="title mt-1">
             <h5>Filter by:</h5>
-            <h5><span>Reset all <i class="material-icons">clear</i></span></h5>
+            <h5 (click)="resetFilters()"><span>Reset all <i class="material-icons">clear</i></span></h5>
           </div>
           <div class="content">
-            <input type="text" placeholder="Search">
+            <input type="text" [(ngModel)]="searchQuery" placeholder="Search name or model">
+            <div class="dropdown">
+              <label>Year</label>
+              <select [(ngModel)]="yearFilter" class="form-select filterDrop">
+                <option value="" selected>Select a year</option>
+                <option   *ngFor="let year of years" [value]="year">{{ year }}</option>
+              </select>
+            </div>
+            <div class="dropdown">
+              <label>Car Type</label>
+              <select [(ngModel)]="typeFilter" class="form-select filterDrop">
+                <option value=0 selected>Select a car type</option>
+                <option *ngFor="let options of getCarTypeOptions(); trackBy:identify" [value]="options.value"  >{{ options.label}}</option>
+              </select>
+            </div>
+            <div class="dropdown">
+              <label>Doors</label>
+              <select [(ngModel)]="doorsFilter" class="form-select filterDrop">
+                <option value=0 selected>Select doors number</option>
+                <option *ngFor="let options of getDoorsOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+              </select>
+            </div>
+            <div class="dropdown">
+              <label>Gearbox</label>
+              <select [(ngModel)]="gearFilter" class="form-select filterDrop">
+                <option value=0 selected>Select gearbox type</option>
+                <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+              </select>
+            </div>
+            <div class="dropdown">
+              <label>Engine</label>
+              <select [(ngModel)]="engineFilter" class="form-select filterDrop">
+                <option value=0 disabled selected>Select engine type</option>
+                <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+               </select>
+              </div>
+          </div>
+          <div class="filterBtn mt-2">
+            <button mat-raised-button color="warn" (click)="filter()">Filter</button>
+
           </div>
         </div>
 
         <div class="middle">
           
 
-          <mat-card *ngFor="let car of cars" class="example-card mt-1 mb-1">
+          <mat-card *ngFor="let car of filteredCars" class="example-card mt-1 mb-1">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>{{car.name}}</mat-card-title>
-              <mat-card-subtitle>{{car.model}}</mat-card-subtitle>
+              <mat-card-subtitle>{{car.model}} {{car.year}} {{car.engineCapacity != 0 ? car.engineCapacity.toFixed(1) : ''}}</mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image src="">
             <mat-card-content>
-              <p>
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-              </p>
+              
+              <div class="image-container">
+                <img mat-card-image *ngIf="car.photos && car.photos.length > 0" src="{{car.photos[0].photo}}">
+
+              </div>
             </mat-card-content>
             <mat-card-footer>
               <span> {{CarType[car.type]}}</span>

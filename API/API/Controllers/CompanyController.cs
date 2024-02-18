@@ -70,6 +70,7 @@ namespace API.Controllers
             car.Model = request.brand;
             car.Year = request.year;
             car.type = request.type;
+            car.engineCapacity = request.engineCapacity;
 
             /*byte[] photoBytes = Convert.FromBase64String(request.photos);
 
