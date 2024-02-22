@@ -139,6 +139,7 @@ export class HomeComponent implements OnInit{
         const modalRef = this.modalService.open(AddReservationsModalComponent, { size: 'lg' });
         modalRef.componentInstance.car = car;
         modalRef.componentInstance.clientId = this.customer.id;
+        
       } else {
         this.errorService.openErrorModal("you neeed a customer account with a complete profile to make reservations");
       }
@@ -211,7 +212,7 @@ export class HomeComponent implements OnInit{
       }
 
       if (this.typeFilter > 0) {
-            this.filteredCars = this.filteredCars.filter(car => car.type === this.typeFilter);
+            this.filteredCars = this.filteredCars.filter(car => car.type == this.typeFilter);
       }
 
       //console.log(filteredCars);

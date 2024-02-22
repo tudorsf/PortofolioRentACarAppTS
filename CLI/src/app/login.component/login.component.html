@@ -1,28 +1,31 @@
-<div class="row">
-  <div class="col-md-9">
-    <div class="background-image"></div>
-  </div>
-  <div class="col-md-3">
-    <div class="container mt-5" *ngIf="!loggedIn">
-      <h2>Login</h2>
-      <form>
-        <div class="mb-3">
-          <label for="loginEmail" class="form-label">Username</label>
-          <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" [(ngModel)]="user.userName" name="username">
-        </div>
-        <div class="mb-3">
-          <label for="loginPassword" class="form-label">Password</label>
-          <input type="password" class="form-control" id="loginPassword" placeholder="Password" [(ngModel)]="user.password" name="password">
-        </div>
-        <button type="submit" class="btn custom-btn" (click)="login()">Login</button>
-      </form>
+<div class="main">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="background-image"></div>
     </div>
+    <div class="col-md-3">
+      <div class="container mt-5" *ngIf="!loggedIn">
+        <h2>Login</h2>
+        <form>
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Username</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" [(ngModel)]="user.userName" name="username">
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password" [(ngModel)]="user.password" name="password">
+          </div>
+          <button type="submit" class="btn custom-btn" (click)="login()">Login</button>
+        </form>
+      </div>
+    
+      <div class="container mt-5" *ngIf="loggedIn">
+        <p>Already logged in</p>
+        <button class="btn custom-btn" (click)="logOff()">Log Out</button>
+      </div>
+    </div>
+  </div>
   
-    <div class="container mt-5" *ngIf="loggedIn">
-      <p>Already logged in</p>
-      <button class="btn custom-btn" (click)="logOff()">Log Out</button>
-    </div>
-  </div>
 </div>
 
 

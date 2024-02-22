@@ -1,7 +1,7 @@
-import { Component, Input, ViewEncapsulation,OnInit } from "@angular/core";
+import { Component, Input, ViewEncapsulation,OnInit, OnDestroy, EventEmitter, Output } from "@angular/core";
 import { NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Reservation } from "src/app/models/BL/reservation.model";
-import {FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -38,31 +38,43 @@ import {NativeDateAdapter} from '@angular/material/core';
   })
 
 
-export class AddReservationsModalComponent implements OnInit{
+export class AddReservationsModalComponent implements OnInit, OnDestroy{
     @Input() car!: Car;
 
     @Input() clientId!: number;
 
+    /*@Output() reservationAdded: EventEmitter<void> = new EventEmitter<void>();*/
+
+    btnDisabled = true;
+
+    range!: FormGroup;
     
     todayDate = new Date();
    
 
     private modalRef: NgbModalRef | null = null;
 
-    range = new FormGroup({
-      start: new FormControl<Date | null>(null),
-      end: new FormControl<Date | null>(null),
-    });
+   
 
     constructor(public activeModal: NgbActiveModal,
                  private customerService: CustomerService, 
                  private carsService: CarsService,
-                 private  errorService: ErrorService){
+                 private  errorService: ErrorService,
+                 private fb: FormBuilder){
+
+                  this.range = this.fb.group({
+                    start: [null, Validators.required],
+                    end: [null, Validators.required]
+                  });
       
-      }
+                }
 
       ngOnInit(){
 
+      }
+
+      ngOnDestroy(): void {
+        this.carsService.getCars();
       }
     
     
@@ -95,7 +107,13 @@ export class AddReservationsModalComponent implements OnInit{
         console.log(reservation);
         console.log(this.car);
         this.carsService.addReservation(reservation).subscribe(
-            success => this.activeModal.dismiss()
+
+            success => {
+              //this.reservationAdded.emit();
+              this.car.reservations.push(reservation)
+              this.activeModal.dismiss();
+            }
+           
           )
         
         
@@ -111,7 +129,26 @@ export class AddReservationsModalComponent implements OnInit{
         return customer.id;
     }
 
-   
+    sundayFilter = (d: Date | null): boolean => {
+      
+       if (this.car && this.car.reservations) {
+        const reservations = this.car.reservations;
+        const selectedDate = d || new Date(); 
+  
+      
+          for (const reservation of reservations) {
+            const startDate = new Date(reservation.startDate);
+            const endDate = new Date(reservation.endDate);
+            if (selectedDate >= startDate && selectedDate <= endDate) {
+              return false; 
+            }
+          }
+      }
+  
+      return true;
+    };
+
+    
 
    
     
