@@ -61,63 +61,58 @@
         <div class="middle">
           
 
-          <mat-card *ngFor="let car of filteredCars" class="example-card mt-1 mb-1">
+          <mat-card *ngFor="let car of filteredCars" class="example-card mt-2 mb-1">
             <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
+              <div mat-card-avatar class="example-header-image"><i class="fas fa-car fa-lg"></i></div>
               <mat-card-title>{{car.name}}</mat-card-title>
               <mat-card-subtitle>{{car.model}} {{car.year}} {{car.engineCapacity != 0 ? car.engineCapacity.toFixed(1) : ''}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="">
             <mat-card-content>
               
               <div class="image-container">
                 <img mat-card-image *ngIf="car.photos && car.photos.length > 0" src="{{car.photos[0].photo}}">
+                <img mat-card-image class="noPic" *ngIf="car.photos.length == 0" src="..\assets\images\no-image-available.webp">
 
               </div>
             </mat-card-content>
             <mat-card-footer>
-              <span> {{CarType[car.type]}}</span>
-              <span> {{Engine[car.engine]}}</span>
-              <span> {{GearboxType[car.gearboxType]}}</span>
-              <span> {{DorsNr[car.doorsNr]}}</span>
-              <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+              <div class="row mt-1 rowFooter">
+                <div class="col footer">
+                  <span> <i class="fa-solid fa-gas-pump"></i> {{Engine[car.engine]}}</span>
+                </div>
+                <div class="col footer">
+                  <span> <i class="fa-solid fa-gear"></i> {{GearboxType[car.gearboxType]}}</span>
+
+                </div>
+                <div class="col footer">
+                  <span> <i class="fa-solid fa-car"></i> {{CarType[car.type]}}</span>
+                </div>
+                </div>
+                <!--<div class="col footer">
+                   <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+                </div>-->
+                <div class="row mb-1">
+                  <div class="col md-3">
+
+                  </div>
+                  <div class="col md-6">
+                    <button mat-raised-button style="width: 100%;" color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+
+                  </div>
+                  <div class="col md-3">
+
+                  </div>
+                </div>
+              
+            
+             <!--
+              <span> {{DorsNr[car.doorsNr]}}</span>-->
             </mat-card-footer>
           </mat-card>
-          
-     <!-- <table>
-        <thead>
-          <tr>
-            <th>Car Name</th>
-            <th>Price</th>
-            <th>Price</th>
-            <th>Price</th>
-            <th>Price</th>
-            <th>Price</th>
-  
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let car of cars">
-            <td>{{ car.name }}</td>
-            <td>{{ car.brand }}</td>
-    
-            <td>{{car.pricePerDay}}</td>
-            <td >{{Engine[car.engine]}}</td>                
-            <td>{{DorsNr[car.doorsNr]}}</td>
-            <td>{{CarType[car.type]}}</td>
-            <td>{{ GearboxType[car.gearboxType] }}</td>
-    
-            <td>
-              <button mat-flat-button color="warn" (click)="openResModal(this.car)">Add Reservation</button>
-  
-            </td>
-          </tr>
-          
-        </tbody>
-      </table>-->
+         
         </div>
         <div class="right">
-        <!-- Content for the last 50% section -->
+
         </div>
       </div>
 

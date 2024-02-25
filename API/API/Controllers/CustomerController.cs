@@ -177,7 +177,52 @@ namespace API.Controllers
 
          }
 
-       
+       /* [HttpPost("RateCar")]
+
+        public async Task<ActionResult<Company>> RateCaryByCustomer(int id, decimal rating)
+        {
+            var reservation = _context.Reservations.FirstOrDefault(r => r.Id == id);
+
+
+
+            if (reservation == null)
+            {
+                return BadRequest("Reservation not found");
+            }
+
+            if (reservation.EndDate > DateTime.UtcNow)
+            {
+                return BadRequest("Cannot rate a reservation that has not ended yet");
+            }
+
+            if (reservation.CustRating != null)
+            {
+                return BadRequest("already rated");
+
+            }
+
+            reservation.CustRating = rating;
+
+            var car = _context.Cars.FirstOrDefault(c => c.Id == reservation.CompanyId);
+
+            if (car == null)
+            {
+
+                return BadRequest("company not found");
+
+            }
+
+            car.Rating = (car.Rating * car.NumberOfRatings + rating) / (car.NumberOfRatings + 1);
+
+            car.NumberOfRatings++;
+
+            _context.Car.Update(car);
+            await _context.SaveChangesAsync();
+
+            return car;
+
+        }*/
+
 
     }
 }

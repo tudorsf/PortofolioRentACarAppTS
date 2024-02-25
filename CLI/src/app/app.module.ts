@@ -29,6 +29,7 @@ import { LoaderComponent } from './loader.component/loader.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AddReservationsModalComponent } from './home.component/addReservation/addRes-modal.component';
 import {MatCardModule} from '@angular/material/card';
+import { MaterialElevationDirective } from './directives/cards.directive';
 
 
 const routes: Routes = [
@@ -60,7 +61,8 @@ const routes: Routes = [
     AddCarComponent,
     ReservationsModalComponent,
     NoProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    MaterialElevationDirective
     
 
     

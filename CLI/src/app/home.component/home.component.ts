@@ -19,6 +19,7 @@ import { CompanyService } from '../services/company.service';
 import { Photo } from '../models/BL/photo.model';
 
 
+
 @Component({
   selector: 'home-component',
   templateUrl: './home.component.html',
