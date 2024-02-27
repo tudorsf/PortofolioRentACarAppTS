@@ -1,0 +1,62 @@
+﻿# Ignore node_modules for Angular
+node_modules/
+
+# Ignore .NET build artifacts
+bin/
+obj/
+
+# Ignore SQL Server database files
+*.mdf
+*.ldf
+
+# Ignore Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore SQL Server project files
+*.dbmdl
+*.dbproj.schemaview
+*.sqlproj.user
+
+# Ignore ReSharper files
+_ReSharper*/
+*.resharper
+*.sln.DotSettings.user
+
+# Ignore Angular build artifacts
+/dist/
+/tmp/
+
+# Ignore Angular configuration files
+/angular.json
+/*.js
+
+# Ignore IDE files
+.idea/
+
+# Ignore log files
+*.log
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore node.js package files
+package-lock.json
+
+# Ignore compiled Angular files
+*.js.map
+
+# Ignore .NET Core temporary files
+obj/
+bin/
+API/.vs/API/v17/.suo
+API/API/bin/Debug/net6.0/API.exe
+API/API/bin/Debug/net6.0/API.pdb
+API/API/bin/Debug/net6.0/API.dll
+
+# Ignore .NET build artifacts
+*.dll
+*.exe
+*.pdb
