@@ -61,7 +61,7 @@
         <div class="middle">
           
 
-          <mat-card *ngFor="let car of filteredCars" class="example-card mt-2 mb-1">
+          <mat-card *ngFor="let car of filteredCars" class="example-card mt-2 mb-1" (click)="selectCar(car)">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"><i class="fas fa-car fa-lg"></i></div>
               <mat-card-title>{{car.name}}</mat-card-title>
@@ -112,7 +112,13 @@
          
         </div>
         <div class="right">
+          <div class="mt-2 rightCont">
 
+          
+          <ng-container *ngIf="selectedCar">
+            <carDetails-component [car]="selectedCar"></carDetails-component>
+          </ng-container>
+        </div>
         </div>
       </div>
 

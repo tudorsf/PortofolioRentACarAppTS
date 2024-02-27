@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { LoggedUser } from './models/loggedUser';
 import { ErrorModalComponent } from './shared/error-modal/error-modal.component';
@@ -12,6 +12,8 @@ import { Customer } from './models/BL/customer.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+
+
   title = 'LoginCLI';
   
   userRole:string;
@@ -47,7 +49,9 @@ export class AppComponent implements OnInit{
      } /*else if(this.userRole == 'company'){
       
      }*/
+
    }
+
 
  
     get dashboardLink(): string {
@@ -60,6 +64,10 @@ export class AppComponent implements OnInit{
         return '/login';
       }
     }
+
+   
+
+    
   
   
 

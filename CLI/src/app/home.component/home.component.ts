@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit{
     
   isLoading = true;
 
+  showModal = false; 
+  selectedCar: Car | null = null;
 
   loggedIn = false;
   
@@ -230,6 +232,10 @@ export class HomeComponent implements OnInit{
       this.typeFilter = 0;
     
       this.filteredCars = this.cars;
+    }
+
+    selectCar(car: Car){
+      this.selectedCar = car;
     }
     
 

@@ -26,6 +26,7 @@
   
   .right {
     width: 50%;
+
     /*background-color: lightcoral;*/
   }
   
@@ -118,4 +119,12 @@
   .rowFooter{
     margin-bottom: 3px;
     margin-right: 2px;
+  }
+
+  .rightCont{
+    margin-left: 1rem;
+    /*margin-right: 2rem;*/
+    overflow: hidden;
+    /*position: fixed;*/
+    /*width: 100%;*/
   }
