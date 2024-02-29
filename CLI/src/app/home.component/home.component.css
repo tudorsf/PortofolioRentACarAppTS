@@ -4,7 +4,7 @@
 
 .container {
     display: flex;
-    max-width: 100%;
+    max-width: 90%;
     max-height: 100%;
     background-color: lightgray;
   }
@@ -26,8 +26,8 @@
   
   .right {
     width: 50%;
+    margin-right: 2px;
 
-    /*background-color: lightcoral;*/
   }
   
   @media (max-width: 768px) {
@@ -121,10 +121,9 @@
     margin-right: 2px;
   }
 
-  .rightCont{
-    margin-left: 1rem;
-    /*margin-right: 2rem;*/
-    overflow: hidden;
-    /*position: fixed;*/
-    /*width: 100%;*/
+.rightCont{
+  margin-left: 1rem;
+  overflow-y: hidden;
+  position: fixed;
+  width: calc(80% / 2);
   }

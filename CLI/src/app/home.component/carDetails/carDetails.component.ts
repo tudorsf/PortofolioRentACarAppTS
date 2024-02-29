@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Car } from "src/app/models/BL/car.model";
+import { Customer } from "src/app/models/BL/customer.model";
 
 @Component({
     selector: 'carDetails-component',
@@ -15,8 +16,12 @@ import { Car } from "src/app/models/BL/car.model";
 
     @Input() clientId!: number;
 
+    @Input() customer!: Customer;
+
 
     ngOnInit(): void {
         
     }
+
+   
   }
