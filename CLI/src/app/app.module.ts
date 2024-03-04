@@ -31,6 +31,8 @@ import { AddReservationsModalComponent } from './home.component/addReservation/a
 import {MatCardModule} from '@angular/material/card';
 import { MaterialElevationDirective } from './directives/cards.directive';
 import { CarDetails } from './home.component/carDetails/carDetails.component';
+import {MatIconModule } from '@angular/material/icon';
+
 
 
 const routes: Routes = [
@@ -66,6 +68,7 @@ const routes: Routes = [
     MaterialElevationDirective,
     CarDetails
     
+    
 
     
   ],
@@ -82,7 +85,9 @@ const routes: Routes = [
     MatNativeDateModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
+    
     
     
   ],

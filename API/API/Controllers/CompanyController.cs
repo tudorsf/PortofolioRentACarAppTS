@@ -72,6 +72,8 @@ namespace API.Controllers
             car.type = request.type;
             car.engineCapacity = request.engineCapacity;
 
+            car.City = _context.Companies.FirstOrDefault(c => c.Id == car.CompanyREF).City;
+
             /*byte[] photoBytes = Convert.FromBase64String(request.photos);
 
             var photo = new Photo

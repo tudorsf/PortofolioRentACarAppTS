@@ -3,7 +3,34 @@
         {{car.name}} {{car.model}}
     </mat-card-header>
     <mat-card-content>
+      <div>
+       
+          <ngb-carousel  *ngIf="car.photos.length > 0">
+            <ng-template ngbSlide *ngFor="let photo of car.photos; let i = index">
+              <div class="picsum-img-wrapper" >
+                <img [src]="photo.photo" alt="Random first slide" />
+              </div>
+             
+            </ng-template>
+            
+          </ngb-carousel>
 
+          <ngb-carousel *ngIf="car.photos.length == 0">
+            <ng-template ngbSlide >
+              <div class="picsum-img-wrapper" >
+                <img src="..\assets\images\no-image-available.webp" />
+              </div>
+             
+            </ng-template>
+            
+          </ngb-carousel>
+
+      
+      </div>
+
+      
+      
+      
     </mat-card-content>
     <mat-card-footer>
 

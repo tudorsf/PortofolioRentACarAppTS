@@ -15,7 +15,8 @@ namespace API.Models.Company
         public Company Company { get; set; }
 
         public int CompanyREF { get; set; }
-        
+
+        public string City { get; set; }        
 
         public List<CarPhotos> Photos { get; set; } = new List<CarPhotos>();
 

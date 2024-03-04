@@ -18,6 +18,7 @@ export interface Car {
     year: number;
     horsepower: number;
     engineCapacity: number;
+    city: string;
     
 
 }

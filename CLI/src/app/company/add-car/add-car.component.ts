@@ -56,7 +56,7 @@ import { UtilityService } from 'src/app/services/utility.service';
             brand: ['', Validators.required],
             engine: [''],
             gearboxType: [''],
-           type: [''],
+            type: [''],
             year: [''],
             horsepower: [''],
             photos: this.fb.array([])
