@@ -70,8 +70,11 @@
             </mat-card-header>
             <mat-card-content>
               <div class="row">
-                <span> <i class="fa-solid fa-location-dot"></i> {{car.city}}</span>
-
+                <div class="col md-6">                <span> <i class="fa-solid fa-location-dot"></i> {{car.city}}</span>
+                </div>
+                <div class="col md-6">
+                  <span><i class="fa-solid fa-tag"></i> {{car.pricePerDay}}</span>
+                </div>
               </div>
               <div class="image-container">
                 <img mat-card-image *ngIf="car.photos && car.photos.length > 0" src="{{car.photos[0].photo}}">
@@ -120,7 +123,7 @@
 
           
           <ng-container *ngIf="selectedCar">
-            <carDetails-component [car]="selectedCar"></carDetails-component>
+            <carDetails-component [customer]="this.customer" [car]="selectedCar"></carDetails-component>
           </ng-container>
         </div>
         </div>

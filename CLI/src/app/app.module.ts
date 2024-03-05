@@ -32,6 +32,8 @@ import {MatCardModule} from '@angular/material/card';
 import { MaterialElevationDirective } from './directives/cards.directive';
 import { CarDetails } from './home.component/carDetails/carDetails.component';
 import {MatIconModule } from '@angular/material/icon';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 
 
@@ -86,7 +88,10 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatMomentDateModule,
+   
+    
     
     
     

@@ -1,10 +1,10 @@
 <div class="modal-header">
-    header
+   <p> Rent this {{car.name}} {{car.model}} for {{car.pricePerDay}} daily</p>
 </div>
 <div class="modal-body">
     <mat-form-field>
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [dateFilter]="sundayFilter" [min]="todayDate">
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [dateFilter]="notAvailable" [min]="todayDate">
           <input matStartDate formControlName="start" placeholder="Start date"  >
           <input matEndDate formControlName="end" placeholder="End date" >
         </mat-date-range-input>
@@ -13,13 +13,27 @@
         <mat-date-range-picker #picker></mat-date-range-picker>
      </mat-form-field>
 
-     
+     <div class="row mt-2">
+        <p>Select pick up time</p>
+        <ngb-timepicker [(ngModel)]="pickUptime" />
+     </div>
+    
+     <div class="row mt-2">
+        <p>Select drop off time</p>
+        <ngb-timepicker [(ngModel)]="dropOfftime" />
+   
+     </div>
+
+    
 
 </div>
 
 <div class="modal-footer">
-    <button mat-flat-button color="primary" [disabled]="!range.valid" (click)="save()">Reserve</button>
+    <p *ngIf="range.valid">your price will be {{ calculateTotalPrice() }}</p>
 
+    <button mat-flat-button color="primary" [disabled]="!range.valid" (click)="save()">Reserve</button>
+   
+    
 </div>
 
   

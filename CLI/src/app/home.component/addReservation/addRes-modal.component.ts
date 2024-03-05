@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation,OnInit, OnDestroy, EventEmitter, Output } from "@angular/core";
-import { NgbModalRef, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbActiveModal, NgbTimeStruct, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Reservation } from "src/app/models/BL/reservation.model";
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder, Validators} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
@@ -16,6 +16,9 @@ import { ErrorService } from "src/app/services/error.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import {NativeDateAdapter} from '@angular/material/core';
+import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { utc } from "moment";
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-addRes-modal',
@@ -29,8 +32,9 @@ import {NativeDateAdapter} from '@angular/material/core';
         JsonPipe,
         MatNativeDateModule,
         MatButtonModule,
-        MatInputModule
-        
+        MatInputModule,
+        NgbTimepickerModule,
+        CommonModule,
       ],
       encapsulation: ViewEncapsulation.None, 
       styleUrls: ['./addRes-modal.component.css'],
@@ -50,7 +54,15 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     range!: FormGroup;
     
     todayDate = new Date();
-   
+
+    pickUptime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
+
+    dropOfftime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
+
+    
+    totalPrice: number = 0;
+
+
 
     private modalRef: NgbModalRef | null = null;
 
@@ -60,13 +72,18 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
                  private customerService: CustomerService, 
                  private carsService: CarsService,
                  private  errorService: ErrorService,
-                 private fb: FormBuilder){
+                 private fb: FormBuilder,
+                 private config: NgbTimepickerConfig){
+
+                  config.seconds = false;
+                  config.spinners = false;
 
                   this.range = this.fb.group({
                     start: [null, Validators.required],
                     end: [null, Validators.required]
                   });
-      
+
+                  
                 }
 
       ngOnInit(){
@@ -76,7 +93,20 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       ngOnDestroy(): void {
         this.carsService.getCars();
       }
-    
+
+      calculateTotalPrice(){
+        const startDate: Date | null | undefined = this.range.get('start')?.value;
+        const endDate: Date | null | undefined = this.range.get('end')?.value;
+
+        const utcStartDate = new Date(startDate!.toISOString());
+        const utcEndDate = new Date(endDate!.toISOString());
+
+         return Math.floor((utcEndDate.getTime() - utcStartDate.getTime()) / 1000 / 60 / 60 / 24) * this.car.pricePerDay;
+        
+      }
+
+      
+
     
     save(){
       
@@ -84,8 +114,19 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       const endDate: Date | null | undefined = this.range.get('end')?.value;
       console.log('startDate', startDate);
 
+      console.log('startTime', this.pickUptime);
+      console.log('dropoffTime', this.dropOfftime);
+
+
+
       const utcStartDate = new Date(startDate!.toISOString());
+      utcStartDate.setHours(this.pickUptime.hour);
+      utcStartDate.setMinutes(this.pickUptime.minute);
+
+      
       const utcEndDate = new Date(endDate!.toISOString());
+      utcEndDate.setHours(this.dropOfftime.hour);
+      utcEndDate.setMinutes(this.dropOfftime.minute);
 
       console.log('utcdate:', utcStartDate);
 
@@ -129,7 +170,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
         return customer.id;
     }
 
-    sundayFilter = (d: Date | null): boolean => {
+    notAvailable = (d: Date | null): boolean => {
       
        if (this.car && this.car.reservations) {
         const reservations = this.car.reservations;
@@ -138,8 +179,13 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       
           for (const reservation of reservations) {
             const startDate = new Date(reservation.startDate);
+            startDate.setHours(0);
+            startDate.setMinutes(0);
             const endDate = new Date(reservation.endDate);
+            endDate.setHours(0);
+            endDate.setMinutes(0);
             if (selectedDate >= startDate && selectedDate <= endDate) {
+              
               return false; 
             }
           }
