@@ -3,29 +3,69 @@
  </div>
 
  <div *ngIf="!isLoading">
-  <div *ngIf="customer">
-    <tr>
-        <td><label>Name:</label></td>
-        <td>{{ customer!.name }}</td>
-      </tr>
-      <tr>
-        <td><label>Email:</label></td>
-        <td>{{ customer!.eMail }}</td>
-      </tr>
-      <tr>
-        <td><label>Phone Number:</label></td>
-        <td>{{ customer!.phoneNumber }}</td>
-      </tr>
-      <tr>
-        <td><label>Rating:</label></td>
-        <td>{{ customer!.rating }} <span><ngb-rating [max]="5" [(rate)]="customer.rating" [readonly]="true"></ngb-rating></span></td>
-      </tr>
-      
-</div>
+  <div *ngIf="customer" class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <mat-card>
+          <mat-card-header>         
+             <mat-card-title>{{customer.name}}</mat-card-title>
+             <mat-card-subtitle>{{customer.phoneNumber}}</mat-card-subtitle>
+             <mat-card-subtitle>{{customer.eMail}}</mat-card-subtitle>
+             <mat-card-subtitle>{{customer.rating}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-radio-group [(ngModel)]="selectedOption">
+              <mat-radio-button value="past">Past Reservations</mat-radio-button>
+              <mat-radio-button value="current">Current Reservations</mat-radio-button>
+              <mat-radio-button value="future">Future Reservations</mat-radio-button>
+            </mat-radio-group>
+          
+          </mat-card-content>
+          <mat-card-footer>
+             
+          </mat-card-footer>
+        </mat-card>
+      </div>
+      <div class="col-md-8">
+        <div *ngIf="filteredReservations.length > 0">
+          <ul>
+            <li *ngFor="let reservation of filteredReservations" class="mt-1">
+              {{reservation.id}} - {{ reservation.startDate }} - {{ reservation.endDate }} - {{reservation.totalPrice}} 
+              <button (click)="toggleRating(reservation.id)" [disabled]="reservation.custRating != null" mat-raised-button color="accent" *ngIf="selectedOption=='past'">Rate Experience</button>
+              <p *ngIf="reservation.custRating != null">You Rated this experience {{reservation.custRating}} stars</p>
+              <div *ngIf="selectedReservationId == reservation.id">
+                <mat-icon *ngFor="let star of stars" (click)="rate(reservation.id, star)" (mouseenter)="onMouseEnter(star)"
+                (mouseleave)="onMouseLeave()"
+               
+                [style.color]="star <= hoveredRating ? 'gold' : (star <= selectedRating ? 'gold' : 'gray')"
+                [style.cursor]="star <= hoveredRating ? 'pointer' : 'default'">star</mat-icon>
+              </div>
+              
+              
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="filteredReservations.length == 0">
+          <p>you dont have any {{selectedOption}} reservations</p>
+        </div>
 
-<div *ngIf="!customer">prifile not created
-    <noProfile-component></noProfile-component>
+       
+        <!--
+        <ul>
+          <li *ngFor="let reservation of reservations">
+            {{reservation.id}} - {{ reservation.startDate }} - {{ reservation.endDate }} - {{reservation.totalPrice}}
+          </li>
+        </ul>-->
+      </div>
+    </div>
+  </div>
+    
+    <div *ngIf="!customer">prifile not created
+        <noProfile-component></noProfile-component>
+    </div>
+    
+    
+    
 </div>
-</div>
-
-
+    
+      <!-- -->

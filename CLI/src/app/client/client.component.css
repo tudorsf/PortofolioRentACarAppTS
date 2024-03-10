@@ -1,0 +1,13 @@
+.container{
+    width: 90%;
+    margin-top: 2px;
+}
+
+.profile{
+    width: 30%;
+}
+
+.reservations{
+    margin-left: 3px;
+    width: 50%;
+}

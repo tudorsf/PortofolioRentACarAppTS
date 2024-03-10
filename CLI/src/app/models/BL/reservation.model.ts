@@ -6,5 +6,7 @@ export interface Reservation {
     startDate: Date;
     endDate: Date;
     totalPrice: number;
+    custRating: number | null; //rating given by customer
+    compRating: number | null; //rating given by company
   }
   

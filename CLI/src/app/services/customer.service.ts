@@ -44,6 +44,10 @@ import { Customer } from '../models/BL/customer.model';
         
     }
 
+    rateCompany(id: number, rating: number){
+        
+        return this.http.post('https://localhost:7262/api/Customer/RateCompany?id=' + id + '&rating=' + rating, {})
+    }
     
 }
 

@@ -140,7 +140,8 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
           customerId: this.clientId,
           startDate: utcStartDate,
           endDate: utcEndDate,
-          
+          compRating: null,
+          custRating: null,
           totalPrice: 0 
         };
   

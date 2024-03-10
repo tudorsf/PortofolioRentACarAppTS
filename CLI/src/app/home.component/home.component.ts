@@ -185,8 +185,8 @@ export class HomeComponent implements OnInit{
     }
 
     filter(){
-      //let filteredCars = this.cars;
-
+      this.filteredCars = this.cars;
+      
         if (this.searchQuery !== '') {
             this.filteredCars = this.filteredCars.filter(car =>
                 car.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
