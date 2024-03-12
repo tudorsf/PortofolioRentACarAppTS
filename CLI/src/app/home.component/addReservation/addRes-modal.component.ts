@@ -55,7 +55,21 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     
     todayDate = new Date();
 
-    pickUptime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
+    /*setClockHour(){
+      const now = new Date();
+
+      const startDate: Date | null | undefined = this.range.get('start')?.value;
+      if(startDate){
+        const utcStartDate = new Date(startDate!.toISOString());
+          if(utcStartDate.getDay() == now.getDay()){
+            return utcStartDate.getMinutes();
+      }
+    }
+
+      return 30;
+    }*/
+
+    pickUptime: NgbTimeStruct = { hour: this.todayDate.getHours() , minute: this.todayDate.getMinutes() , second: 30 };
 
     dropOfftime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
 
@@ -71,7 +85,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     constructor(public activeModal: NgbActiveModal,
                  private customerService: CustomerService, 
                  private carsService: CarsService,
-                 private  errorService: ErrorService,
+                 private errorService: ErrorService,
                  private fb: FormBuilder,
                  private config: NgbTimepickerConfig){
 
@@ -194,6 +208,27 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
   
       return true;
     };
+
+    isTimeInPast(time: NgbTimeStruct): boolean{
+      const now = new Date();
+      const selectedTime = new Date();
+      console.log(this.range.get('start')?.value)
+      const startDate: Date | null | undefined = this.range.get('start')?.value;
+      if(startDate){
+        const utcStartDate = new Date(startDate!.toISOString());
+        if(utcStartDate.getDay() == now.getDay()){
+          selectedTime.setHours(time.hour - 2);
+          selectedTime.setMinutes(time.minute);
+          return selectedTime < now;
+        }
+      }
+
+      return false;
+     
+      
+    }
+
+    
 
     
 

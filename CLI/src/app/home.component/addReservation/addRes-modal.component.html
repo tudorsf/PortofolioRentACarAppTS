@@ -12,24 +12,24 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
      </mat-form-field>
-
-     <div class="row mt-2">
-        <p>Select pick up time</p>
-        <ngb-timepicker [(ngModel)]="pickUptime" />
+     <div *ngIf="range.valid">
+      <div class="row mt-2">
+         <p>Select pick up time</p>
+         <ngb-timepicker [(ngModel)]="pickUptime"/>
+      </div>
+     
+      <div class="row mt-2">
+         <p>Select drop off time</p>
+         <ngb-timepicker [(ngModel)]="dropOfftime" />
+     </div>
      </div>
     
-     <div class="row mt-2">
-        <p>Select drop off time</p>
-        <ngb-timepicker [(ngModel)]="dropOfftime" />
-    </div>
 </div>
 
 <div class="modal-footer">
-    <p *ngIf="range.valid">your price will be {{ calculateTotalPrice() }}</p>
-
-    <button mat-flat-button color="primary" [disabled]="!range.valid" (click)="save()">Reserve</button>
-   
-    
+   <p *ngIf="range.valid">your price will be {{ calculateTotalPrice() }}</p>
+   <button mat-flat-button color="primary" [disabled]="!range.valid || isTimeInPast(pickUptime)" (click)="save()">Reserve</button>
+   <p *ngIf="isTimeInPast(pickUptime)">All reservations should be scheduled at least two hours ahead from the current time.</p>
 </div>
 
   
