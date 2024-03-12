@@ -85,10 +85,6 @@ export class HomeComponent implements OnInit{
         this.loggedIn = isLoggedIn;
       });
 
-      
-
-      
-  
       this.carsService.getCars().subscribe((data: any) => {
         
         for (const key in data) {
@@ -185,6 +181,8 @@ export class HomeComponent implements OnInit{
     }
 
     filter(){
+
+      this.selectedCar = null;
       this.filteredCars = this.cars;
       
         if (this.searchQuery !== '') {
@@ -238,6 +236,9 @@ export class HomeComponent implements OnInit{
       this.selectedCar = car;
     }
     
+    closeCarDetails(): void {
+      this.selectedCar = null; // Reset the selectedCar to null to close the CarDetails component
+    }
 
   
  }

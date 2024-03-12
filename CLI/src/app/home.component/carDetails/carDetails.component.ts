@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { Car } from "src/app/models/BL/car.model";
 import { Customer } from "src/app/models/BL/customer.model";
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -13,10 +13,7 @@ import { ErrorService } from "src/app/services/error.service";
     selector: 'carDetails-component',
     templateUrl: './carDetails.component.html',
     styleUrls: ['./carDetails.component.css']
-   
-    
-    
-  })
+})
 
   export class CarDetails implements OnInit{
     
@@ -29,6 +26,8 @@ import { ErrorService } from "src/app/services/error.service";
     range!: FormGroup;
 
     todayDate = new Date();
+
+    @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
 
     constructor( private modalService: NgbModal,
@@ -54,25 +53,10 @@ import { ErrorService } from "src/app/services/error.service";
       
   }
 
-
-    //@ViewChild('carousel', { static: true }) carousel!: NgbCarousel; 
-
-
-    /*prevSlide(){
-      if(this.carousel){
-        this.carousel.prev();
-
-      } else {
-        console.log("?")
-      }
-    }
-
-    nextSlide(){
-      if(this.carousel){
-        this.carousel.next();
-
-      }
-    }*/
+  closeDetails(): void {
+    this.close.emit(); 
 
    
   }
+
+}

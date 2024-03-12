@@ -96,7 +96,7 @@ export class ClientComponent implements OnInit {
       console.log('curr')
 
       return this.reservations.filter(reservation =>
-        new Date(reservation.startDate).setHours(0,0,0,0) == new Date().setHours(0,0,0,0))
+        new Date(reservation.startDate).setHours(0,0,0,0) <= new Date().setHours(0,0,0,0) && new Date().setHours(0,0,0,0) <= new Date(reservation.endDate).setHours(0,0,0,0))
       
     } else if (this.selectedOption == 'future') {
       return this.reservations.filter(reservation => new Date(reservation.startDate).setHours(0) > currentDate.setHours(0))

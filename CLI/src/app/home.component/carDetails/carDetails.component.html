@@ -1,7 +1,17 @@
 <mat-card>
+  
     <mat-card-header>
+      <div>
         {{car.name}} {{car.model}}
+      </div>
+      <div>
+        <button style="position: absolute; top: 0; right: 0;" mat-icon-button (click)="closeDetails()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+       
     </mat-card-header>
+   
     <mat-card-content>
       <div>
          <ngb-carousel  *ngIf="car.photos.length > 0">
@@ -12,7 +22,7 @@
             </ng-template>
           </ngb-carousel>
           <ngb-carousel *ngIf="car.photos.length == 0">
-            <ng-template ngbSlide >
+            <ng-template ngbSlide>
               <div class="picsum-img-wrapper" >
                 <img src="..\assets\images\no-image-available.webp" />
               </div>

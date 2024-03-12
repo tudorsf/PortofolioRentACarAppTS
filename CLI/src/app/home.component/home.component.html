@@ -123,7 +123,7 @@
 
           
           <ng-container *ngIf="selectedCar">
-            <carDetails-component [customer]="this.customer" [car]="selectedCar"></carDetails-component>
+            <carDetails-component [customer]="this.customer" [car]="selectedCar" (close)="closeCarDetails()"></carDetails-component>
           </ng-container>
         </div>
         </div>

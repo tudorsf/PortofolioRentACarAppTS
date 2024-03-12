@@ -62,6 +62,10 @@ export class CompanyService {
         
     }
 
+    rateCustomer(id: number, rating: number){
+        return this.http.post('https://localhost:7262/api/Company/RateCustomer?id=' + id + '&rating=' + rating, {})
+    }
+
 
 
     

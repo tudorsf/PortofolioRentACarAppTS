@@ -101,7 +101,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
         const utcStartDate = new Date(startDate!.toISOString());
         const utcEndDate = new Date(endDate!.toISOString());
 
-         return Math.floor((utcEndDate.getTime() - utcStartDate.getTime()) / 1000 / 60 / 60 / 24) * this.car.pricePerDay;
+         return Math.floor(((utcEndDate.getTime() - utcStartDate.getTime()) / 1000 / 60 / 60 / 24) + 1) * this.car.pricePerDay;
         
       }
 

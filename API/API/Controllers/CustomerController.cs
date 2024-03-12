@@ -97,7 +97,7 @@ namespace API.Controllers
         {
             var car = _context.Cars.FirstOrDefault(r => r.Id == id);
 
-            int price = car.PricePerDay * days;
+            int price = car.PricePerDay * (days + 1);
 
             return price;
         }
