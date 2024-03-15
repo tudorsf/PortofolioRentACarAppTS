@@ -38,7 +38,7 @@
       </div>
       <div class="col"></div>
       <div class="col">
-         <button mat-flat-button color="primary" [disabled]="!range.valid || isTimeInPast(pickUptime) || overlap() || isDropOffTimeValid()" (click)="save()">Reserve</button>
+         <button mat-flat-button color="primary" [disabled]="!range.valid || isTimeInPast(pickUptime) || overlap() || isDropOffTimeValid() || hoursDifference()" (click)="save()">Reserve</button>
 
       </div>
    </div>
@@ -51,6 +51,10 @@
       </div>
       <div class="row">
          <p *ngIf="overlap()">Reservation overlaps with another existing reservation</p>
+   
+      </div>
+      <div class="row">
+         <p *ngIf="hoursDifference()">You can rent a car for 10 hours minimum per day or 20 hours for two days</p>
    
       </div>
    </div>

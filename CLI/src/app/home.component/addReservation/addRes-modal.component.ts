@@ -88,9 +88,6 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
 
       ngOnInit(){
 
-        const now = new Date();
-        console.log(now)
-
       }
 
       ngOnDestroy(): void {
@@ -142,7 +139,6 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
         this.carsService.addReservation(reservation).subscribe(
 
             success => {
-              //this.reservationAdded.emit();
               this.car.reservations.push(reservation)
               this.activeModal.dismiss();
             },
@@ -170,7 +166,6 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     notAvailable = (d: Date | null): boolean => {
       
        if (this.car && this.car.reservations) {
-        console.log(this.car.reservations);
         const reservations = this.car.reservations;
         const selectedDate = d || new Date(); 
   
@@ -245,20 +240,43 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       }
     }
 
-    /*isHoursDifferenceValid(): boolean{
-      const selectedStartDate = new Date(this.range.get('start')?.value);
-      const selectedEndDate = new Date(this.range.get('end')?.value);
-  
-      if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
-        const pickUpDateTime = new Date(selectedStartDate);
-        pickUpDateTime.setHours(this.pickUptime.hour, this.pickUptime.minute);
-        const dropOffDateTime = new Date(selectedStartDate);
-        dropOffDateTime.setHours(this.dropOfftime.hour, this.dropOfftime.minute);
-        if()
-    }*/
 
+    hoursDifference(): boolean{
+      
+        const selectedStartDate = new Date(this.range.get('start')?.value);
+        const selectedEndDate = new Date(this.range.get('end')?.value);
+      
+        const daysDifference = Math.ceil((selectedEndDate.getTime() - selectedStartDate.getTime()) / (1000 * 3600 * 24));
+      
+        if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
 
-    
+          const pickUpDateTime = new Date(selectedStartDate);
+          pickUpDateTime.setHours(this.pickUptime.hour, this.pickUptime.minute);
+          const dropOffDateTime = new Date(selectedStartDate);
+          dropOffDateTime.setHours(this.dropOfftime.hour, this.dropOfftime.minute);
+          const timeDifferenceMillis = dropOffDateTime.getTime() - pickUpDateTime.getTime();
+          const timeDifferenceHours = timeDifferenceMillis / (1000 * 60 * 60);
+            if(timeDifferenceHours < 10){
+              return true;
+            }
+             
+          } 
+      
+        if (daysDifference == 1) {
+          const pickUpDateTime = new Date(selectedStartDate);
+          pickUpDateTime.setHours(this.pickUptime.hour, this.pickUptime.minute);
+          const dropOffDateTime = new Date(selectedEndDate);
+          dropOffDateTime.setHours(this.dropOfftime.hour, this.dropOfftime.minute);
+          const timeDifferenceMillis = dropOffDateTime.getTime() - pickUpDateTime.getTime();
+          const timeDifferenceHours = timeDifferenceMillis / 1000 / 60 / 60;
+
+          if(timeDifferenceHours < 20){
+            return true;
+          }
+        }
+      
+        return false;
+
+    }
+
 }
-
-
