@@ -64,6 +64,13 @@ namespace API.Controllers
 
                 return BadRequest("not available");
 
+            var overlappingReservation = car.Reservations.FirstOrDefault(r =>
+                                                    (request.startDate <= r.EndDate && request.endDate >= r.StartDate)
+                                                                    );
+
+            if (overlappingReservation != null)
+                return BadRequest("Reservation overlaps with another existing reservation");
+
             else
 
             reservation.CarId = request.carId;

@@ -102,17 +102,14 @@ export class HomeComponent implements OnInit{
             
           }
         }
-        console.log(this.cars);
-  
       
       });
 
 
       this.customerService.customer$.subscribe((value) => {
-        console.log(value);
         if(value != null){
           this.customer = value;
-          console.log(this.customer, 'home component');
+          
         }
        
       });
@@ -121,16 +118,13 @@ export class HomeComponent implements OnInit{
       
   
     }
-
-   
-    
+  
     logOff(){
       this.authService.logOff()
     }
 
     getUser(){
         const user: LoggedUser = JSON.parse(this.cookieService.get('user'));
-        console.log(user);
     }
 
     openResModal(car: Car){
@@ -198,17 +192,14 @@ export class HomeComponent implements OnInit{
       }
 
     if (this.doorsFilter > 0) {
-      console.log("dor filter", this.doorsFilter)
         this.filteredCars = this.filteredCars.filter(car => car.doorsNr == this.doorsFilter);
       }
 
       if (this.engineFilter > 0) {
-        console.log('engin filter', this.engineFilter)
                  this.filteredCars = this.filteredCars.filter(car => car.engine == this.engineFilter);
       }
 
       if (this.gearFilter > 0) {
-        console.log('gear filter', this.gearFilter)
             this.filteredCars = this.filteredCars.filter(car => car.gearboxType == this.gearFilter);
       }
 
@@ -216,7 +207,6 @@ export class HomeComponent implements OnInit{
             this.filteredCars = this.filteredCars.filter(car => car.type == this.typeFilter);
       }
 
-      //console.log(filteredCars);
       return this.filteredCars;
     }
 
@@ -237,7 +227,7 @@ export class HomeComponent implements OnInit{
     }
     
     closeCarDetails(): void {
-      this.selectedCar = null; // Reset the selectedCar to null to close the CarDetails component
+      this.selectedCar = null; 
     }
 
   

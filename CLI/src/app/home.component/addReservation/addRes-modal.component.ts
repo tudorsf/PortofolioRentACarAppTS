@@ -47,7 +47,6 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
 
     @Input() clientId!: number;
 
-    /*@Output() reservationAdded: EventEmitter<void> = new EventEmitter<void>();*/
 
     btnDisabled = true;
 
@@ -55,23 +54,10 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     
     todayDate = new Date();
 
-    /*setClockHour(){
-      const now = new Date();
 
-      const startDate: Date | null | undefined = this.range.get('start')?.value;
-      if(startDate){
-        const utcStartDate = new Date(startDate!.toISOString());
-          if(utcStartDate.getDay() == now.getDay()){
-            return utcStartDate.getMinutes();
-      }
-    }
+    pickUptime: NgbTimeStruct = { hour: this.todayDate.getHours() , minute: this.todayDate.getMinutes(), second: 30 };
 
-      return 30;
-    }*/
-
-    pickUptime: NgbTimeStruct = { hour: this.todayDate.getHours() , minute: this.todayDate.getMinutes() , second: 30 };
-
-    dropOfftime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
+    dropOfftime: NgbTimeStruct = { hour: this.todayDate.getHours(), minute: 30, second: 30 };
 
     
     totalPrice: number = 0;
@@ -102,6 +88,9 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
 
       ngOnInit(){
 
+        const now = new Date();
+        console.log(now)
+
       }
 
       ngOnDestroy(): void {
@@ -126,13 +115,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       
       const startDate: Date | null | undefined = this.range.get('start')?.value;
       const endDate: Date | null | undefined = this.range.get('end')?.value;
-      console.log('startDate', startDate);
-
-      console.log('startTime', this.pickUptime);
-      console.log('dropoffTime', this.dropOfftime);
-
-
-
+     
       const utcStartDate = new Date(startDate!.toISOString());
       utcStartDate.setHours(this.pickUptime.hour);
       utcStartDate.setMinutes(this.pickUptime.minute);
@@ -141,9 +124,6 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       const utcEndDate = new Date(endDate!.toISOString());
       utcEndDate.setHours(this.dropOfftime.hour);
       utcEndDate.setMinutes(this.dropOfftime.minute);
-
-      console.log('utcdate:', utcStartDate);
-
 
       if (startDate && endDate) {
       
@@ -159,21 +139,23 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
           totalPrice: 0 
         };
   
-       
-        console.log(reservation);
-        console.log(this.car);
         this.carsService.addReservation(reservation).subscribe(
 
             success => {
               //this.reservationAdded.emit();
               this.car.reservations.push(reservation)
               this.activeModal.dismiss();
+            },
+            error => {
+              this.errorService.openErrorModal(error.error)
             }
+            
            
           )
         
         
       } else {
+        
         
         console.log('Please select both start and end dates.');
       }
@@ -188,6 +170,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     notAvailable = (d: Date | null): boolean => {
       
        if (this.car && this.car.reservations) {
+        console.log(this.car.reservations);
         const reservations = this.car.reservations;
         const selectedDate = d || new Date(); 
   
@@ -200,11 +183,11 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
             endDate.setHours(0);
             endDate.setMinutes(0);
             if (selectedDate >= startDate && selectedDate <= endDate) {
-              
-              return false; 
+               return false; 
             }
+           
           }
-      }
+      } 
   
       return true;
     };
@@ -212,8 +195,9 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
     isTimeInPast(time: NgbTimeStruct): boolean{
       const now = new Date();
       const selectedTime = new Date();
-      console.log(this.range.get('start')?.value)
+     
       const startDate: Date | null | undefined = this.range.get('start')?.value;
+
       if(startDate){
         const utcStartDate = new Date(startDate!.toISOString());
         if(utcStartDate.getDay() == now.getDay()){
@@ -224,20 +208,57 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
       }
 
       return false;
-     
-      
     }
 
+    overlap(){
     
+      if (this.car && this.car.reservations) {
+        const newReservationStartDate = new Date(this.range.get('start')?.value);
+        const newReservationEndDate = new Date(this.range.get('end')?.value);
+    
+        for (const reservation of this.car.reservations) {
+          const existingReservationStartDate = new Date(reservation.startDate);
+          const existingReservationEndDate = new Date(reservation.endDate);
+    
+          if (newReservationStartDate < existingReservationEndDate && newReservationEndDate > existingReservationStartDate) {
+            return true; // Overlap found
+          }
+        }
+      }
+      return false; // No overlap found
+
+    }
+
+    isDropOffTimeValid(): boolean {
+      const selectedStartDate = new Date(this.range.get('start')?.value);
+      const selectedEndDate = new Date(this.range.get('end')?.value);
+  
+      if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+        const pickUpDateTime = new Date(selectedStartDate);
+        pickUpDateTime.setHours(this.pickUptime.hour, this.pickUptime.minute);
+        const dropOffDateTime = new Date(selectedStartDate);
+        dropOffDateTime.setHours(this.dropOfftime.hour, this.dropOfftime.minute);
+        
+        return dropOffDateTime < pickUpDateTime;
+      } else {
+          return false;
+      }
+    }
+
+    /*isHoursDifferenceValid(): boolean{
+      const selectedStartDate = new Date(this.range.get('start')?.value);
+      const selectedEndDate = new Date(this.range.get('end')?.value);
+  
+      if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+        const pickUpDateTime = new Date(selectedStartDate);
+        pickUpDateTime.setHours(this.pickUptime.hour, this.pickUptime.minute);
+        const dropOffDateTime = new Date(selectedStartDate);
+        dropOffDateTime.setHours(this.dropOfftime.hour, this.dropOfftime.minute);
+        if()
+    }*/
+
 
     
-
-   
-    
-
-    
-
-   
 }
 
 

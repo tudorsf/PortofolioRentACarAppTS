@@ -23,13 +23,38 @@
          <ngb-timepicker [(ngModel)]="dropOfftime" />
      </div>
      </div>
+
+    
     
 </div>
 
 <div class="modal-footer">
-   <p *ngIf="range.valid">your price will be {{ calculateTotalPrice() }}</p>
-   <button mat-flat-button color="primary" [disabled]="!range.valid || isTimeInPast(pickUptime)" (click)="save()">Reserve</button>
-   <p *ngIf="isTimeInPast(pickUptime)">All reservations should be scheduled at least two hours ahead from the current time.</p>
+   <div>
+
+   <div class="row">
+      <div class="col">
+         <p *ngIf="range.valid">your price will be {{ calculateTotalPrice() }}</p>
+
+      </div>
+      <div class="col"></div>
+      <div class="col">
+         <button mat-flat-button color="primary" [disabled]="!range.valid || isTimeInPast(pickUptime) || overlap() || isDropOffTimeValid()" (click)="save()">Reserve</button>
+
+      </div>
+   </div>
+      <div class="row">
+         <p *ngIf="isTimeInPast(pickUptime)">All reservations should be scheduled at least two hours ahead from the current time.</p>
+      </div>
+      <div class="row">
+         <p *ngIf="isDropOffTimeValid()">Drop off time must always be in the future</p>
+   
+      </div>
+      <div class="row">
+         <p *ngIf="overlap()">Reservation overlaps with another existing reservation</p>
+   
+      </div>
+   </div>
+   
 </div>
 
   
