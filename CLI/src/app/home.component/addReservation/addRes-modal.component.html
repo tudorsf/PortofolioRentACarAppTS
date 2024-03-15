@@ -43,18 +43,18 @@
       </div>
    </div>
       <div class="row">
-         <p *ngIf="isTimeInPast(pickUptime)">All reservations should be scheduled at least two hours ahead from the current time.</p>
+         <p *ngIf="isTimeInPast(pickUptime) && range.valid">All reservations should be scheduled at least two hours ahead from the current time.</p>
       </div>
       <div class="row">
-         <p *ngIf="isDropOffTimeValid()">Drop off time must always be in the future</p>
+         <p *ngIf="isDropOffTimeValid() && range.valid">Drop off time must always be in the future</p>
    
       </div>
       <div class="row">
-         <p *ngIf="overlap()">Reservation overlaps with another existing reservation</p>
+         <p *ngIf="overlap() && range.valid">Reservation overlaps with another existing reservation</p>
    
       </div>
       <div class="row">
-         <p *ngIf="hoursDifference()">You can rent a car for 10 hours minimum per day or 20 hours for two days</p>
+         <p *ngIf="hoursDifference() && range.valid">You can rent a car for 10 hours minimum per day or 20 hours for two days</p>
    
       </div>
    </div>
