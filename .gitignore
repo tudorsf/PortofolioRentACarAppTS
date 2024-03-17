@@ -76,3 +76,6 @@ API/API/bin/Debug/net6.0/API.pdb
 API/API/bin/Debug/net6.0/API.exe
 API/API/bin/Debug/net6.0/API.dll
 API/.vs/API/v17/.suo
+API/API/obj/staticwebassets.pack.sentinel
+API/.vs/API/v17/.suo
+API/.vs/API/DesignTimeBuild/.dtbcache.v2

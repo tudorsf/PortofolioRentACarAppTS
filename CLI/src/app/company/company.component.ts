@@ -120,7 +120,7 @@ export class CompanyComponent implements OnInit {
   }
 
   openReservationModal(carReservations: Reservation[]): void {
-    const modalRef = this.modalService.open(ReservationsModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ReservationsModalComponent, { size: 'xl', windowClass:'resModal'});
     modalRef.componentInstance.reservations = carReservations;
   }
 

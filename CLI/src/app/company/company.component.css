@@ -80,6 +80,18 @@
     
   }
 
+ 
+  
+  .resModal .modal-content {
+  max-height: '99vh';
+
+    height: '99vh'
+  }
+
+  .resBtn:hover{
+    /*color: aquamarine;*/
+    background-color: #2aae6e;
+  }
   
   
   

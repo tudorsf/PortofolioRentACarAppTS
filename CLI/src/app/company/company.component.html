@@ -16,6 +16,7 @@
       <div class="profile-container">
         <div class= "profile-info d-flex justify-content-center align-items-center">
           <div>
+           
             <table class="company-table">
               <tr>
                 <td><label>Name:</label></td>
@@ -85,7 +86,7 @@
 
                 <td>
                   <div *ngIf="car.reservations.length > 0">
-                    <input type="text" (click)="openReservationModal(this.car.reservations)" placeholder="Click to view reservations">
+                    <a mat-button class="resBtn" (click)="openReservationModal(this.car.reservations)">Click to view reservations</a>
                   </div>
                   <div *ngIf="car.reservations.length === 0">
                     No reservations

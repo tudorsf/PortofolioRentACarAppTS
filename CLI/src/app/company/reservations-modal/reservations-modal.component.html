@@ -5,9 +5,38 @@
     </button>
   </div>
   <div class="modal-body">
-    <ul>
+   <!-- <ul>
       <li *ngFor="let reservation of reservations">
         {{reservation.id}} - {{ reservation.startDate }} - {{ reservation.endDate }} - {{reservation.totalPrice}}
       </li>
-    </ul>
+    </ul>-->
+    <div class="row">
+      <div class="col-md-4">
+        <mat-radio-group [(ngModel)]="selectedOption">
+          <mat-radio-button value="past">Past Reservations</mat-radio-button>
+          <mat-radio-button value="current">Current Reservations</mat-radio-button>
+          <mat-radio-button value="future">Future Reservations</mat-radio-button>
+        </mat-radio-group>
+      
+      </div>
+      <div class="col-md-8">
+        <ul>
+          <li *ngFor="let reservation of filteredReservations" class="mt-1">
+            {{reservation.id}} - {{ reservation.startDate }} - {{ reservation.endDate }} - {{reservation.totalPrice}} 
+            <button (click)="toggleRating(reservation.id)" [disabled]="reservation.compRating != null" mat-raised-button color="accent" *ngIf="selectedOption=='past'">Rate Experience</button>
+            <p *ngIf="reservation.compRating != null">You Rated this experience {{reservation.compRating}} stars</p>
+            <div *ngIf="selectedReservationId == reservation.id">
+              <mat-icon *ngFor="let star of stars" (click)="rate(reservation.id, star)" (mouseenter)="onMouseEnter(star)"
+              (mouseleave)="onMouseLeave()"
+             
+              [style.color]="star <= hoveredRating ? 'gold' : (star <= selectedRating ? 'gold' : 'gray')"
+              [style.cursor]="star <= hoveredRating ? 'pointer' : 'default'">star</mat-icon>
+            </div>
+            
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+    
   </div>
