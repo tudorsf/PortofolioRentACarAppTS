@@ -11,3 +11,8 @@
     margin-left: 3px;
     width: 50%;
 }
+
+ngb-rating {
+    color: #FFC107;
+    
+  }

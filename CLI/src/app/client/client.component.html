@@ -11,7 +11,7 @@
              <mat-card-title>{{customer.name}}</mat-card-title>
              <mat-card-subtitle>{{customer.phoneNumber}}</mat-card-subtitle>
              <mat-card-subtitle>{{customer.eMail}}</mat-card-subtitle>
-             <mat-card-subtitle>{{customer.rating}}</mat-card-subtitle>
+             <mat-card-subtitle>{{customer.rating}} <span><ngb-rating [max]="5" [(rate)]="customer.rating" [readonly]="true"></ngb-rating></span></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <mat-radio-group [(ngModel)]="selectedOption">

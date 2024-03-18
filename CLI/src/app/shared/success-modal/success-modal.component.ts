@@ -4,15 +4,15 @@ import { ErrorService } from 'src/app/services/error.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-error-modal',
-  templateUrl: './error-modal.component.html',
-  styleUrls:['error-modal.component.css'],
+  selector: 'app-success-modal',
+  templateUrl: './success-modal.component.html',
+  styleUrls: ['../error-modal/error-modal.component.css'],
   providers: [NgbActiveModal]
 })
-export class ErrorModalComponent {
+export class SuccessModalComponent {
   
 
-  @Input() errorMessage: string = '';
+  @Input() successMessage: string = '';
   
   constructor(public activeModal: NgbActiveModal,private errorService: ErrorService, private router: Router) {}
 

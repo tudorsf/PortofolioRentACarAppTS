@@ -13,9 +13,15 @@
     <div class="row">
       <div class="col-md-4">
         <mat-radio-group [(ngModel)]="selectedOption">
-          <mat-radio-button value="past">Past Reservations</mat-radio-button>
-          <mat-radio-button value="current">Current Reservations</mat-radio-button>
-          <mat-radio-button value="future">Future Reservations</mat-radio-button>
+          <div class="row">
+            <mat-radio-button value="past">Past Reservations</mat-radio-button>
+          </div>
+          <div class="row">
+            <mat-radio-button value="current">Current Reservations</mat-radio-button>
+          </div>
+          <div class="row">
+            <mat-radio-button value="future">Future Reservations</mat-radio-button>
+          </div>
         </mat-radio-group>
       
       </div>

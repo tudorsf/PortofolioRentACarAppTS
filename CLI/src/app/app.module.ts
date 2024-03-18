@@ -34,6 +34,8 @@ import { CarDetails } from './home.component/carDetails/carDetails.component';
 import {MatIconModule } from '@angular/material/icon';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {MatRadioModule} from '@angular/material/radio';
+import { InfoModalComponent } from './shared/info-modal/info-modal.component';
+import {SuccessModalComponent} from'./shared/success-modal/success-modal.component';
 
 
 
@@ -69,7 +71,9 @@ const routes: Routes = [
     NoProfileComponent,
     LoaderComponent,
     MaterialElevationDirective,
-    CarDetails
+    CarDetails,
+    InfoModalComponent,
+    SuccessModalComponent
     
     
 

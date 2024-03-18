@@ -7,6 +7,7 @@ import { ErrorService } from "src/app/services/error.service";
 @Component({
     selector: 'app-reservations-modal',
     templateUrl: './reservations-modal.component.html',
+    styleUrls: ['./reservations-modal.component.css']
   })
 
 
@@ -36,7 +37,6 @@ export class ReservationsModalComponent {
        
         return this.reservations.filter(reservation => new Date(reservation.endDate).setHours(0) < currentDate.setHours(0));
       } else if (this.selectedOption == 'current') {
-        console.log('curr')
   
         return this.reservations.filter(reservation =>
           new Date(reservation.startDate).setHours(0,0,0,0) <= new Date().setHours(0,0,0,0) && new Date().setHours(0,0,0,0) <= new Date(reservation.endDate).setHours(0,0,0,0))
@@ -59,7 +59,7 @@ export class ReservationsModalComponent {
             this.toggleRating(reservation.id);
           }
           console.log(reservation);
-         this.errorService.openErrorModal("rated successfully")
+         this.errorService.openInfoModal("rated successfully")
         },
         error => {
           this.errorService.openErrorModal("something went wrong")

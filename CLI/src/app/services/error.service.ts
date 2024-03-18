@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorModalComponent } from '../shared/error-modal/error-modal.component';
 import { Router } from '@angular/router';
+import { InfoModalComponent } from '../shared/info-modal/info-modal.component';
+import { SuccessModalComponent } from '../shared/success-modal/success-modal.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,13 +20,7 @@ export class ErrorService {
   }
 
   closeErrorModal(): void {
-     /*if(this.modalRef!.componentInstance.errorMessage == "you neeed a customer account to make reservations"){
-      
-      this.modalRef!.close('Manually closed');
-      this.modalRef = null; 
-      this.router.navigate(['/register']);
-      
-    } else */if (this.modalRef) {
+     if (this.modalRef) {
       console.log(this.modalRef!.componentInstance.errorMessage);
       this.modalRef.close('Manually closed');
       this.modalRef = null; 
@@ -32,5 +29,19 @@ export class ErrorService {
 
 
   }
+
+  openInfoModal(infoMessage: string): void {
+    this.modalRef = this.modalService.open(InfoModalComponent, { centered: true });
+    this.modalRef.componentInstance.infoMessage = infoMessage;
+  }
+
+  openSuccessModal(successMessage: string): void {
+    this.modalRef = this.modalService.open(SuccessModalComponent, { centered: true });
+    this.modalRef.componentInstance.successMessage = successMessage;
+  }
+
+
+ 
+
 
 }

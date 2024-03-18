@@ -141,6 +141,7 @@ export class AddReservationsModalComponent implements OnInit, OnDestroy{
             success => {
               this.car.reservations.push(reservation)
               this.activeModal.dismiss();
+              this.errorService.openSuccessModal("Reservation added");
             },
             error => {
               this.errorService.openErrorModal(error.error)

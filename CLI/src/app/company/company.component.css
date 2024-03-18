@@ -82,11 +82,7 @@
 
  
   
-  .resModal .modal-content {
-  max-height: '99vh';
-
-    height: '99vh'
-  }
+  ::ng-deep .resModal .modal-content .modal-body { height: 400px; } 
 
   .resBtn:hover{
     /*color: aquamarine;*/
