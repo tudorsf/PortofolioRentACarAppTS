@@ -30,6 +30,10 @@
     margin-top: 10px; 
   }
 
+  .leftright{
+    display: flex;
+  }
+
 .left .right {
     height: 100%;
     width: 100%;
@@ -80,12 +84,6 @@
     width: calc(80% / 2);
 }
 
-.rightCont2{
-    margin-left: 1rem;
-    overflow-y: hidden;
-    /*position: fixed;*/
-    width: calc(80% / 2);
-}
 
 
 

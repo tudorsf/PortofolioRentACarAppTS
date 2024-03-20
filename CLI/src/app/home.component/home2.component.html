@@ -94,8 +94,11 @@
                       </div>
                 </mat-expansion-panel>
             </mat-accordion>
-          
+         
+            <div *ngIf="filteredCars.length > 0">
             <div class="left1">
+               
+                
                 <mat-card *ngFor="let car of filteredCars" class="car-card mt-2 mb-1" (click)="selectCar(car)">
                     <mat-card-header>
                       <div mat-card-avatar class="car-header-image"><i class="fas fa-car fa-lg"></i></div>
@@ -155,8 +158,13 @@
                     <ng-container *ngIf="selectedCar">
                       <carDetails-component [customer]="this.customer" [car]="selectedCar" (close)="closeCarDetails()"></carDetails-component>
                     </ng-container>
+                    </div>
             </div>
-        </div>
+            </div>
+            <div *ngIf="filteredCars.length == 0">
+                <p>no cars matching your preferences, please expand your search or try again later</p>
+            </div>
+      
         
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { LoggedUser } from '../models/loggedUser';
 import { CookieService } from 'ngx-cookie-service';
@@ -120,6 +120,12 @@ export class HomeComponent implements OnInit{
       
   
     }
+
+    @HostListener('window:scroll', ['$event'])
+      onScroll(event: Event) {
+        if(this.selectedCar != null)
+        this.panelOpenState = false;
+    }
   
     logOff(){
       this.authService.logOff()
@@ -208,6 +214,7 @@ export class HomeComponent implements OnInit{
       if (this.typeFilter > 0) {
             this.filteredCars = this.filteredCars.filter(car => car.type == this.typeFilter);
       }
+      this.panelOpenState = false;
 
       return this.filteredCars;
     }
@@ -222,6 +229,7 @@ export class HomeComponent implements OnInit{
       this.typeFilter = 0;
     
       this.filteredCars = this.cars;
+      this.panelOpenState = false;
     }
 
     selectCar(car: Car){
