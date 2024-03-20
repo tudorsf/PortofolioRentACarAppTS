@@ -36,6 +36,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {MatRadioModule} from '@angular/material/radio';
 import { InfoModalComponent } from './shared/info-modal/info-modal.component';
 import {SuccessModalComponent} from'./shared/success-modal/success-modal.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -76,6 +78,7 @@ const routes: Routes = [
     SuccessModalComponent
     
     
+    
 
     
   ],
@@ -95,7 +98,8 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,
     MatMomentDateModule,
-   MatRadioModule
+    MatRadioModule,
+    MatExpansionModule
     
     
     

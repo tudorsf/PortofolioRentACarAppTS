@@ -1,0 +1,162 @@
+<div *ngIf="isLoading">
+    <app-loader-component></app-loader-component>
+   </div>
+  
+<div *ngIf="!isLoading" style="width: 100%;">
+    <div *ngIf="cars.length == 0">
+        <p>no cars available, please try again later</p>
+    </div>
+    <div *ngIf="cars.length > 0">
+        <div class="container mt-1">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false"
+                    [expanded]="panelOpenState">
+                    <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Filter
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       Filter is {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                    </mat-expansion-panel-header>
+                       <!-- <p>I'm visible because I am open</p>-->
+                       <div class="title mt-1">
+                        <h5>Filter by:</h5>
+                        <h5 (click)="resetFilters()"><span>Reset all <i class="material-icons">clear</i></span></h5>
+                      </div>
+                      <div class="content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" [(ngModel)]="searchQuery" placeholder="Search name or model">
+                            </div>
+                            <div class="col-md-4">
+                                
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                <div class="dropdown">
+                                    <label>Year</label>
+                                    <select [(ngModel)]="yearFilter" class="form-select filterDrop">
+                                      <option value="" selected>Select a year</option>
+                                      <option   *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="dropdown">
+                                    <label>Car Type</label>
+                                    <select [(ngModel)]="typeFilter" class="form-select filterDrop">
+                                      <option value=0 selected>Select a car type</option>
+                                      <option *ngFor="let options of getCarTypeOptions(); trackBy:identify" [value]="options.value"  >{{ options.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="dropdown">
+                                    <label>Doors</label>
+                                    <select [(ngModel)]="doorsFilter" class="form-select filterDrop">
+                                        <option value=0 selected>Select doors number</option>
+                                        <option *ngFor="let options of getDoorsOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                <div class="dropdown">
+                                    <label>Gearbox</label>
+                                    <select [(ngModel)]="gearFilter" class="form-select filterDrop">
+                                      <option value=0 selected>Select gearbox type</option>
+                                      <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="dropdown">
+                                    <label>Engine</label>
+                                    <select [(ngModel)]="engineFilter" class="form-select filterDrop">
+                                      <option value=0 disabled selected>Select engine type</option>
+                                      <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+                       
+                       
+                      </div>
+                      <div class="filterBtn mt-2">
+                        <button mat-raised-button color="warn" (click)="filter()">Filter</button>
+            
+                      </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+          
+            <div class="left1">
+                <mat-card *ngFor="let car of filteredCars" class="car-card mt-2 mb-1" (click)="selectCar(car)">
+                    <mat-card-header>
+                      <div mat-card-avatar class="car-header-image"><i class="fas fa-car fa-lg"></i></div>
+                      <mat-card-title>{{car.name}}</mat-card-title>
+                      <mat-card-subtitle>{{car.model}} {{car.year}} {{car.engineCapacity != 0 ? car.engineCapacity.toFixed(1) : ''}}</mat-card-subtitle>
+        
+                    </mat-card-header>
+                    <mat-card-content>
+                      <div class="row">
+                        <div class="col md-6">  <span> <i class="fa-solid fa-location-dot"></i> {{car.city}}</span>
+                        </div>
+                        <div class="col md-6">
+                          <span style="font-weight: bold;" ><i class="fa-solid fa-tag"></i>{{car.pricePerDay}} <i class="fa-solid fa-euro-sign"></i></span> 
+                        </div>
+                      </div>
+                      <div class="image-container">
+                        <img mat-card-image *ngIf="car.photos && car.photos.length > 0" src="{{car.photos[0].photo}}">
+                        <img mat-card-image class="noPic" *ngIf="car.photos.length == 0" src="..\assets\images\no-image-available.webp">
+        
+                      </div>
+                    </mat-card-content>
+                    <mat-card-footer>
+                      <div class="row mt-1 rowFooter">
+                        <div class="col footer">
+                          <span> <i class="fa-solid fa-gas-pump"></i> {{Engine[car.engine]}}</span>
+                        </div>
+                        <div class="col footer">
+                          <span> <i class="fa-solid fa-gear"></i> {{GearboxType[car.gearboxType]}}</span>
+        
+                        </div>
+                        <div class="col footer">
+                          <span> <i class="fa-solid fa-car"></i> {{CarType[car.type]}}</span>
+                        </div>
+                        </div>
+                       
+                        <div class="row mb-1 rowFooter">
+                          <div class="col md-3">
+                           
+                          </div>
+                          <div class="col md-6">
+                            <button mat-raised-button style="width: 100%;" color="warn" (click)="openResModal(this.car)">Add Reservation</button>
+        
+                          </div>
+                          <div class="col md-3">
+        
+                          </div>
+                        </div>
+                      
+                    </mat-card-footer>
+                  </mat-card>
+                 
+            </div>
+            <div class="right1">
+               <!-- <div class="mt-2" [ngClass]="panelOpenState ? 'rightCont2' : 'rightCont'">-->
+
+                    <div class="mt-2 rightCont">
+                    <ng-container *ngIf="selectedCar">
+                      <carDetails-component [customer]="this.customer" [car]="selectedCar" (close)="closeCarDetails()"></carDetails-component>
+                    </ng-container>
+            </div>
+        </div>
+        
+    </div>
+</div>

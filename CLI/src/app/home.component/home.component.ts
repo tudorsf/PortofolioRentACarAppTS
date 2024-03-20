@@ -22,8 +22,8 @@ import { Photo } from '../models/BL/photo.model';
 
 @Component({
   selector: 'home-component',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './home2.component.html',
+  styleUrls: [ './home2.component.css']
  
   
 })
@@ -62,6 +62,8 @@ export class HomeComponent implements OnInit{
   engineFilter: number = 0;
   gearFilter: number = 0;
   typeFilter: number = 0;
+
+  panelOpenState = false;
 
 
 
@@ -223,7 +225,11 @@ export class HomeComponent implements OnInit{
     }
 
     selectCar(car: Car){
+      
       this.selectedCar = car;
+      if(this.panelOpenState == true){
+        this.panelOpenState = false;
+      }
     }
     
     closeCarDetails(): void {
