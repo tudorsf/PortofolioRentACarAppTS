@@ -1,5 +1,7 @@
 
-
+::ng-deep body{
+    background-color:rgb(240, 240, 240);
+}
 
 .container{
     width: 90%;
@@ -83,6 +85,17 @@
     position: fixed;
     width: calc(80% / 2);
 }
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rowFooter{
+    margin-bottom: 3px;
+    margin-right: 2px;
+  }
 
 
 

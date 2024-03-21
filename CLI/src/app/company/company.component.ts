@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild  } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Company } from '../models/BL/company.model';
 import { CompanyService } from '../services/company.service';
@@ -13,6 +13,8 @@ import { Car } from '../models/BL/car.model';
 import { ReservationsModalComponent } from './reservations-modal/reservations-modal.component';
 import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
 import { UtilityService } from '../services/utility.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -24,6 +26,7 @@ import { UtilityService } from '../services/utility.service';
   styleUrls: ['./company.component.css',
 '../app.component.css']
 })
+
 export class CompanyComponent implements OnInit {
 
   private modalRef: NgbModalRef | null = null;
@@ -47,6 +50,12 @@ export class CompanyComponent implements OnInit {
 
   showDropdown = false;
 
+  dataSource = new MatTableDataSource<Car>();
+
+  displayedColumns:any = ['name', 'model', 'pricePerDay', 'engine', 'doorsNr', "type", "gearboxType", "reservations"];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
  
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
@@ -65,10 +74,10 @@ export class CompanyComponent implements OnInit {
           try{
             this.company = data;
             this.company!.cars.forEach((car) => {
-
-               this.reservations = [ ...car.reservations];
-              console.log(this.company?.cars);
-               console.log(this.reservations);
+                   this.reservations = [ ...car.reservations];
+                   this.dataSource = new MatTableDataSource<Car>(this.company?.cars);
+                   this.dataSource.paginator = this.paginator;
+                   
             });
             this.isLoading = false;
            
@@ -97,10 +106,9 @@ export class CompanyComponent implements OnInit {
     console.log(this.isLoading);
 
 
-    
-    
   }
 
+ 
   
 
 

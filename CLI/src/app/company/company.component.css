@@ -62,18 +62,18 @@
     border-radius: 4px;
   }
 
-  table{
+ 
+
+  /*table{
     border-spacing: 10px;
     border-collapse: separate;
-  }
+  }*/
 
   table td {
     font-family: sans-serif;
   }
 
-  table td label{
-    font-weight: bold;
-  }
+ 
 
   ngb-rating {
     color: #FFC107;
@@ -86,8 +86,32 @@
 
   .resBtn:hover{
     /*color: aquamarine;*/
-    background-color: #2aae6e;
+    /*background-color: #2aae6e;*/
+    background-color: rgb(38, 213, 134);
+
   }
+
+  table {
+    width: 100%;
+  }
+
+  
+  table th{
+    background-color: rgb(38, 213, 134);
+    color: white;
+  }
+
+  .mat-mdc-row:hover {
+    font-weight: bold;
+    background-color: #ccc;
+  }
+
+  
+
+  
+  
+ 
+  
   
   
   

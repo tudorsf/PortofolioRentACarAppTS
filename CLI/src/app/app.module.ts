@@ -37,8 +37,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { InfoModalComponent } from './shared/info-modal/info-modal.component';
 import {SuccessModalComponent} from'./shared/success-modal/success-modal.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-
-
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 
 
 
@@ -99,7 +99,9 @@ const routes: Routes = [
     MatIconModule,
     MatMomentDateModule,
     MatRadioModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
     
     
     
