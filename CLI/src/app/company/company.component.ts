@@ -13,7 +13,7 @@ import { Car } from '../models/BL/car.model';
 import { ReservationsModalComponent } from './reservations-modal/reservations-modal.component';
 import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
 import { UtilityService } from '../services/utility.service';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 
@@ -27,12 +27,12 @@ import { MatTableDataSource } from '@angular/material/table';
 '../app.component.css']
 })
 
-export class CompanyComponent implements OnInit {
+export class CompanyComponent implements OnInit, AfterViewInit {
 
   private modalRef: NgbModalRef | null = null;
 
+  @ViewChild(MatPaginator, {static: false}) paginator!: MatPaginator;
 
- 
   company: Company | null = null;
 
   address: string = '';
@@ -54,9 +54,6 @@ export class CompanyComponent implements OnInit {
 
   displayedColumns:any = ['name', 'model', 'pricePerDay', 'engine', 'doorsNr', "type", "gearboxType", "reservations"];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
- 
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
              private profileService: ProfileService,
@@ -75,11 +72,17 @@ export class CompanyComponent implements OnInit {
             this.company = data;
             this.company!.cars.forEach((car) => {
                    this.reservations = [ ...car.reservations];
-                   this.dataSource = new MatTableDataSource<Car>(this.company?.cars);
-                   this.dataSource.paginator = this.paginator;
-                   
+
+                   //this.dataSource.paginator = this.paginator;
+
             });
             this.isLoading = false;
+            this.dataSource = new MatTableDataSource<Car>(this.company?.cars);
+
+            if(this.dataSource){
+              this.dataSource.paginator = this.paginator;
+            }
+            
            
           }
           catch (error) {
@@ -106,6 +109,13 @@ export class CompanyComponent implements OnInit {
     console.log(this.isLoading);
 
 
+  }
+
+  ngAfterViewInit(): void {
+    
+
+                   this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource)
   }
 
  
