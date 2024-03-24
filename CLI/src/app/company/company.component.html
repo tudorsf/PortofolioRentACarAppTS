@@ -7,140 +7,129 @@
     <div *ngIf="!company" class="profile-not-created">
       <noProfile-component></noProfile-component>
     </div>
- 
-
 
     <div *ngIf="company" class="content">
-  <div class="row">
-    <div class="col col-md-3">
-      <div class="profile-container">
-        <div class= "profile-info d-flex justify-content-center align-items-center">
-          <div>
-           <table class="company-table">
-              <tr>
-                <td><label>Name:</label></td>
-                <td>{{ company!.name }}</td>
-              </tr>
-              <tr>
-                <td><label>Location:</label></td>
-                <td>{{ company!.city }}</td>
-              </tr>
-              <tr>
-                <td><label>Address:</label></td>
-                <td>{{ company!.address }}</td>
-              </tr>
-              <tr>
-                <td><label>Email:</label></td>
-                <td>{{ company!.eMail }}</td>
-              </tr>
-              <tr>
-                <td><label>Phone Number:</label></td>
-                <td>{{ company!.phoneNumber }}</td>
-              </tr>
-              <tr>
-                <td><label>Rating:</label></td>
-                <td>{{ company!.rating }} <span><ngb-rating [max]="5" [(rate)]="company.rating" [readonly]="true"></ngb-rating></span></td>
-              </tr>
-              <tr>
-                <td><label></label></td>
-                <td><button routerLink="/add-car" class="contentButton">Add car</button></td>
-              </tr>
-            </table>
-            
-          </div>
-          
-        </div>
-       
-      </div>
-    </div>
-    <div class="col col-md-9">
-      <div *ngIf="company.cars.length == 0">
-        <p>you have no cars, please add</p>
-      </div>
-
-      <div *ngIf="company.cars.length > 0">
-        <div class="cars-section">
-         <div class="mat-elevation-z8">
-
-         
-          <table mat-table [dataSource]="dataSource" >
-            
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Car Name </th>
-              <td mat-cell *matCellDef="let car"> {{ car.name }} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="model">
-              <th mat-header-cell *matHeaderCellDef> Model </th>
-              <td mat-cell *matCellDef="let car"> {{ car.model }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="pricePerDay">
-              <th mat-header-cell *matHeaderCellDef> Price </th>
-              <td mat-cell *matCellDef="let car"> {{ car.pricePerDay }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="engine">
-              <th mat-header-cell *matHeaderCellDef> Engine </th>
-              <td mat-cell *matCellDef="let car"> {{ Engine[car.engine] }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="doorsNr">
-              <th mat-header-cell *matHeaderCellDef> Doors </th>
-              <td mat-cell *matCellDef="let car"> {{ DorsNr[car.doorsNr] }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="type">
-              <th mat-header-cell *matHeaderCellDef> Type </th>
-              <td mat-cell *matCellDef="let car"> {{ CarType[car.type] }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="gearboxType">
-              <th mat-header-cell *matHeaderCellDef> Gearbox </th>
-              <td mat-cell *matCellDef="let car"> {{ GearboxType[car.gearboxType] }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="reservations">
-              <th mat-header-cell *matHeaderCellDef> Reservations </th>
-              <td mat-cell *matCellDef="let car">
-                <div *ngIf="car.reservations.length > 0">
-                  <button mat-button class="resBtn" (click)="openReservationModal(car.reservations)">Manage</button>
-                </div>
-                <div *ngIf="car.reservations.length === 0">
-                  No reservations
-                </div>
-              </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-          </table>
-              <mat-paginator #matPaginator [length]="100"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10]"
-                 aria-label="Select page">
-             </mat-paginator>
+      <div class="row">
+        <div class="col col-md-3">
+          <div class="profile-container">
+            <div class= "profile-info d-flex justify-content-center align-items-center">
+              <div>
+              <table class="company-table">
+                  <tr>
+                    <td><label>Name:</label></td>
+                    <td>{{ company!.name }}</td>
+                  </tr>
+                  <tr>
+                    <td><label>Location:</label></td>
+                    <td>{{ company!.city }}</td>
+                  </tr>
+                  <tr>
+                    <td><label>Address:</label></td>
+                    <td>{{ company!.address }}</td>
+                  </tr>
+                  <tr>
+                    <td><label>Email:</label></td>
+                    <td>{{ company!.eMail }}</td>
+                  </tr>
+                  <tr>
+                    <td><label>Phone Number:</label></td>
+                    <td>{{ company!.phoneNumber }}</td>
+                  </tr>
+                  <tr>
+                    <td><label>Rating:</label></td>
+                    <td>{{ company!.rating }} <span><ngb-rating [max]="5" [(rate)]="company.rating" [readonly]="true"></ngb-rating></span></td>
+                  </tr>
+                  <tr>
+                    <td><label></label></td>
+                    <td><button routerLink="/add-car" class="contentButton">Add car</button></td>
+                  </tr>
+                </table>
+                
+              </div>
+              
             </div>
+          
+          </div>
         </div>
-      </div>
+        <div class="col col-md-9">
+          <div *ngIf="company.cars.length == 0">
+            <p>you have no cars, please add</p>
+          </div>
+
+          <div *ngIf="company.cars.length > 0">
+            <div class="cars-section">
+            <div class="mat-elevation-z8">
+               <table mat-table [dataSource]="dataSource" >
+                
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Car Name </th>
+                  <td mat-cell *matCellDef="let car"> {{ car.name }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="model">
+                  <th mat-header-cell *matHeaderCellDef> Model </th>
+                  <td mat-cell *matCellDef="let car"> {{ car.model }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="pricePerDay">
+                  <th mat-header-cell *matHeaderCellDef> Price </th>
+                  <td mat-cell *matCellDef="let car"> {{ car.pricePerDay }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="engine">
+                  <th mat-header-cell *matHeaderCellDef> Engine </th>
+                  <td mat-cell *matCellDef="let car"> {{ Engine[car.engine] }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="doorsNr">
+                  <th mat-header-cell *matHeaderCellDef> Doors </th>
+                  <td mat-cell *matCellDef="let car"> {{ DorsNr[car.doorsNr] }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let car"> {{ CarType[car.type] }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="gearboxType">
+                  <th mat-header-cell *matHeaderCellDef> Gearbox </th>
+                  <td mat-cell *matCellDef="let car"> {{ GearboxType[car.gearboxType] }} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="reservations">
+                  <th mat-header-cell *matHeaderCellDef> Reservations </th>
+                  <td mat-cell *matCellDef="let car">
+                    <div *ngIf="car.reservations.length > 0">
+                      <button mat-button class="resBtn" (click)="openReservationModal(car.reservations)">Manage</button>
+                    </div>
+                    <div *ngIf="car.reservations.length === 0">
+                      No reservations
+                    </div>
+                  </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              </table>
+            
+            
+                </div>
+            </div>
+          </div>
       
+          
+        </div>
     </div>
-  </div>
-
-  
-
-
-
-
-
-
-    
-
 
     </div>
 </div>
     
 
-   
+<mat-paginator #matPaginator 
+  [hidden]="isLoading || !company || !company.cars || company.cars.length === 0"
+  [pageSize]="10"
+  [pageSizeOptions]= "[5, 10,15]"
+  aria-label="Select page">
+</mat-paginator>

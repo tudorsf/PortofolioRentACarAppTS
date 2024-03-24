@@ -73,8 +73,6 @@ export class CompanyComponent implements OnInit, AfterViewInit {
             this.company!.cars.forEach((car) => {
                    this.reservations = [ ...car.reservations];
 
-                   //this.dataSource.paginator = this.paginator;
-
             });
             this.isLoading = false;
             this.dataSource = new MatTableDataSource<Car>(this.company?.cars);
@@ -112,10 +110,7 @@ export class CompanyComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
-
-                   this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource)
+    this.dataSource.paginator = this.paginator;
   }
 
  
