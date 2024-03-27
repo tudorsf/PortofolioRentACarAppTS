@@ -39,6 +39,8 @@ import {SuccessModalComponent} from'./shared/success-modal/success-modal.compone
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { FileUploadModule } from 'primeng/fileupload';
+import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
 
@@ -101,7 +103,10 @@ const routes: Routes = [
     MatRadioModule,
     MatExpansionModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FileUploadModule,
+    CdkDropList, 
+    CdkDrag
     
     
     

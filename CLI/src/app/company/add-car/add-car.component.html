@@ -29,3 +29,78 @@
    <input type="file" class="file-upload" (change)="uploadPicture($event)" multiple>
    <button (click)="addCar()">add car</button>
 </form>
+<!--<div class="page">
+   <div class="container">
+      <form [formGroup]="carForm">
+         <div class="row"></div>
+         <div class="row mt-3">
+            <div class="col-md-6">  
+               <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input matInput #input placeholder="Ex. Mercedes" type="text" name="name" class="form-control" formControlName="name">
+                </mat-form-field> 
+            </div>
+            <div class="col-md-6">
+               <mat-form-field>
+                  <mat-label>Brand</mat-label>
+                  <input matInput #input placeholder="Ex. C Classe" type="text" name="brand" class="form-control" formControlName="brand">
+                </mat-form-field> 
+            </div>
+        </div>
+         
+         <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" cdkDrag>
+               <mat-card>
+                  <mat-card-header>No Picture Selected</mat-card-header>
+                  <mat-card-content>
+                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
+                  </mat-card-content>
+               </mat-card>
+            </div>
+            <div class="example-box" cdkDrag>
+               <mat-card>
+                  <mat-card-header>No Picture Selected</mat-card-header>
+                  <mat-card-content>
+                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
+                  </mat-card-content>
+               </mat-card>
+            </div>
+            <div class="example-box" cdkDrag>
+               <mat-card>
+                  <mat-card-header>No Picture Selected</mat-card-header>
+                  <mat-card-content>
+                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
+                  </mat-card-content>
+               </mat-card>
+            </div>
+            <div class="example-box" cdkDrag>
+               <mat-card>
+                  <mat-card-header>4</mat-card-header>
+                  <mat-card-content>
+                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
+                  </mat-card-content>
+               </mat-card>
+            </div>
+         </div>
+
+         <div class="row mt-3">
+
+            <div class="col-md-2">
+               <label>horsepower </label> <input type="text" name="horsepower" class="form-control" formControlName="horsepower">
+            </div>
+            <div class="col-md-2">
+               <label>Engine Capacity</label> <input type="text" name="engineCapacity" class="form-control" formControlName="engineCapacity">
+            </div>
+            <div class="col-md-3">
+               <label>Engine</label> 
+               <select formControlName="engine" name="engine" id="engine"  class="form-control">
+                  <option value="" disabled selected>Select engine type</option>
+                  <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+               </select>   
+            </div>
+            </div>
+      </form>
+   
+   </div>
+</div>
+-->

@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, HostBinding, OnInit  } from '@angular/core';
 import { Car } from 'src/app/models/BL/car.model';
 import { FormBuilder, FormGroup, Validators, FormArray  } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { ErrorService } from 'src/app/services/error.service';
 import { DoorsNr, Engine,CarType, GearboxType, } from 'src/app/models/enums/carEnums';
 import { UtilityService } from 'src/app/services/utility.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 
 
 
@@ -21,6 +23,7 @@ import { UtilityService } from 'src/app/services/utility.service';
   export class AddCarComponent implements OnInit {
 
     carForm: FormGroup;
+
 
     car!: Car /*= {
         id: 0,
@@ -70,6 +73,9 @@ import { UtilityService } from 'src/app/services/utility.service';
             this.company = value;
             console.log(this.company, 'home component');
           });
+          
+          
+
     }
 
     engineEnum = Engine;
@@ -149,5 +155,9 @@ import { UtilityService } from 'src/app/services/utility.service';
 
           reader.readAsDataURL(file); 
       }
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+      moveItemInArray(this.car.photos, event.previousIndex, event.currentIndex);
     }
   }
