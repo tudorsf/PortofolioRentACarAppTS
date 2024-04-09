@@ -1,4 +1,4 @@
-<form [formGroup]="carForm">
+<!--<form [formGroup]="carForm">
    <label>name</label> <input type="text" name="name" class="form-control" formControlName="name">
    <label>brand </label> <input type="text" name="brand" class="form-control" formControlName="brand">
    <label>year </label> <input type="text" name="year" class="form-control" formControlName="year">
@@ -28,8 +28,8 @@
    </select>
    <input type="file" class="file-upload" (change)="uploadPicture($event)" multiple>
    <button (click)="addCar()">add car</button>
-</form>
-<!--<div class="page">
+</form>-->
+<div class="page">
    <div class="container">
       <form [formGroup]="carForm">
          <div class="row"></div>
@@ -48,48 +48,41 @@
             </div>
         </div>
          
-         <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+        <!--<div class="row mt-2">
+         <input type="file" (change)="previewPicture($event)" accept="image/*">
+        </div>
+         <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >
             <div class="example-box" cdkDrag>
                <mat-card>
                   <mat-card-header>No Picture Selected</mat-card-header>
                   <mat-card-content>
-                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
+                     <img [src]="url1" alt="Uploaded Photo">
                   </mat-card-content>
                </mat-card>
-            </div>
-            <div class="example-box" cdkDrag>
                <mat-card>
-                  <mat-card-header>No Picture Selected</mat-card-header>
-                  <mat-card-content>
-                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
-                  </mat-card-content>
-               </mat-card>
-            </div>
-            <div class="example-box" cdkDrag>
-               <mat-card>
-                  <mat-card-header>No Picture Selected</mat-card-header>
-                  <mat-card-content>
-                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
-                  </mat-card-content>
-               </mat-card>
-            </div>
-            <div class="example-box" cdkDrag>
-               <mat-card>
-                  <mat-card-header>4</mat-card-header>
-                  <mat-card-content>
-                     <p-fileUpload mode="basic" chooseLabel="Choose" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="uploadPicture($event)"></p-fileUpload>
-                  </mat-card-content>
-               </mat-card>
-            </div>
+               <mat-card-header>No Picture Selected</mat-card-header>
+               <mat-card-content>
+                  <img [src]="url2" alt="Uploaded Photo">
+               </mat-card-content>
+            </mat-card>
+
          </div>
+          
+           
+         </div>-->
 
          <div class="row mt-3">
-
             <div class="col-md-2">
-               <label>horsepower </label> <input type="text" name="horsepower" class="form-control" formControlName="horsepower">
+               <mat-form-field>
+                  <mat-label>Horsepower</mat-label>
+                  <input matInput #input placeholder="Ex. 100" type="text" name="horsepower" class="form-control" formControlName="horsepower">
+                </mat-form-field> 
             </div>
             <div class="col-md-2">
-               <label>Engine Capacity</label> <input type="text" name="engineCapacity" class="form-control" formControlName="engineCapacity">
+               <mat-form-field>
+                  <mat-label>Engine Capacity</mat-label>
+                  <input matInput #input placeholder="Ex. 2.0" type="text" name="engineCapacity" class="form-control" formControlName="engineCapacity">
+                </mat-form-field> 
             </div>
             <div class="col-md-3">
                <label>Engine</label> 
@@ -98,9 +91,59 @@
                   <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
                </select>   
             </div>
+            <div class="col-md-3">
+               <label>Type</label> 
+               <select formControlName="type" id="type" class="form-control">
+                  <option value="" disabled selected>Select a car type</option>
+                  <option *ngFor="let options of getCarTypeOptions(); trackBy:identify" [value]="options.value"  >{{ options.label}}</option>
+               </select> 
             </div>
+         </div>
+         <div class="row mt-3">
+            <div class="col-md-3">
+               <label>Doors Number</label> 
+               <select formControlName="doorsNr" id="doorsNr" class="form-control">
+                  <option value="" disabled selected>Select doors number</option>
+                  <option *ngFor="let options of getDoorsOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+               </select>
+            </div>
+            <div class="col-md-3">
+               <label>Gearbox</label> 
+               <select formControlName="gearboxType" id="gearboxType" class="form-control">
+                  <option value="" disabled selected>Select gearbox type</option>
+                  <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+               </select>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field>
+                  <mat-label>Year</mat-label>
+                  <input matInput #input placeholder="Ex. 2014" type="text" name="year" class="form-control" formControlName="year">
+                </mat-form-field> 
+            </div>
+            <div class="col-md-3">
+               <mat-form-field>
+                  <mat-label>Price</mat-label>
+                  <input matInput #input placeholder="Ex. 2.0" type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
+                </mat-form-field> 
+            </div>
+         </div>
+         <div class="row mt-3">
+            <input type="file" (change)="uploadPicture($event)" accept="image/*"/>
+
+            <!--<div cdkDropList
+               (cdkDropListDropped)="onDrop($event)"
+               class="photo-drop-list">
+                  <div
+                     *ngFor="let photo of carForm.get('photos')!.value; let i = index"
+                     cdkDrag
+                    class="photo-item">
+                        <img [src]="photo" alt="Photo {{i + 1}}" class="photo-preview" />
+                  </div>
+            </div>-->
+         </div>
+         <button (click)="addCar()">add car</button>
+
       </form>
    
    </div>
 </div>
--->

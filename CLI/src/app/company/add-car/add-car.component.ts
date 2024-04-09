@@ -24,6 +24,11 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
     carForm: FormGroup;
 
+    photosArray!: FormArray;
+
+    url1 = '';
+    url2 = '';
+    url3 = '';
 
     car!: Car /*= {
         id: 0,
@@ -74,7 +79,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
             console.log(this.company, 'home component');
           });
           
-          
+          this.photosArray = this.carForm.get('photos') as FormArray;
 
     }
 
@@ -139,7 +144,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
     uploadPicture(event: any){
       const files: FileList = event.target.files;
-      const photosArray = this.carForm.get('photos') as FormArray;
+      this.photosArray = this.carForm.get('photos') as FormArray;
 
       for (let i = 0; i < files.length; i++) {
           const file: File = files[i];
@@ -150,14 +155,17 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
               const base64String = base64Image.split(',')[1];
 
-              photosArray.push(this.fb.control(base64String)); 
+              this.photosArray.push(this.fb.control(base64String)); 
           };
 
           reader.readAsDataURL(file); 
       }
+
     }
 
-    drop(event: CdkDragDrop<string[]>) {
-      moveItemInArray(this.car.photos, event.previousIndex, event.currentIndex);
+    onDrop(event: CdkDragDrop<string[]>) {
+      const photosArray = this.carForm.get('photos') as FormArray;
+      moveItemInArray(photosArray.controls, event.previousIndex, event.currentIndex);
     }
+
   }
