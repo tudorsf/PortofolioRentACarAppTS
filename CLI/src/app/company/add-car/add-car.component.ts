@@ -26,9 +26,9 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
     photosArray!: FormArray;
 
-    url1 = '';
-    url2 = '';
-    url3 = '';
+    previewPhotos: any[] = [];
+
+    URL: (string | ArrayBuffer)[] | null = null;
 
     car!: Car /*= {
         id: 0,
@@ -153,9 +153,9 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
           reader.onload = (e) => {
               const base64Image: string = reader.result as string;
 
-              const base64String = base64Image.split(',')[1];
+              //const base64String = base64Image.split(',')[1];
 
-              this.photosArray.push(this.fb.control(base64String)); 
+              this.photosArray.push(this.fb.control(base64Image)); 
           };
 
           reader.readAsDataURL(file); 
@@ -163,9 +163,13 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
     }
 
+
     onDrop(event: CdkDragDrop<string[]>) {
       const photosArray = this.carForm.get('photos') as FormArray;
-      moveItemInArray(photosArray.controls, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.photosArray.controls, event.previousIndex, event.currentIndex);
     }
+
+   
+    
 
   }
