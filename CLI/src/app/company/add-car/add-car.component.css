@@ -104,14 +104,20 @@ mat-form-field  {
   }
 
   .example-box {
-    width: 150px; /* Set your desired width */
-    height: 80%; /* Set your desired height */
-    overflow: hidden; /* Hide any overflow */
+    width: 150px; 
+    height: 80%; 
+    /*overflow: hidden; */
   }
   
   .photo-preview {
-    width: 200px; /* Make the image fill the container horizontally */
-    height: auto; /* Maintain aspect ratio */
+    width: 200px; 
+    height: auto; 
+  }
+
+  .actions{
+    justify-content: flex;
+    align-items: center;
+
   }
 
  

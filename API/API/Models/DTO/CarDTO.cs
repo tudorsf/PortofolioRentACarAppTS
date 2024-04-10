@@ -6,7 +6,7 @@ namespace API.Models.DTO
     {   
         public string name { get; set; }
 
-        public string brand { get; set; }
+        public string model { get; set; }
         public int pricePerDay { get; set; }
 
         public int companyREF { get; set; }

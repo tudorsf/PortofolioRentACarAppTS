@@ -49,6 +49,8 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
    
     company: Company | null = null;
 
+    info: boolean = false;
+
     constructor(private fb: FormBuilder,
                 private companyService: CompanyService,
                 private carsService: CarsService,
@@ -61,7 +63,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
             pricePerDay: ['', Validators.required],
             doorsNr: [''],
             engineCapacity: ['', Validators.required],
-            brand: ['', Validators.required],
+            model: ['', Validators.required],
             engine: [''],
             gearboxType: [''],
             type: [''],
@@ -111,7 +113,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   
 
     addCar(){
-      //console.log()
+     
       console.log(this.carForm.value , 'car form value');
 
         this.car =  this.carForm.value;
@@ -129,6 +131,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
             console.log(this.car);
             this.carsService.addCar(this.car).subscribe(
                 success => {
+                  this.errorService.openSuccessModal(this.car.name + ' ' + this.car.model + ' successfully added')
                    this.router.navigate(["/company"]);
                 },
 
@@ -156,6 +159,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
               //const base64String = base64Image.split(',')[1];
 
               this.photosArray.push(this.fb.control(base64Image)); 
+             
           };
 
           reader.readAsDataURL(file); 
@@ -165,10 +169,24 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 
     onDrop(event: CdkDragDrop<string[]>) {
-      const photosArray = this.carForm.get('photos') as FormArray;
-      moveItemInArray(this.photosArray.controls, event.previousIndex, event.currentIndex);
+     
+      moveItemInArray(this.carForm.get('photos')!.value, event.previousIndex, event.currentIndex);
     }
 
+    removePic(photo: string) {
+      const photosArray = this.carForm.get('photos') as FormArray;
+      const photoIndex = photosArray.value.indexOf(photo);
+      
+      if (photoIndex !== -1) {
+        photosArray.removeAt(photoIndex);
+      }
+    }
+
+    askInfo(){
+      this.info = !this.info;
+    }
+
+    
    
     
 

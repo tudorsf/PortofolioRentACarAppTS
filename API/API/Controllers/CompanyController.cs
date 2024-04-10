@@ -8,6 +8,7 @@ using LoginAPI3.Models.UserModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models.Customer;
+using System.Xml.Linq;
 
 namespace API.Controllers
 {
@@ -67,7 +68,7 @@ namespace API.Controllers
             car.Horsepower = request.Horsepower;
             car.engine = request.engine;
             car.gearboxType = request.gearboxType;
-            car.Model = request.brand;
+            car.Model = request.model;
             car.Year = request.year;
             car.type = request.type;
             car.engineCapacity = request.engineCapacity;
@@ -88,9 +89,9 @@ namespace API.Controllers
 
             foreach (var elements in request.photos)
             {
-                
+                var newElement = elements.Split(',')[1];
 
-                byte[] photoBytes = Convert.FromBase64String(elements);
+                byte[] photoBytes = Convert.FromBase64String(newElement);
 
                 var photo = new CarPhotos
                 {
