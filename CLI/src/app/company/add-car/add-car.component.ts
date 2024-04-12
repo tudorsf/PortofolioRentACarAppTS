@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit  } from '@angular/core';
 import { Car } from 'src/app/models/BL/car.model';
-import { FormBuilder, FormGroup, Validators, FormArray  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl, AbstractControl, ValidationErrors, ValidatorFn  } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/BL/company.model';
 import { CarsService } from 'src/app/services/cars.service';
@@ -30,26 +30,13 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
     URL: (string | ArrayBuffer)[] | null = null;
 
-    car!: Car /*= {
-        id: 0,
-        name: '',
-        brand: '',
-        pricePerDay: 0,
-        companyREF: 0,
-        photos: [],
-        reservations: [],
-        doorsNr: 3,
-        engine: 1,
-        gearboxType: 1,
-        carType: 1,
-        year: 0,
-        horsepower: 0
-    }*/
+    car!: Car;
 
-   
     company: Company | null = null;
 
     info: boolean = false;
+
+    
 
     constructor(private fb: FormBuilder,
                 private companyService: CompanyService,
@@ -60,15 +47,15 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
             ){
         this.carForm = this.fb.group({
             name: ['', Validators.required],
-            pricePerDay: ['', Validators.required],
-            doorsNr: [''],
-            engineCapacity: ['', Validators.required],
+            pricePerDay: ['', this.priceHpwValidator()],
+            doorsNr: ['', this.dropDownValidator()],
+            engineCapacity: ['', [Validators.required, this.engineCapacityValidator()]],
             model: ['', Validators.required],
-            engine: [''],
-            gearboxType: [''],
-            type: [''],
-            year: [''],
-            horsepower: [''],
+            engine: ['',this.dropDownValidator()],
+            gearboxType: ['', this.dropDownValidator()],
+            type: ['', this.dropDownValidator()],
+            year: ['', this.yearValidator()],
+            horsepower: ['', this.priceHpwValidator()],
             photos: this.fb.array([])
 
         })
@@ -84,6 +71,9 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
           this.photosArray = this.carForm.get('photos') as FormArray;
 
     }
+
+    
+  
 
     engineEnum = Engine;
     gearboxEnum = GearboxType;
@@ -186,8 +176,76 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
       this.info = !this.info;
     }
 
+    engineCapacityValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = parseFloat(control.value);
     
-   
+        if (isNaN(value)) {
+          return { 'invalidNumber': true };
+        }
+    
+        if (value < 0.8 || value > 5.0) {
+          return { 'range': true };
+        }
+    
+        return null; 
+      };
+    }
+
+    dropDownValidator(): ValidatorFn{
+      return (control: AbstractControl): ValidationErrors | null => {
+        const selectedValue = control.value;
+        if (!selectedValue) {
+          return { 'required': true };
+        }
+        return null; // No error, validation passed
+      };
+    }
+
+    yearValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value;
+        const currentYear = new Date().getFullYear();
+        
+        const yearPattern = /^\d{4}$/;
+    
+        if (!yearPattern.test(value)) {
+          return { 'invalidYearFormat': true }; 
+        }
+    
+        const inputYear = parseInt(value, 10);
+        if (isNaN(inputYear) || inputYear < currentYear - 15 || inputYear > currentYear) {
+          return { 'yearRange': true }; 
+        }
+    
+        return null; 
+      };
+    }
+
+    isInvalid(controlName: string) {
+      const control = this.carForm.get(controlName);
+      return control && control.invalid && (control.dirty || control.touched);
+    }
+
+    priceHpwValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = parseFloat(control.value);
+    
+        if (isNaN(value)) {
+          return { 'invalidNumber': true };
+        }
+    
+        if (value < 1) {
+          return { 'range': true };
+        }
+    
+        return null; 
+      };
+    }
+
+    
+
+    
     
 
   }

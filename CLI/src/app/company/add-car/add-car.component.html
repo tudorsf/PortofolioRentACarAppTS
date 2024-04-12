@@ -24,12 +24,20 @@
                <mat-form-field>
                   <mat-label>Horsepower</mat-label>
                   <input matInput #input placeholder="Ex. 100" type="text" name="horsepower" class="form-control" formControlName="horsepower">
+                  <mat-error *ngIf="isInvalid('horsepower')">
+                     <span>Please inseart a valid horsepower value greater than 0</span>
+                  </mat-error>
                 </mat-form-field> 
             </div>
             <div class="col-md-2">
                <mat-form-field>
                   <mat-label>Engine Capacity</mat-label>
                   <input matInput #input placeholder="Ex. 2.0" type="text" name="engineCapacity" class="form-control" formControlName="engineCapacity">
+                  <mat-error *ngIf="engineCapacityValidator()">
+                     <span>
+                        Please enter a valid engine capacity value between 0.8 and 5.0 liters
+                     </span>
+                   </mat-error>
                 </mat-form-field> 
             </div>
             <div class="col-md-3">
@@ -37,6 +45,9 @@
                <select formControlName="engine" name="engine" id="engine"  class="form-control">
                   <option value="" disabled selected>Select engine type</option>
                   <option *ngFor="let options of getEngineOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+                  <mat-error *ngIf="isInvalid('engine')">
+                     <span>Please select an option</span>
+                  </mat-error>
                </select>   
             </div>
             <div class="col-md-3">
@@ -44,6 +55,9 @@
                <select formControlName="type" id="type" class="form-control">
                   <option value="" disabled selected>Select a car type</option>
                   <option *ngFor="let options of getCarTypeOptions(); trackBy:identify" [value]="options.value"  >{{ options.label}}</option>
+                  <mat-error *ngIf="isInvalid('type')">
+                     <span>Please select an option</span>
+                  </mat-error>
                </select> 
             </div>
          </div>
@@ -53,6 +67,9 @@
                <select formControlName="doorsNr" id="doorsNr" class="form-control">
                   <option value="" disabled selected>Select doors number</option>
                   <option *ngFor="let options of getDoorsOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
+                  <mat-error *ngIf="isInvalid('doorsNr')">
+                     <span>Please select an option</span>
+                  </mat-error>
                </select>
             </div>
             <div class="col-md-3">
@@ -61,22 +78,30 @@
                   <option value="" disabled selected>Select gearbox type</option>
                   <option *ngFor="let options of getGearboxTypeOptions(); trackBy:identify" [value]="options.value">{{ options.label}}</option>
                </select>
+               <mat-error *ngIf="isInvalid('gearboxType')">
+                  <span>Please select an option</span>
+               </mat-error>
             </div>
             <div class="col-md-3">
               <mat-form-field>
                   <mat-label>Year</mat-label>
                   <input matInput #input placeholder="Ex. 2014" type="text" name="year" class="form-control" formControlName="year">
+                  <mat-error *ngIf="isInvalid('year')">
+                    <span>Please inseart a valid year not older than 15 years old present time</span>
+                   </mat-error>
                 </mat-form-field> 
             </div>
             <div class="col-md-3">
                <mat-form-field>
                   <mat-label>Price</mat-label>
-                  <input matInput #input placeholder="Ex. 2.0" type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
+                  <input matInput #input placeholder="Ex. 100" type="text" name="pricePerDay" class="form-control" formControlName="pricePerDay">
+                  <mat-error *ngIf="isInvalid('pricePerDay')">
+                     <span>Please inseart a valid price with a value biger than 1</span>
+                    </mat-error>
                 </mat-form-field> 
             </div>
          </div>
          <div class="row mt-3" style="height: 300px;">
-           <!-- <input type="file" (change)="uploadPicture($event)"  accept="image/*"/>-->
             <div class="mb-3">
                <label for="formFile" class="form-label">Add Photos</label>   <span class="ml-3"><i class="fas fa-info-circle info-icon" (click)="askInfo()"></i></span>
                <input [disabled]="carForm.get('photos')!.value.length > 5" class="form-control" type="file" (change)="uploadPicture($event)" id="formFile"  accept="image/*">
