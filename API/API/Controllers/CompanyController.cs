@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models.Customer;
 using System.Xml.Linq;
+using API.Hub;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers
 {
@@ -19,13 +21,15 @@ namespace API.Controllers
        
         private readonly IConfiguration _configuration;
         private readonly DataContext _context;
+
         public CompanyController(IConfiguration configuration, DataContext context)
         {
             _configuration = configuration;
             _context = context;
         }
 
-        
+
+
 
 
         [HttpPost("addProfile")]

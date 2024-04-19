@@ -5,6 +5,7 @@ import { ErrorModalComponent } from './shared/error-modal/error-modal.component'
 import { ErrorService } from './services/error.service';
 import { CustomerService } from './services/customer.service';
 import { Customer } from './models/BL/customer.model';
+import { SignalRService } from './services/signalR.service';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,15 @@ export class AppComponent implements OnInit{
 
   customer: Customer | null = null;
 
-  constructor(private authService: AuthService, private customerService: CustomerService){
+  constructor(private authService: AuthService, private customerService: CustomerService, private signalRService: SignalRService){
     this.userRole = this.authService.getCurrentUserRole();
    }
 
    ngOnInit(): void {
+    this.signalRService.getNotificationReceivedObservable().subscribe(message => {
+      // Handle incoming notification
+      console.log('Received notification:', message);
+    });
      if(this.userRole == 'client'){
       this.customerService.getProfile().subscribe(
         (data: any) => {

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Data;
 using System.Threading;
+using API.Hub;
 using API.Models.Company;
 using API.Models.Customer;
 using API.Models.DTO;
 using LoginAPI3.Data;
 using LoginAPI3.Models.UserModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
@@ -16,10 +18,13 @@ namespace API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly DataContext _context;
-        public CustomerController(IConfiguration configuration, DataContext context)
+        private IHubContext<MessageHub, IMessageHubCompany> messageHub;
+
+        public CustomerController(IConfiguration configuration, DataContext context, IHubContext<MessageHub, IMessageHubCompany> _messageHub)
         {
             _configuration = configuration;
             _context = context;
+            messageHub = _messageHub;
         }
 
         [HttpPost("addProfile")]
@@ -60,7 +65,11 @@ namespace API.Controllers
                     .Include(c => c.Reservations)
                     .FirstOrDefault(r => r.Id == request.carId);
 
-            if (car == null)
+            var company = _context.Companies
+                 
+                  .FirstOrDefault(r => r.Id == request.companyId);
+
+            if (car == null || company == null)
 
                 return BadRequest("not available");
 
@@ -96,7 +105,11 @@ namespace API.Controllers
 
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
-            //return Ok();
+
+            /*messageHub.Clients.All.SendNotificationsToComp("you have one new reservation");*/
+
+            messageHub.Clients.Group(company.Id.ToString()).SendNotificationsToComp("you have one new reservation");
+
             return reservation;
         }
 

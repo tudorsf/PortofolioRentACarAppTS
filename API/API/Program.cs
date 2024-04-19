@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using API.Hub;
 using LoginAPI3.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 /*builder.Services.AddControllers()
         .AddJsonOptions(options =>
@@ -19,6 +21,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -34,9 +37,14 @@ builder.Services.AddCors(policyBuilder =>
         .AllowAnyMethod()
         )
 );
+
+
 var app = builder.Build();
 
 app.UseCors();
+
+app.MapHub<MessageHub>("/hub");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
