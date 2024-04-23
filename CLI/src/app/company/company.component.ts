@@ -15,6 +15,8 @@ import { Engine,DoorsNr, GearboxType,CarType } from '../models/enums/carEnums';
 import { UtilityService } from '../services/utility.service';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SignalRService } from '../services/signalR.service';
+import { ErrorService } from '../services/error.service';
 
 
 
@@ -54,12 +56,18 @@ export class CompanyComponent implements OnInit, AfterViewInit {
 
   displayedColumns:any = ['name', 'model', 'pricePerDay', 'engine', 'doorsNr', "type", "gearboxType", "reservations"];
 
+  notifications: string[] = [];
+
+  message: string = ''
+
  constructor(private companyService: CompanyService, 
              private modalService: NgbModal, 
              private profileService: ProfileService,
              private streetService: StreetMapService,
              private router: Router,
-             private utilityService: UtilityService) 
+             private utilityService: UtilityService,
+            private signalRService: SignalRService,
+          private errorService: ErrorService) 
           {}
 
   ngOnInit(): void {
@@ -80,12 +88,12 @@ export class CompanyComponent implements OnInit, AfterViewInit {
             if(this.dataSource){
               this.dataSource.paginator = this.paginator;
             }
-            
+           
+         
            
           }
           catch (error) {
             console.error('Error creating profile:', error);
-            //this.isLoading = false;
           }
         } else if(data == null){
           this.isLoading = false;
@@ -101,11 +109,16 @@ export class CompanyComponent implements OnInit, AfterViewInit {
     this.companyService.company$.subscribe((value) => {
       this.company = value;
       console.log(this.company, 'home component');
+      
     });
+    
+     console.log(this.notifications);
 
-   
-    console.log(this.isLoading);
-
+    this.signalRService.getNotificationReceivedObservable().subscribe((notification: string) => {
+              this.notifications.push(notification);
+              console.log(this.notifications, 'notif');
+              this.errorService.openErrorModal(notification);
+            });
 
   }
 

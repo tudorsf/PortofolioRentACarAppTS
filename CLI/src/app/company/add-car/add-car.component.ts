@@ -198,7 +198,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
         if (!selectedValue) {
           return { 'required': true };
         }
-        return null; // No error, validation passed
+        return null; 
       };
     }
 

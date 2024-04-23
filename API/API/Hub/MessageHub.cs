@@ -1,4 +1,5 @@
 ﻿using API.Hub;
+using LoginAPI3.Data;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.Hub
@@ -9,5 +10,8 @@ namespace API.Hub
         {
             await Clients.All.SendNotificationsToComp(message);
         }
+
+
+
     }
 }

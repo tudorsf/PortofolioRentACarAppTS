@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tudor\\Desktop\\rentApp\\PortofolioRentACarAppTS\\API\\API\\API.csproj": {}
+    "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tudor\\Desktop\\rentApp\\PortofolioRentACarAppTS\\API\\API\\API.csproj": {
+    "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tudor\\Desktop\\rentApp\\PortofolioRentACarAppTS\\API\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Tudor\\Desktop\\rentApp\\PortofolioRentACarAppTS\\API\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Tudor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tudor\\Desktop\\rentApp\\PortofolioRentACarAppTS\\API\\API\\obj\\",
+        "outputPath": "C:\\Users\\Tudor\\Desktop\\RentACarApp\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tudor\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -73,8 +73,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -86,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

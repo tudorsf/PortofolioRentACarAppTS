@@ -18,13 +18,13 @@ namespace API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly DataContext _context;
-        private IHubContext<MessageHub, IMessageHubCompany> messageHub;
+        private readonly IHubContext<MessageHub, IMessageHubCompany> _hubContext;
 
-        public CustomerController(IConfiguration configuration, DataContext context, IHubContext<MessageHub, IMessageHubCompany> _messageHub)
+        public CustomerController(IConfiguration configuration, DataContext context, IHubContext<MessageHub, IMessageHubCompany> hubContext)
         {
             _configuration = configuration;
             _context = context;
-            messageHub = _messageHub;
+            _hubContext = hubContext;
         }
 
         [HttpPost("addProfile")]
@@ -43,10 +43,6 @@ namespace API.Controllers
             
             customer.Rating = 5;
             customer.NumberOfRatings = 0;
-
-
-
-
 
 
             _context.Customers.Add(customer);
@@ -85,12 +81,7 @@ namespace API.Controllers
             reservation.CarId = request.carId;
             reservation.CompanyId = request.companyId;
             reservation.CustomerId = request.customerId;
-            //reservation.StartDate = request.startDate;
-
-
             reservation.StartDate = request.startDate.AddHours(2);
-
-           
             reservation.EndDate = request.endDate.AddHours(2);
 
             TimeSpan timeDifference = request.endDate - request.startDate;
@@ -106,9 +97,7 @@ namespace API.Controllers
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
 
-            /*messageHub.Clients.All.SendNotificationsToComp("you have one new reservation");*/
-
-            messageHub.Clients.Group(company.Id.ToString()).SendNotificationsToComp("you have one new reservation");
+            await _hubContext.Clients.Client(company.Id.ToString()).SendNotificationsToComp("you have one new res");
 
             return reservation;
         }

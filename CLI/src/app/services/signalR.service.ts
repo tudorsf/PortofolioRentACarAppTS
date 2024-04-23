@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { Subject } from 'rxjs';
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
   private notificationReceived = new Subject<string>();
+ 
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -27,6 +29,10 @@ export class SignalRService {
   }
 
   getNotificationReceivedObservable() {
+    console.log(this.notificationReceived.asObservable());
     return this.notificationReceived.asObservable();
+    
   }
+
+ 
 }

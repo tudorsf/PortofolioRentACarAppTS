@@ -26,19 +26,14 @@ export class AppComponent implements OnInit{
    }
 
    ngOnInit(): void {
-    this.signalRService.getNotificationReceivedObservable().subscribe(message => {
-      // Handle incoming notification
-      console.log('Received notification:', message);
-    });
+   
      if(this.userRole == 'client'){
       this.customerService.getProfile().subscribe(
         (data: any) => {
-          console.log(data + "data from backend")
           if(data != null){
             try{
               this.customer = data;
-              //this.customerService.setCustomer(this.customer);
-              console.log(this.customer)
+             
             }
             catch (error) {
               console.error('Error creating profile:', error);
